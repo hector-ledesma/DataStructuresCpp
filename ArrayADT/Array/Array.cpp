@@ -3,18 +3,54 @@
 
 #include <iostream>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+struct Array {
+    int A[20];
+    int size;
+    int length;
+};
+
+void Display(struct Array arr) {
+    std::cout << "Elements are" << std::endl;
+    for (int i = 0; i < arr.length; i++)
+        std::cout << arr.A[i]<<" ";
+
+    std::cout << std::endl;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+void Append(struct Array* arr, int x) {
+    if (arr->length < arr->size)
+        arr->A[arr->length++] = x;
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+}
+
+void Insert(struct Array* arr, int index, int x) {
+    if (index >= 0 && index <= arr->length) {
+        for (int i = arr->length; i > index; i--)
+            arr->A[i] = arr->A[i - 1];
+        arr->A[index] = x;
+        arr->length++;
+    }
+}
+
+int Delete(struct Array* arr, int index) {
+    int x = 0;
+    if (index >= 0 && index <= arr->length) {
+        x = arr->A[index];
+        for (int i = index; i < arr->length - 1; i++)
+            arr->A[i] = arr->A[i + 1];
+        arr->length--;
+        return x;
+    }
+    return 0;
+}
+
+int main()
+{
+    struct Array arr = { {2,3,4,5,6}, 20, 5 };
+    int deleted = Delete(&arr, 2);
+    std::cout << "Deleted element is: " << deleted << std::endl;
+    Insert(&arr, 2, 12);
+    Append(&arr, 10);
+    Display(arr);
+
+}
