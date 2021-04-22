@@ -61,9 +61,69 @@ int LinearSearch(struct Array* arr, int key) {
     return -1;
 }
 
+// The 3 params for binary search are low, high, key.
+// Main thing is that low can't be greater than high.
+// We need to find a middle by adding low and high and dividing by 2.
+// If mid is larger than our key, we shorten the array to the left:
+//      h = mid - 1
+// Else, if mid is lower, we move to the right:
+//      l = mid + 1
+// Once we find our key, return it. Otherwise, return -1.
+// I'll try to implement this before watching the lesson and see what I get right or wrong.
+// With a loop first, and then recursively.
+
+// Success!!
+int LinearBinarySearch(struct Array* arr, int key) {
+    int l = 0;
+    int h = arr->length-1;
+    while (l <= h) {
+        int mid = (l + h) / 2;
+        if (arr->A[mid] == key)
+            return arr->A[mid];
+        if (arr->A[mid] > key) {
+            h = mid - 1;
+        }
+        else {
+            l = mid + 1;
+        }
+    }
+
+    return -1;
+}
+
+// Success!!
+int RBinarySearch(struct Array* arr, int l, int h, int key) {
+
+    if (l <= h) {
+        int mid = (l + h) / 2;
+        if (arr->A[mid] == key)
+            return arr->A[mid];
+        if (arr->A[mid] > key)
+            return RBinarySearch(arr, l, mid-1, key);
+        return RBinarySearch(arr, mid+1, h, key);
+    }
+
+    return -1;
+}
+
 int main()
 {
-    struct Array arr = { {2,3,4,5,6}, 20, 5 };
+    struct Array arr = { {2,3,4,5,6,10,12,14,29}, 20, 9 };
+
+    // Do binary search before screwing up the sort.
+    int siFound = LinearBinarySearch(&arr, 29);
+    std::cout << "Found this item: " << siFound << std::endl;
+
+    int notFound = LinearBinarySearch(&arr, 21);
+    std::cout << "Couldn't find an item: " << notFound << std::endl;
+
+    int rSiFound = RBinarySearch(&arr, 0, arr.length, 29);
+    std::cout << "Found this item recursively: " << rSiFound << std::endl;
+
+    int rNotFound = RBinarySearch(&arr, 0, arr.length, 1);
+    std::cout << "Couldn't find an item recursively: " << notFound << std::endl;
+    std::cout << std::endl;
+
     int deleted = Delete(&arr, 2);
     std::cout << "Deleted element is: " << deleted << std::endl;
     Insert(&arr, 2, 12);
