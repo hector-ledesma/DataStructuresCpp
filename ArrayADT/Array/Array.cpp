@@ -170,6 +170,28 @@ void Reverse2(struct Array* arr) {
     }
 }
 
+void InsertSort(struct Array* arr, int x) {
+    if (arr->length == arr->size)
+        return;
+
+    int i = arr->length - 1;
+    while (i >= 0 && arr->A[i] > x) {
+        arr->A[i + 1] = arr->A[i];
+        i--;
+    }
+    arr->A[i + 1] = x;
+    arr->length++;
+}
+
+int isSorted(struct Array arr) {
+    int i;
+    for (i = 0; i < arr.length - 1; i++) {
+        if (arr.A[i] > arr.A[i + 1])
+            return 0;
+    }
+    return 1;
+}
+
 int main()
 {
     struct Array arr = { {2,3,4,5,6,10,12,14,29}, 20, 9 };
@@ -189,6 +211,22 @@ int main()
     std::cout << "Couldn't find an item recursively: " << notFound << std::endl;
     std::cout << std::endl;
 
+    InsertSort(&arr, 13);
+    Display(arr);
+
+    std::cout << std::endl;
+    std::cout << "Is it sorted? " << isSorted(arr) << std::endl;
+    std::cout << std::endl;
+    
+
+    std::cout << "----------------" << std::endl;
+    Display(arr);
+    Reverse(&arr);
+    Display(arr);
+    Reverse2(&arr);
+    Display(arr);
+    std::cout << "----------------" << std::endl;
+
     int deleted = Delete(&arr, 2);
     std::cout << "Deleted element is: " << deleted << std::endl;
     Insert(&arr, 2, 12);
@@ -196,10 +234,8 @@ int main()
     int found = LinearSearch(&arr, 12);
     std::cout << "Found 12 at index: " << found << std::endl;
 
-    Display(arr);
-    Reverse(&arr);
-    Display(arr);
-    Reverse2(&arr);
-    Display(arr);
+    std::cout << std::endl;
+    std::cout << "Is it sorted? " << isSorted(arr) << std::endl;
+    std::cout << std::endl;
 
 }
