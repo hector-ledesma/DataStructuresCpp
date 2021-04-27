@@ -192,6 +192,18 @@ int isSorted(struct Array arr) {
     return 1;
 }
 
+void Rearrange(struct Array* arr) {
+    int i, j;
+    i = 0;
+    j = arr->length - 1;
+
+    while (i < j) {
+        while (arr->A[i] < 0)i++;
+        while (arr->A[j] >= 0)j--;
+        if (i < j)swap(&arr->A[i], &arr->A[j]);
+    }
+}
+
 int main()
 {
     struct Array arr = { {2,3,4,5,6,10,12,14,29}, 20, 9 };
