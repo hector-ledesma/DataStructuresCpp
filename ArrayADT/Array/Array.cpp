@@ -3,58 +3,100 @@
 
 #include <iostream>
 
-struct Array {
-    int A[20];
+class Array {
+private:
+    int *A;
     int size;
     int length;
+
+    void swap(int* x, int* y);
+public:
+    Array() {
+        size = 10;
+        length = 0;
+        A = new int[size];
+    }
+    Array(int sz) {
+        size = sz;
+        length = 0;
+        A = new int[size];
+    }
+    ~Array() {
+        delete[]A;
+    }
+
+    void Display();
+    void Append(int x);
+    void Insert(int index, int x);
+    int Delete(int index);
+    int LinearSearch(int key);
+    int LinearBinarySearch(int key);
+    int RBinarySearch(int l, int h, int key);
+    int Get(int index);
+    void Set(int index, int x);
+    int Max();
+    int Min();
+    int Sum();
+    float Avg();
+    void Reverse();
+    void Reverse2();
+    void InsertSort(int x);
+    int isSorted();
+    void Rearrange();
+    Array* Merge(Array* arr2);
+    Array* Union(Array* arr2);
+    Array* UnionUnsorted(Array* arr2);
+    Array* Intersection(Array* arr2);
+    Array* IntersectionUnsorted(Array* arr2);
+    Array* Difference(Array* arr2);
+    Array* DifferenceUnsorted(Array* arr2);
 };
 
-void Display(struct Array arr) {
+void Array::Display() {
     std::cout << "Elements are" << std::endl;
-    for (int i = 0; i < arr.length; i++)
-        std::cout << arr.A[i]<<" ";
+    for (int i = 0; i < length; i++)
+        std::cout << A[i]<<" ";
 
     std::cout << std::endl;
 }
 
-void Append(struct Array* arr, int x) {
-    if (arr->length < arr->size)
-        arr->A[arr->length++] = x;
-
+void Array::Append(int x) {
+    if (length < size)
+        A[length++] = x;
 }
 
-void Insert(struct Array* arr, int index, int x) {
-    if (index >= 0 && index <= arr->length) {
-        for (int i = arr->length; i > index; i--)
-            arr->A[i] = arr->A[i - 1];
-        arr->A[index] = x;
-        arr->length++;
+void Array::Insert(int index, int x) {
+    if (index >= 0 && index <= length) {
+        for (int i = length; i > index; i--)
+            A[i] = A[i - 1];
+        A[index] = x;
+        length++;
     }
 }
 
-int Delete(struct Array* arr, int index) {
+int Array::Delete(int index) {
     int x = 0;
-    if (index >= 0 && index <= arr->length) {
-        x = arr->A[index];
-        for (int i = index; i < arr->length - 1; i++)
-            arr->A[i] = arr->A[i + 1];
-        arr->length--;
+    if (index >= 0 && index <= length) {
+        x = A[index];
+        for (int i = index; i < length - 1; i++)
+            A[i] = A[i + 1];
+        length--;
         return x;
     }
     return 0;
 }
 
-void swap(int* x, int* y) {
+void Array::swap(int* x, int* y) {
     int temp = *x;
     *x = *y;
     *y = temp;
 }
 
-int LinearSearch(struct Array* arr, int key) {
-    for (int i = 0; i < arr->length; i++) {
-        if (key == arr->A[i]) {
+int Array::LinearSearch(int key) {
+    for (int i = 0; i < length; i++) {
+        if (key == A[i]) {
             //swap(&arr->A[i], &arr->A[i - 1]);
-            swap(&arr->A[i], &arr->A[0]);
+            swap(&A[i], &A[0]);
             return i;
         }
     }
@@ -73,14 +115,14 @@ int LinearSearch(struct Array* arr, int key) {
 // With a loop first, and then recursively.
 
 // Success!!
-int LinearBinarySearch(struct Array* arr, int key) {
+int Array::LinearBinarySearch(int key) {
     int l = 0;
-    int h = arr->length-1;
+    int h = length-1;
     while (l <= h) {
         int mid = (l + h) / 2;
-        if (arr->A[mid] == key)
-            return arr->A[mid];
-        if (arr->A[mid] > key) {
+        if (A[mid] == key)
+            return A[mid];
+        if (A[mid] > key) {
             h = mid - 1;
         }
         else {
@@ -92,135 +134,135 @@ int LinearBinarySearch(struct Array* arr, int key) {
 }
 
 // Success!!
-int RBinarySearch(struct Array* arr, int l, int h, int key) {
+int Array::RBinarySearch(int l, int h, int key) {
 
     if (l <= h) {
         int mid = (l + h) / 2;
-        if (arr->A[mid] == key)
-            return arr->A[mid];
-        if (arr->A[mid] > key)
-            return RBinarySearch(arr, l, mid-1, key);
-        return RBinarySearch(arr, mid+1, h, key);
+        if (A[mid] == key)
+            return A[mid];
+        if (A[mid] > key)
+            return RBinarySearch(l, mid-1, key);
+        return RBinarySearch(mid+1, h, key);
     }
 
     return -1;
 }
 
-int Get(struct Array arr, int index) {
-    if (index >= 0 && index < arr.length)
-        return arr.A[index];
+int Array::Get(int index) {
+    if (index >= 0 && index < length)
+        return A[index];
     return -1;
 }
 
-void Set(struct Array* arr, int index, int x) {
-    if (index >= 0 && index < arr->length)
-        arr->A[index] = x;
+void Array::Set(int index, int x) {
+    if (index >= 0 && index < length)
+        A[index] = x;
 }
 
-int Max(struct Array arr) {
-    int max = arr.A[0];
+int Array::Max() {
+    int max = A[0];
     int i;
-    for (i = 1; i < arr.length; i++) {
-        if (arr.A[i] > max)
-            max = arr.A[i];
+    for (i = 1; i < length; i++) {
+        if (A[i] > max)
+            max = A[i];
     }
     return max;
 }
 
-int Min(struct Array arr) {
-    int min = arr.A[0];
+int Array::Min() {
+    int min = A[0];
     int i;
-    for (i = 1; i < arr.length; i++) {
-        if (arr.A[i] < min)
-            min = arr.A[i];
+    for (i = 1; i < length; i++) {
+        if (A[i] < min)
+            min = A[i];
     }
     return min;
 }
 
-int Sum(struct Array arr) {
+int Array::Sum() {
     int s = 0;
     int i;
-    for (i = 0; i < arr.length; i++)
-        s += arr.A[i];
+    for (i = 0; i < length; i++)
+        s += A[i];
     return s;
 }
 
-float Avg(struct Array arr) {
-    return (float) Sum(arr) / arr.length;
+float Array::Avg() {
+    return (float) Sum() / length;
 }
 
-void Reverse(struct Array* arr) {
+void Array::Reverse() {
     int* B;
     int i, j;
 
-    B = new int[arr->length];
+    B = new int[length];
 
-    for (i = arr->length - 1, j = 0; i >= 0; i--, j++)
-        B[j] = arr->A[i];
-    for (i = 0; i < arr->length; i++)
-        arr->A[i] = B[i];
+    for (i = length - 1, j = 0; i >= 0; i--, j++)
+        B[j] = A[i];
+    for (i = 0; i < length; i++)
+        A[i] = B[i];
 
     delete [] B;
 }
 
-void Reverse2(struct Array* arr) {
+void Array::Reverse2() {
     int i, j;
-    for (i = 0, j = arr->length - 1; i < j; i++, j--) {
-        swap(&arr->A[i], &arr->A[j]);
+    for (i = 0, j = length - 1; i < j; i++, j--) {
+        swap(&A[i], &A[j]);
     }
 }
 
-void InsertSort(struct Array* arr, int x) {
-    if (arr->length == arr->size)
+void Array::InsertSort(int x) {
+    if (length == size)
         return;
 
-    int i = arr->length - 1;
-    while (i >= 0 && arr->A[i] > x) {
-        arr->A[i + 1] = arr->A[i];
+    int i = length - 1;
+    while (i >= 0 && A[i] > x) {
+        A[i + 1] = A[i];
         i--;
     }
-    arr->A[i + 1] = x;
-    arr->length++;
+    A[i + 1] = x;
+    length++;
 }
 
-int isSorted(struct Array arr) {
+int Array::isSorted() {
     int i;
-    for (i = 0; i < arr.length - 1; i++) {
-        if (arr.A[i] > arr.A[i + 1])
+    for (i = 0; i < length - 1; i++) {
+        if (A[i] > A[i + 1])
             return 0;
     }
     return 1;
 }
 
-void Rearrange(struct Array* arr) {
+void Array::Rearrange() {
     int i, j;
     i = 0;
-    j = arr->length - 1;
+    j = length - 1;
 
     while (i < j) {
-        while (arr->A[i] < 0)i++;
-        while (arr->A[j] >= 0)j--;
-        if (i < j)swap(&arr->A[i], &arr->A[j]);
+        while (A[i] < 0)i++;
+        while (A[j] >= 0)j--;
+        if (i < j)swap(&A[i], &A[j]);
     }
 }
 
-struct Array* Merge(struct Array* arr1, struct Array* arr2) {
+Array* Array::Merge(Array* arr2) {
     int i, j, k;
     i = j = k = 0;
-    struct Array* arr3 = new Array;
+    struct Array* arr3 = new Array(length+arr2->length);
 
-    while (i < arr1->length && j < arr2->length) {
-        if (arr1->A[i] < arr2->A[j])
-            arr3->A[k++] = arr1->A[i++];
+    while (i < length && j < arr2->length) {
+        if (A[i] < arr2->A[j])
+            arr3->A[k++] = A[i++];
         else
             arr3->A[k++] = arr2->A[j++];
     }
-    for (; i < arr1->length; i++)
-        arr3->A[k++] = arr1->A[i];
+    for (; i < length; i++)
+        arr3->A[k++] = A[i];
     for (; j < arr2->length; j++)
         arr3->A[k++] = arr2->A[j];
 
-    arr3->length = arr1->length + arr2->length;
+    arr3->length = length + arr2->length;
     arr3->size = 10;
 
     return arr3;
@@ -230,23 +272,23 @@ struct Array* Merge(struct Array* arr1, struct Array* arr2) {
 // Under each method, there'll be a student-led implementation for unsorted sets.
 
 // This Union method assumes both sets are sorted.
-struct Array* Union(struct Array* arr1, struct Array* arr2) {
+Array* Array::Union(Array* arr2) {
     int i, j, k;
     i = j = k = 0;
     struct Array* arr3 = new Array;
 
-    while (i < arr1->length && j < arr2->length) {
-        if (arr1->A[i] < arr2->A[j])
-            arr3->A[k++] = arr1->A[i++];
-        else if (arr2->A[j] < arr1->A[i])
+    while (i < length && j < arr2->length) {
+        if (A[i] < arr2->A[j])
+            arr3->A[k++] = A[i++];
+        else if (arr2->A[j] < A[i])
             arr3->A[k++] = arr2->A[j++];
         else { // Main difference is that if we find values that are the same, we only add one and move both indices forward. This prevents duplicates.
-            arr3->A[k++] = arr1->A[i++];
+            arr3->A[k++] = A[i++];
             j++;
         }
     }
-    for (; i < arr1->length; i++)
-        arr3->A[k++] = arr1->A[i];
+    for (; i < length; i++)
+        arr3->A[k++] = A[i];
     for (; j < arr2->length; j++)
         arr3->A[k++] = arr2->A[j];
 
@@ -257,14 +299,14 @@ struct Array* Union(struct Array* arr1, struct Array* arr2) {
 }
 // For this, we first copy the first array into the third.
 // As we add items from the second array, we have to check all existing items in the third array, including the ones just added.
-struct Array* UnionUnsorted(struct Array* arr1, struct Array* arr2) {
+Array* Array::UnionUnsorted(Array* arr2) {
     int i, j, k;
     i = j = k = 0;
     struct Array* arr3 = new Array;
 
     // Copy first array
-    for (; i < arr1->length; i++)
-        arr3->A[k++] = arr1->A[i];
+    for (; i < length; i++)
+        arr3->A[k++] = A[i];
 
     // Copy second array.
     for (; j < arr2->length; j++) {
@@ -287,18 +329,18 @@ struct Array* UnionUnsorted(struct Array* arr1, struct Array* arr2) {
 
 // Copy of Union
 // Should only copy element if they're equal
-struct Array* Intersection(struct Array* arr1, struct Array* arr2) {
+Array* Array::Intersection(Array* arr2) {
     int i, j, k;
     i = j = k = 0;
     struct Array* arr3 = new Array;
 
-    while (i < arr1->length && j < arr2->length) {
-        if (arr1->A[i] < arr2->A[j])
+    while (i < length && j < arr2->length) {
+        if (A[i] < arr2->A[j])
             i++;
-        else if (arr2->A[j] < arr1->A[i]) // Main difference is that if either Ai or Aj is smaller, move the corresponding index.
+        else if (arr2->A[j] < A[i]) // Main difference is that if either Ai or Aj is smaller, move the corresponding index.
             j++;
         else { // And once we have matching elements, add them to the result.
-            arr3->A[k++] = arr1->A[i++];
+            arr3->A[k++] = A[i++];
             j++;
         }
     }
@@ -310,7 +352,7 @@ struct Array* Intersection(struct Array* arr1, struct Array* arr2) {
 }
 
 // Should only copy element if they're present in both arrays.
-struct Array* IntersectionUnsorted(struct Array* arr1, struct Array* arr2) {
+Array* Array::IntersectionUnsorted(Array* arr2) {
     int i, j, k;
     i = j = k = 0;
     struct Array* arr3 = new Array;
@@ -320,17 +362,17 @@ struct Array* IntersectionUnsorted(struct Array* arr1, struct Array* arr2) {
         //arr3->A[k++] = arr1->A[i];
 
     // Go through first array one by one.
-    for (; i < arr1->length; i++) {
+    for (; i < length; i++) {
         // For every item in arr1, we want to check if it's present in arr2.
         j = 0;
         // Check from 0 to last of arr2.
         // Let's use while, so that we can easily have an early exit condition.
-        while (arr1->A[i] != arr2->A[j] && j < arr2->length)
+        while (A[i] != arr2->A[j] && j < arr2->length)
             j++;
 
         // If we exit early, it's cause we found a match. So enter it into arr3.
         if (j < arr2->length)
-            arr3->A[k++] = arr1->A[i];
+            arr3->A[k++] = A[i];
 
     }
 
@@ -341,23 +383,23 @@ struct Array* IntersectionUnsorted(struct Array* arr1, struct Array* arr2) {
 
 // Copy from Union
 // Only elements from first array get added.
-struct Array* Difference(struct Array* arr1, struct Array* arr2) {
+Array* Array::Difference(Array* arr2) {
     int i, j, k;
     i = j = k = 0;
     struct Array* arr3 = new Array;
 
-    while (i < arr1->length && j < arr2->length) {
-        if (arr1->A[i] < arr2->A[j])
-            arr3->A[k++] = arr1->A[i++];
-        else if (arr2->A[j] < arr1->A[i])
+    while (i < length && j < arr2->length) {
+        if (A[i] < arr2->A[j])
+            arr3->A[k++] = A[i++];
+        else if (arr2->A[j] < A[i])
             j++;
         else { // Only elements from first array get added that arn't in the second array.
             i++;
             j++;
         }
     }
-    for (; i < arr1->length; i++)
-        arr3->A[k++] = arr1->A[i];
+    for (; i < length; i++)
+        arr3->A[k++] = A[i];
 
     arr3->length = k;
     arr3->size = 10;
@@ -366,7 +408,7 @@ struct Array* Difference(struct Array* arr1, struct Array* arr2) {
 }
 
 // Will only copy elements from array 1 that are not present in array 2.
-struct Array* DifferenceUnsorted(struct Array* arr1, struct Array* arr2) {
+Array* Array::DifferenceUnsorted(Array* arr2) {
     int i, j, k;
     i = j = k = 0;
     struct Array* arr3 = new Array;
@@ -376,17 +418,17 @@ struct Array* DifferenceUnsorted(struct Array* arr1, struct Array* arr2) {
         //arr3->A[k++] = arr1->A[i];
 
     // Go through first array one by one.
-    for (; i < arr1->length; i++) {
+    for (; i < length; i++) {
         // For every item in arr1, we want to check if it's present in arr2.
         j = 0;
         // Check from 0 to last of arr2.
         // Let's use while, so that we can easily have an early exit condition.
-        while (arr1->A[i] != arr2->A[j] && j < arr2->length)
+        while (A[i] != arr2->A[j] && j < arr2->length)
             j++;
 
         // If we hit the end, it's because this item is not present in arr2. So add it to arr3.
         if (j == arr2->length)
-            arr3->A[k++] = arr1->A[i];
+            arr3->A[k++] = A[i];
 
     }
 
@@ -397,6 +439,7 @@ struct Array* DifferenceUnsorted(struct Array* arr1, struct Array* arr2) {
 
 int main()
 {
+    /*
     struct Array arr = { {2,3,4,5,6,10,12,14,29}, 20, 9 };
 
     // Do binary search before screwing up the sort.
@@ -488,6 +531,6 @@ int main()
     Display(*differenceUnsorted);
 
     std::cout << "----------------" << std::endl;
-
+    */
 
 }
