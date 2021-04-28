@@ -477,6 +477,9 @@ int missingSol1(Array<T>* arr);
 template<class T>
 int missingSol2(Array<T>* arr);
 
+template<class T>
+void missingSol3(Array<T>* arr);
+
 int main()
 {
     /*
@@ -594,6 +597,21 @@ int main()
     int found2 = missingSol2(&arr1);
     std::cout << found2 << std::endl;
 
+    // Multiple missing elementd in sorted arrays.
+
+    Array<int> arr2 = Array<int>(10);
+    arr2.Append(6);
+    arr2.Append(7);
+    arr2.Append(8);
+    arr2.Append(9);
+    arr2.Append(10);
+    arr2.Append(11);
+    arr2.Append(12);
+    arr2.Append(13);
+    arr2.Append(16);
+    arr2.Append(17);
+
+    missingSol3(&arr2);
 }
 
 // This solution uses the formula (n*(n+1))/2
@@ -623,4 +641,17 @@ int missingSol2(Array<T>* arr) {
     }
 
     return -1;
+}
+
+// This solution uses index difference to find multiple missing elements.
+template<class T>
+void missingSol3(Array<T>* arr) {
+    int diff = arr->Get(0);
+
+    for (int i = 0; i < arr->Length(); i++) 
+        if (arr->Get(i) - i != diff)
+            while(diff<arr->Get(i) - i) {
+                std::cout << i + diff << std::endl;
+                diff++;
+            }
 }
