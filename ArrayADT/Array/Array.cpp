@@ -34,6 +34,7 @@ public:
     T LinearBinarySearch(T key);
     T RBinarySearch(int l, int h, T key);
     T Get(int index);
+    int Length();
     void Set(int index, T x);
     T Max();
     T Min();
@@ -163,6 +164,11 @@ T Array<T>::Get(int index) {
     if (index >= 0 && index < length)
         return A[index];
     return -1;
+}
+
+template<class T>
+int Array<T>::Length() {
+    return length;
 }
 
 template<class T>
@@ -567,16 +573,16 @@ int main()
     // Single missing element in sorted arrays.
 
     Array<int> arr1 = Array<int>(10);
-    arr1.Append(1);
-    arr1.Append(2);
-    arr1.Append(3);
-    arr1.Append(4);
     arr1.Append(6);
     arr1.Append(7);
     arr1.Append(8);
     arr1.Append(9);
     arr1.Append(10);
     arr1.Append(11);
+    arr1.Append(12);
+    arr1.Append(14);
+    arr1.Append(15);
+    arr1.Append(16);
 
     int found1 = missingSol1(arr1);
     std::cout << found1 << std::endl;
@@ -586,14 +592,15 @@ int main()
 // This solution uses the formula (n*(n+1))/2
 template<class T>
 int missingSol1(Array<T> arr) {
-    int s = (arr.Get(arr.length - 1) * (arr.Get(arr.length - 1) + 1 )) / 2 ;
+    int s = (arr.Get(arr.Length() - 1) * (arr.Get(arr.Length() - 1) + 1 )) / 2 ;
     // Check that lowest value is 1. Otherwise, subtract it from the calculation.
-    if (arr.A[0] > 1)
-        s -= (arr.Get(0)-1 * (arr.Get(0))) / 2;
+    if (arr.Get(0) > 1)
+        s -= ((arr.Get(0)-1) * (arr.Get(0))) / 2;
     
     int sum = 0;
     // Go through our array and add all the values up.
-    for (int i = 0; i < arr.length; i++)
+    for (int i = 0; i < arr.Length(); i++)
         sum += arr.Get(i);
+    // Difference will tell us missing element.
     return s - sum;
 }
