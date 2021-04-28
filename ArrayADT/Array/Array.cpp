@@ -365,6 +365,36 @@ struct Array* Difference(struct Array* arr1, struct Array* arr2) {
     return arr3;
 }
 
+// Will only copy elements from array 1 that are not present in array 2.
+struct Array* DifferenceUnsorted(struct Array* arr1, struct Array* arr2) {
+    int i, j, k;
+    i = j = k = 0;
+    struct Array* arr3 = new Array;
+
+    // We don't copy the first array blindly
+    //for (; i < arr1->length; i++)
+        //arr3->A[k++] = arr1->A[i];
+
+    // Go through first array one by one.
+    for (; i < arr1->length; i++) {
+        // For every item in arr1, we want to check if it's present in arr2.
+        j = 0;
+        // Check from 0 to last of arr2.
+        // Let's use while, so that we can easily have an early exit condition.
+        while (arr1->A[i] != arr2->A[j] && j < arr2->length)
+            j++;
+
+        // If we hit the end, it's because this item is not present in arr2. So add it to arr3.
+        if (j == arr2->length)
+            arr3->A[k++] = arr1->A[i];
+
+    }
+
+    arr3->length = k;
+    arr3->size = 10;
+    return arr3;
+}
+
 int main()
 {
     struct Array arr = { {2,3,4,5,6,10,12,14,29}, 20, 9 };
@@ -451,6 +481,11 @@ int main()
     struct Array* intersectedUnsorted = IntersectionUnsorted(&unsorted1, &unsorted2);
     std::cout << "Intersection Unsorted:" << std::endl;
     Display(*intersectedUnsorted);
+
+    std::cout << std::endl;
+    struct Array* differenceUnsorted = DifferenceUnsorted(&unsorted1, &unsorted2);
+    std::cout << "Intersection Unsorted:" << std::endl;
+    Display(*differenceUnsorted);
 
     std::cout << "----------------" << std::endl;
 
