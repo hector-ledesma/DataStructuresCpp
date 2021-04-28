@@ -472,7 +472,11 @@ Array<T>* Array<T>::DifferenceUnsorted(Array<T>* arr2) {
 }
 
 template<class T>
-int missingSol1(Array<T> arr);
+int missingSol1(Array<T>* arr);
+
+template<class T>
+int missingSol2(Array<T>* arr);
+
 int main()
 {
     /*
@@ -580,27 +584,43 @@ int main()
     arr1.Append(10);
     arr1.Append(11);
     arr1.Append(12);
-    arr1.Append(14);
+    arr1.Append(13);
     arr1.Append(15);
     arr1.Append(16);
 
-    int found1 = missingSol1(arr1);
+    int found1 = missingSol1(&arr1);
     std::cout << found1 << std::endl;
+
+    int found2 = missingSol2(&arr1);
+    std::cout << found2 << std::endl;
 
 }
 
 // This solution uses the formula (n*(n+1))/2
 template<class T>
-int missingSol1(Array<T> arr) {
-    int s = (arr.Get(arr.Length() - 1) * (arr.Get(arr.Length() - 1) + 1 )) / 2 ;
+int missingSol1(Array<T>* arr) {
+    int s = (arr->Get(arr->Length() - 1) * (arr->Get(arr->Length() - 1) + 1 )) / 2 ;
     // Check that lowest value is 1. Otherwise, subtract it from the calculation.
-    if (arr.Get(0) > 1)
-        s -= ((arr.Get(0)-1) * (arr.Get(0))) / 2;
+    if (arr->Get(0) > 1)
+        s -= ((arr->Get(0)-1) * (arr->Get(0))) / 2;
     
     int sum = 0;
     // Go through our array and add all the values up.
-    for (int i = 0; i < arr.Length(); i++)
-        sum += arr.Get(i);
+    for (int i = 0; i < arr->Length(); i++)
+        sum += arr->Get(i);
     // Difference will tell us missing element.
     return s - sum;
+}
+
+// This solution compares the difference between value and index.
+template<class T>
+int missingSol2(Array<T>* arr) {
+    int diff = arr->Get(0);
+
+    for (int i = 0; i < arr->Length(); i++) {
+        if (arr->Get(i) - i != diff)
+            return i + diff;
+    }
+
+    return -1;
 }
