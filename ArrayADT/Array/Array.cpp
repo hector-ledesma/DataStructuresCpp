@@ -465,6 +465,8 @@ Array<T>* Array<T>::DifferenceUnsorted(Array<T>* arr2) {
     return arr3;
 }
 
+template<class T>
+int missingSol1(Array<T> arr);
 int main()
 {
     /*
@@ -561,4 +563,37 @@ int main()
     std::cout << "----------------" << std::endl;
     */
 
+    // Array challenges.
+    // Single missing element in sorted arrays.
+
+    Array<int> arr1 = Array<int>(10);
+    arr1.Append(1);
+    arr1.Append(2);
+    arr1.Append(3);
+    arr1.Append(4);
+    arr1.Append(6);
+    arr1.Append(7);
+    arr1.Append(8);
+    arr1.Append(9);
+    arr1.Append(10);
+    arr1.Append(11);
+
+    int found1 = missingSol1(arr1);
+    std::cout << found1 << std::endl;
+
+}
+
+// This solution uses the formula (n*(n+1))/2
+template<class T>
+int missingSol1(Array<T> arr) {
+    int s = (arr.Get(arr.length - 1) * (arr.Get(arr.length - 1) + 1 )) / 2 ;
+    // Check that lowest value is 1. Otherwise, subtract it from the calculation.
+    if (arr.A[0] > 1)
+        s -= (arr.Get(0)-1 * (arr.Get(0))) / 2;
+    
+    int sum = 0;
+    // Go through our array and add all the values up.
+    for (int i = 0; i < arr.length; i++)
+        sum += arr.Get(i);
+    return s - sum;
 }
