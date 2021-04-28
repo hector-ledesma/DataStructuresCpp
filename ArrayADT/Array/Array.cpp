@@ -255,7 +255,6 @@ struct Array* Union(struct Array* arr1, struct Array* arr2) {
 
     return arr3;
 }
-
 // For this, we first copy the first array into the third.
 // As we add items from the second array, we have to check all existing items in the third array, including the ones just added.
 struct Array* UnionUnsorted(struct Array* arr1, struct Array* arr2) {
@@ -269,7 +268,6 @@ struct Array* UnionUnsorted(struct Array* arr1, struct Array* arr2) {
 
     // Copy second array.
     for (; j < arr2->length; j++) {
-        std::cout << "Checking j index: " << j << " of value: " << arr2->A[j] << std::endl;
         // Check all items in arr3, from 0 to current.
         i = 0;
         // Loop will exit early if the elem in arr3 is the same.
@@ -277,9 +275,6 @@ struct Array* UnionUnsorted(struct Array* arr1, struct Array* arr2) {
         while (arr3->A[i] != arr2->A[j] && i < k)
             i++;
         // Therefore, all we have to check is if i == k to know that there was no duplicate.
-        if (j == 4) {
-            std::cout << "i: " << i << " k: " << k << std::endl ; 
-        }
         if (i == k)
             arr3->A[k++] = arr2->A[j];
         
@@ -311,6 +306,36 @@ struct Array* Intersection(struct Array* arr1, struct Array* arr2) {
     arr3->length = k;
     arr3->size = 10;
 
+    return arr3;
+}
+
+// Should only copy element if they're present in both arrays.
+struct Array* IntersectionUnsorted(struct Array* arr1, struct Array* arr2) {
+    int i, j, k;
+    i = j = k = 0;
+    struct Array* arr3 = new Array;
+
+    // We don't copy the first array blindly
+    //for (; i < arr1->length; i++)
+        //arr3->A[k++] = arr1->A[i];
+
+    // Go through first array one by one.
+    for (; i < arr1->length; i++) {
+        // For every item in arr1, we want to check if it's present in arr2.
+        j = 0;
+        // Check from 0 to last of arr2.
+        // Let's use while, so that we can easily have an early exit condition.
+        while (arr1->A[i] != arr2->A[j] && j < arr2->length)
+            j++;
+
+        // If we exit early, it's cause we found a match. So enter it into arr3.
+        if (j < arr2->length)
+            arr3->A[k++] = arr1->A[i];
+
+    }
+
+    arr3->length = k;
+    arr3->size = 10;
     return arr3;
 }
 
@@ -421,6 +446,11 @@ int main()
     struct Array* unitedUnsorted = UnionUnsorted(&unsorted1, &unsorted2);
     std::cout << "Union Unsorted:" << std::endl;
     Display(*unitedUnsorted);
+
+    std::cout << std::endl;
+    struct Array* intersectedUnsorted = IntersectionUnsorted(&unsorted1, &unsorted2);
+    std::cout << "Intersection Unsorted:" << std::endl;
+    Display(*intersectedUnsorted);
 
     std::cout << "----------------" << std::endl;
 
