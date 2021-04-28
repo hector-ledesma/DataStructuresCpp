@@ -3,9 +3,10 @@
 
 #include <iostream>
 
+template <class T>
 class Array {
 private:
-    int *A;
+    T *A;
     int size;
     int length;
 
@@ -14,45 +15,46 @@ public:
     Array() {
         size = 10;
         length = 0;
-        A = new int[size];
+        A = new T[size];
     }
     Array(int sz) {
         size = sz;
         length = 0;
-        A = new int[size];
+        A = new T[size];
     }
     ~Array() {
         delete[]A;
     }
 
     void Display();
-    void Append(int x);
-    void Insert(int index, int x);
-    int Delete(int index);
-    int LinearSearch(int key);
-    int LinearBinarySearch(int key);
-    int RBinarySearch(int l, int h, int key);
-    int Get(int index);
-    void Set(int index, int x);
-    int Max();
-    int Min();
+    void Append(T x);
+    void Insert(int index, T x);
+    T Delete(int index);
+    int LinearSearch(T key);
+    T LinearBinarySearch(T key);
+    T RBinarySearch(int l, int h, T key);
+    T Get(int index);
+    void Set(int index, T x);
+    T Max();
+    T Min();
     int Sum();
     float Avg();
     void Reverse();
     void Reverse2();
-    void InsertSort(int x);
+    void InsertSort(T x);
     int isSorted();
     void Rearrange();
-    Array* Merge(Array* arr2);
-    Array* Union(Array* arr2);
-    Array* UnionUnsorted(Array* arr2);
-    Array* Intersection(Array* arr2);
-    Array* IntersectionUnsorted(Array* arr2);
-    Array* Difference(Array* arr2);
-    Array* DifferenceUnsorted(Array* arr2);
+    Array<T>* Merge(Array<T>* arr2);
+    Array<T>* Union(Array<T>* arr2);
+    Array<T>* UnionUnsorted(Array<T>* arr2);
+    Array<T>* Intersection(Array<T>* arr2);
+    Array<T>* IntersectionUnsorted(Array<T>* arr2);
+    Array<T>* Difference(Array<T>* arr2);
+    Array<T>* DifferenceUnsorted(Array<T>* arr2);
 };
 
-void Array::Display() {
+template<class T>
+void Array<T>::Display() {
     std::cout << "Elements are" << std::endl;
     for (int i = 0; i < length; i++)
         std::cout << A[i]<<" ";
@@ -60,12 +62,14 @@ void Array::Display() {
     std::cout << std::endl;
 }
 
-void Array::Append(int x) {
+template<class T>
+void Array<T>::Append(T x) {
     if (length < size)
         A[length++] = x;
 }
 
-void Array::Insert(int index, int x) {
+template<class T>
+void Array<T>::Insert(int index, T x) {
     if (index >= 0 && index <= length) {
         for (int i = length; i > index; i--)
             A[i] = A[i - 1];
@@ -74,7 +78,8 @@ void Array::Insert(int index, int x) {
     }
 }
 
-int Array::Delete(int index) {
+template<class T>
+T Array<T>::Delete(int index) {
     int x = 0;
     if (index >= 0 && index <= length) {
         x = A[index];
@@ -86,13 +91,16 @@ int Array::Delete(int index) {
     return 0;
 }
 
-void Array::swap(int* x, int* y) {
+template<class T>
+void Array<T>::swap(int* x, int* y) {
     int temp = *x;
     *x = *y;
     *y = temp;
 }
 
-int Array::LinearSearch(int key) {
+// This method returns index.
+template<class T>
+int Array<T>::LinearSearch(T key) {
     for (int i = 0; i < length; i++) {
         if (key == A[i]) {
             //swap(&arr->A[i], &arr->A[i - 1]);
@@ -115,7 +123,8 @@ int Array::LinearSearch(int key) {
 // With a loop first, and then recursively.
 
 // Success!!
-int Array::LinearBinarySearch(int key) {
+template<class T>
+T Array<T>::LinearBinarySearch(T key) {
     int l = 0;
     int h = length-1;
     while (l <= h) {
@@ -134,7 +143,8 @@ int Array::LinearBinarySearch(int key) {
 }
 
 // Success!!
-int Array::RBinarySearch(int l, int h, int key) {
+template<class T>
+T Array<T>::RBinarySearch(int l, int h, T key) {
 
     if (l <= h) {
         int mid = (l + h) / 2;
@@ -148,18 +158,21 @@ int Array::RBinarySearch(int l, int h, int key) {
     return -1;
 }
 
-int Array::Get(int index) {
+template<class T>
+T Array<T>::Get(int index) {
     if (index >= 0 && index < length)
         return A[index];
     return -1;
 }
 
-void Array::Set(int index, int x) {
+template<class T>
+void Array<T>::Set(int index, T x) {
     if (index >= 0 && index < length)
         A[index] = x;
 }
 
-int Array::Max() {
+template<class T>
+T Array<T>::Max() {
     int max = A[0];
     int i;
     for (i = 1; i < length; i++) {
@@ -169,7 +182,8 @@ int Array::Max() {
     return max;
 }
 
-int Array::Min() {
+template<class T>
+T Array<T>::Min() {
     int min = A[0];
     int i;
     for (i = 1; i < length; i++) {
@@ -179,7 +193,8 @@ int Array::Min() {
     return min;
 }
 
-int Array::Sum() {
+template<class T>
+int Array<T>::Sum() {
     int s = 0;
     int i;
     for (i = 0; i < length; i++)
@@ -187,11 +202,13 @@ int Array::Sum() {
     return s;
 }
 
-float Array::Avg() {
+template<class T>
+float Array<T>::Avg() {
     return (float) Sum() / length;
 }
 
-void Array::Reverse() {
+template<class T>
+void Array<T>::Reverse() {
     int* B;
     int i, j;
 
@@ -205,14 +222,16 @@ void Array::Reverse() {
     delete [] B;
 }
 
-void Array::Reverse2() {
+template<class T>
+void Array<T>::Reverse2() {
     int i, j;
     for (i = 0, j = length - 1; i < j; i++, j--) {
         swap(&A[i], &A[j]);
     }
 }
 
-void Array::InsertSort(int x) {
+template<class T>
+void Array<T>::InsertSort(T x) {
     if (length == size)
         return;
 
@@ -225,7 +244,8 @@ void Array::InsertSort(int x) {
     length++;
 }
 
-int Array::isSorted() {
+template<class T>
+int Array<T>::isSorted() {
     int i;
     for (i = 0; i < length - 1; i++) {
         if (A[i] > A[i + 1])
@@ -234,7 +254,8 @@ int Array::isSorted() {
     return 1;
 }
 
-void Array::Rearrange() {
+template<class T>
+void Array<T>::Rearrange() {
     int i, j;
     i = 0;
     j = length - 1;
@@ -246,7 +267,8 @@ void Array::Rearrange() {
     }
 }
 
-Array* Array::Merge(Array* arr2) {
+template<class T>
+Array<T>* Array<T>::Merge(Array<T>* arr2) {
     int i, j, k;
     i = j = k = 0;
     struct Array* arr3 = new Array(length+arr2->length);
@@ -272,10 +294,11 @@ Array* Array::Merge(Array* arr2) {
 // Under each method, there'll be a student-led implementation for unsorted sets.
 
 // This Union method assumes both sets are sorted.
-Array* Array::Union(Array* arr2) {
+template<class T>
+Array<T>* Array<T>::Union(Array<T>* arr2) {
     int i, j, k;
     i = j = k = 0;
-    struct Array* arr3 = new Array;
+    struct Array<T>* arr3 = new Array<T>;
 
     while (i < length && j < arr2->length) {
         if (A[i] < arr2->A[j])
@@ -299,10 +322,11 @@ Array* Array::Union(Array* arr2) {
 }
 // For this, we first copy the first array into the third.
 // As we add items from the second array, we have to check all existing items in the third array, including the ones just added.
-Array* Array::UnionUnsorted(Array* arr2) {
+template<class T>
+Array<T>* Array<T>::UnionUnsorted(Array<T>* arr2) {
     int i, j, k;
     i = j = k = 0;
-    struct Array* arr3 = new Array;
+    struct Array<T>* arr3 = new Array<T>;
 
     // Copy first array
     for (; i < length; i++)
@@ -329,10 +353,11 @@ Array* Array::UnionUnsorted(Array* arr2) {
 
 // Copy of Union
 // Should only copy element if they're equal
-Array* Array::Intersection(Array* arr2) {
+template<class T>
+Array<T>* Array<T>::Intersection(Array<T>* arr2) {
     int i, j, k;
     i = j = k = 0;
-    struct Array* arr3 = new Array;
+    struct Array<T>* arr3 = new Array<T>;
 
     while (i < length && j < arr2->length) {
         if (A[i] < arr2->A[j])
@@ -352,10 +377,11 @@ Array* Array::Intersection(Array* arr2) {
 }
 
 // Should only copy element if they're present in both arrays.
-Array* Array::IntersectionUnsorted(Array* arr2) {
+template<class T>
+Array<T>* Array<T>::IntersectionUnsorted(Array<T>* arr2) {
     int i, j, k;
     i = j = k = 0;
-    struct Array* arr3 = new Array;
+    struct Array<T>* arr3 = new Array<T>;
 
     // We don't copy the first array blindly
     //for (; i < arr1->length; i++)
@@ -383,10 +409,11 @@ Array* Array::IntersectionUnsorted(Array* arr2) {
 
 // Copy from Union
 // Only elements from first array get added.
-Array* Array::Difference(Array* arr2) {
+template<class T>
+Array<T>* Array<T>::Difference(Array<T>* arr2) {
     int i, j, k;
     i = j = k = 0;
-    struct Array* arr3 = new Array;
+    struct Array<T>* arr3 = new Array<T>;
 
     while (i < length && j < arr2->length) {
         if (A[i] < arr2->A[j])
@@ -408,10 +435,11 @@ Array* Array::Difference(Array* arr2) {
 }
 
 // Will only copy elements from array 1 that are not present in array 2.
-Array* Array::DifferenceUnsorted(Array* arr2) {
+template<class T>
+Array<T>* Array<T>::DifferenceUnsorted(Array<T>* arr2) {
     int i, j, k;
     i = j = k = 0;
-    struct Array* arr3 = new Array;
+    struct Array<T>* arr3 = new Array<T>;
 
     // We don't copy the first array blindly
     //for (; i < arr1->length; i++)
