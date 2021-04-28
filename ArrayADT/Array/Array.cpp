@@ -227,6 +227,9 @@ struct Array* Merge(struct Array* arr1, struct Array* arr2) {
 }
 
 // Set operations
+// Under each method, there'll be a student-led implementation for unsorted sets.
+
+// This Union method assumes both sets are sorted.
 struct Array* Union(struct Array* arr1, struct Array* arr2) {
     int i, j, k;
     i = j = k = 0;
@@ -237,7 +240,7 @@ struct Array* Union(struct Array* arr1, struct Array* arr2) {
             arr3->A[k++] = arr1->A[i++];
         else if (arr2->A[j] < arr1->A[i])
             arr3->A[k++] = arr2->A[j++];
-        else {
+        else { // Main difference is that if we find values that are the same, we only add one and move both indices forward. This prevents duplicates.
             arr3->A[k++] = arr1->A[i++];
             j++;
         }
@@ -246,6 +249,90 @@ struct Array* Union(struct Array* arr1, struct Array* arr2) {
         arr3->A[k++] = arr1->A[i];
     for (; j < arr2->length; j++)
         arr3->A[k++] = arr2->A[j];
+
+    arr3->length = k;
+    arr3->size = 10;
+
+    return arr3;
+}
+
+// For this, we first copy the first array into the third.
+// As we add items from the second array, we have to check all existing items in the third array, including the ones just added.
+struct Array* UnionUnsorted(struct Array* arr1, struct Array* arr2) {
+    int i, j, k;
+    i = j = k = 0;
+    struct Array* arr3 = new Array;
+
+    // Copy first array
+    for (; i < arr1->length; i++)
+        arr3->A[k++] = arr1->A[i];
+
+    // Copy second array.
+    for (; j < arr2->length; j++) {
+        std::cout << "Checking j index: " << j << " of value: " << arr2->A[j] << std::endl;
+        // Check all items in arr3, from 0 to current.
+        i = 0;
+        // Loop will exit early if the elem in arr3 is the same.
+        // But i will be = to k if there's no match.
+        while (arr3->A[i] != arr2->A[j] && i < k)
+            i++;
+        // Therefore, all we have to check is if i == k to know that there was no duplicate.
+        if (j == 4) {
+            std::cout << "i: " << i << " k: " << k << std::endl ; 
+        }
+        if (i == k)
+            arr3->A[k++] = arr2->A[j];
+        
+    }
+
+    arr3->length = k;
+    arr3->size = 10;
+    return arr3;
+}
+
+// Copy of Union
+// Should only copy element if they're equal
+struct Array* Intersection(struct Array* arr1, struct Array* arr2) {
+    int i, j, k;
+    i = j = k = 0;
+    struct Array* arr3 = new Array;
+
+    while (i < arr1->length && j < arr2->length) {
+        if (arr1->A[i] < arr2->A[j])
+            i++;
+        else if (arr2->A[j] < arr1->A[i]) // Main difference is that if either Ai or Aj is smaller, move the corresponding index.
+            j++;
+        else { // And once we have matching elements, add them to the result.
+            arr3->A[k++] = arr1->A[i++];
+            j++;
+        }
+    }
+
+    arr3->length = k;
+    arr3->size = 10;
+
+    return arr3;
+}
+
+// Copy from Union
+// Only elements from first array get added.
+struct Array* Difference(struct Array* arr1, struct Array* arr2) {
+    int i, j, k;
+    i = j = k = 0;
+    struct Array* arr3 = new Array;
+
+    while (i < arr1->length && j < arr2->length) {
+        if (arr1->A[i] < arr2->A[j])
+            arr3->A[k++] = arr1->A[i++];
+        else if (arr2->A[j] < arr1->A[i])
+            j++;
+        else { // Only elements from first array get added that arn't in the second array.
+            i++;
+            j++;
+        }
+    }
+    for (; i < arr1->length; i++)
+        arr3->A[k++] = arr1->A[i];
 
     arr3->length = k;
     arr3->size = 10;
@@ -288,6 +375,8 @@ int main()
     Display(arr);
     std::cout << "----------------" << std::endl;
 
+    // Sorted set methods
+    std::cout << "----------------" << std::endl;
     int deleted = Delete(&arr, 2);
     std::cout << "Deleted element is: " << deleted << std::endl;
     Insert(&arr, 2, 12);
@@ -305,11 +394,35 @@ int main()
 
     std::cout << "Merge:" << std::endl;
     Display(*arr3);
+    
     std::cout << std::endl;
-
     struct Array* united = Union(&arr1, &arr2);
     std::cout << "Union:" << std::endl;
     Display(*united);
+
+    std::cout << std::endl;
+    struct Array* intersected = Intersection(&arr1, &arr2);
+    std::cout << "Intersection:" << std::endl;
+    Display(*intersected);
+
+    std::cout << std::endl;
+    struct Array* difference = Difference(&arr1, &arr2);
+    std::cout << "Difference:" << std::endl;
+    Display(*difference);
+    std::cout << "----------------" << std::endl;
+
+    std::cout << std::endl;
+    std::cout << "----------------" << std::endl;
+
+    struct Array unsorted1 = { {2,1,52,12,3}, 10, 5 };
+    struct Array unsorted2 = { {4,12,2,52,10}, 10, 5 };
+    
+    std::cout << std::endl;
+    struct Array* unitedUnsorted = UnionUnsorted(&unsorted1, &unsorted2);
+    std::cout << "Union Unsorted:" << std::endl;
+    Display(*unitedUnsorted);
+
+    std::cout << "----------------" << std::endl;
 
 
 }
