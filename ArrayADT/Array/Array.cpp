@@ -486,6 +486,9 @@ void missingSol4(Array<T>* arr);
 template<class T>
 void duplicateSol1(Array<T>* arr);
 
+template<class T>
+void duplicateSol2(Array<T>* arr);
+
 int main()
 {
     /*
@@ -599,13 +602,13 @@ int main()
     arr1.Append(15);
     arr1.Append(16);
 
-    std::cout << "Sol 1:" << std::endl;
+    std::cout << "\tSol 1:" << std::endl;
     int found1 = missingSol1(&arr1);
-    std::cout << found1 << std::endl;
+    std::cout <<"\t\t"<< found1 << std::endl;
 
-    std::cout << "Sol 2:" << std::endl;
+    std::cout << "\tSol 2:" << std::endl;
     int found2 = missingSol2(&arr1);
-    std::cout << found2 << std::endl;
+    std::cout << "\t\t" << found2 << std::endl;
 
     // Multiple missing elementd in sorted arrays.
 
@@ -621,11 +624,11 @@ int main()
     arr2.Append(16);
     arr2.Append(17);
 
-    std::cout << "Sol 3:" << std::endl;
+    std::cout << "\tSol 3:" << std::endl;
     missingSol3(&arr2);
     
     // Missing element(s) from unsorted array.
-    std::cout << "Sol 4:" << std::endl;
+    std::cout << "\tSol 4:" << std::endl;
     missingSol4(&arr2);
 
     std::cout << std::endl;
@@ -645,7 +648,12 @@ int main()
     arr3.Append(15);
     arr3.Append(20);
 
+    std::cout << "\tSol 1:" << std::endl;
     duplicateSol1(&arr3);
+
+    std::cout << "\tSol 2:" << std::endl;
+    duplicateSol2(&arr3);
+
 }
 
 // This solution uses the formula (n*(n+1))/2
@@ -685,7 +693,7 @@ void missingSol3(Array<T>* arr) {
     for (int i = 0; i < arr->Length(); i++) 
         if (arr->Get(i) - i != diff)
             while(diff<arr->Get(i) - i) {
-                std::cout << i + diff << std::endl;
+                std::cout << "\t\t" << i + diff << std::endl;
                 diff++;
             }
 }
@@ -717,7 +725,7 @@ void missingSol4(Array<T>* arr) {
     // Loop from lowst to highest value found in original array.
     for (int j = l; j <= h; j++) {
         if (hold[j - 1] == 0)
-            std::cout << j << std::endl;
+            std::cout << "\t\t" << j << std::endl;
     } 
 
     delete[]hold;
@@ -733,9 +741,29 @@ void duplicateSol1(Array<T>* arr) {
             // Go up as many times as we find duplicates with index j
             while (arr->Get(j) == arr->Get(i)) j++;
             // The difference between index j and i determine how many times that value was duplicated.
-            std::cout << "Value: " << arr->Get(i) << " duplicated " << j - i << " times." << std::endl;
+            std::cout << "\t\t" << "Value: " << arr->Get(i) << " duplicated " << j - i << " times." << std::endl;
             // Move index i up to where we finished checking.
             i = j - 1;
         }
     }
+}
+
+// This solution uses a hashmap.
+template <class T>
+void duplicateSol2(Array<T>* arr) {
+    // Since it's sorted, we just need the largest/last value
+    int* map = new int[arr->Get(arr->Length()-1)];
+
+    // Initialize all indices to 0;
+    for (int i = 0; i < arr->Get(arr->Length()-1); i++)
+        map[i] = 0;
+
+    // Same thing as before, extract values out of array and use as indices.
+    for (int i = 0; i <= arr->Length(); i++)
+        map[arr->Get(i)-1]++;
+
+    for (int j = arr->Get(0); j <= arr->Get(arr->Length()-1); j++)
+        if (map[j - 1] > 1) {
+            std::cout << "\t\t" << "Value: " << j << " duplicated " << map[j-1] << " times." << std::endl;
+        }
 }
