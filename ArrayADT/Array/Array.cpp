@@ -483,6 +483,9 @@ void missingSol3(Array<T>* arr);
 template<class T>
 void missingSol4(Array<T>* arr);
 
+template<class T>
+void duplicateSol1(Array<T>* arr);
+
 int main()
 {
     /*
@@ -582,6 +585,8 @@ int main()
     // Array challenges.
     // Single missing element in sorted arrays.
 
+    std::cout << "Missing" << std::endl;
+    std::cout << "----------------" << std::endl;
     Array<int> arr1 = Array<int>(10);
     arr1.Append(6);
     arr1.Append(7);
@@ -622,6 +627,25 @@ int main()
     // Missing element(s) from unsorted array.
     std::cout << "Sol 4:" << std::endl;
     missingSol4(&arr2);
+
+    std::cout << std::endl;
+    std::cout << "Duplicates" << std::endl;
+    std::cout << "----------------" << std::endl;
+    std::cout << std::endl;
+
+    Array<int> arr3 = Array<int>(10);
+    arr3.Append(3);
+    arr3.Append(6);
+    arr3.Append(8);
+    arr3.Append(8);
+    arr3.Append(10);
+    arr3.Append(12);
+    arr3.Append(15);
+    arr3.Append(15);
+    arr3.Append(15);
+    arr3.Append(20);
+
+    duplicateSol1(&arr3);
 }
 
 // This solution uses the formula (n*(n+1))/2
@@ -697,4 +721,21 @@ void missingSol4(Array<T>* arr) {
     } 
 
     delete[]hold;
+}
+
+// This solution uses two indices to find and count duplicates in a sorted array
+template <class T>
+void duplicateSol1(Array<T>* arr) {
+    for (int i = 0; i < arr->Length(); i++) {
+        // If we find that the next is a duplicate, go in deeeeep.
+        if (arr->Get(i) == arr->Get(i + 1)) {
+            int j = i + 1;
+            // Go up as many times as we find duplicates with index j
+            while (arr->Get(j) == arr->Get(i)) j++;
+            // The difference between index j and i determine how many times that value was duplicated.
+            std::cout << "Value: " << arr->Get(i) << " duplicated " << j - i << " times." << std::endl;
+            // Move index i up to where we finished checking.
+            i = j - 1;
+        }
+    }
 }
