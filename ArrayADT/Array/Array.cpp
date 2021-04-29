@@ -480,6 +480,9 @@ int missingSol2(Array<T>* arr);
 template<class T>
 void missingSol3(Array<T>* arr);
 
+template<class T>
+void missingSol4(Array<T>* arr);
+
 int main()
 {
     /*
@@ -591,9 +594,11 @@ int main()
     arr1.Append(15);
     arr1.Append(16);
 
+    std::cout << "Sol 1:" << std::endl;
     int found1 = missingSol1(&arr1);
     std::cout << found1 << std::endl;
 
+    std::cout << "Sol 2:" << std::endl;
     int found2 = missingSol2(&arr1);
     std::cout << found2 << std::endl;
 
@@ -607,11 +612,16 @@ int main()
     arr2.Append(10);
     arr2.Append(11);
     arr2.Append(12);
-    arr2.Append(13);
+    arr2.Append(14);
     arr2.Append(16);
     arr2.Append(17);
 
+    std::cout << "Sol 3:" << std::endl;
     missingSol3(&arr2);
+    
+    // Missing element(s) from unsorted array.
+    std::cout << "Sol 4:" << std::endl;
+    missingSol4(&arr2);
 }
 
 // This solution uses the formula (n*(n+1))/2
@@ -654,4 +664,37 @@ void missingSol3(Array<T>* arr) {
                 std::cout << i + diff << std::endl;
                 diff++;
             }
+}
+
+// This solution uses a hashmap to find single or multiple missing elements from an unsorted array.
+// If we can't sort the array, but space is not an issue, we just use a hashmap.
+template<class T>
+void missingSol4(Array<T>* arr) {
+    int l, h;
+    l = h = arr->Get(0);
+    // We'll want to find what are the highest and lowest value in the given array.
+    // We could use the Min() and Max() methods but we can just find both in one iteration.
+    for (int i = 0; i < arr->Length(); i++) {
+        if (arr->Get(i) < l)
+            l = arr->Get(i);
+        if (arr->Get(i) > h)
+            h = arr->Get(i);
+    }
+    // Declare an array as large as our highest value.
+    int* hold = new int[h];
+    for (int i = 0; i < h; i++)
+        // Initialize all values to 0
+        hold[i] = 0;
+
+    for (int i = 0; i < arr->Length(); i++)
+        // Extract values out of our given array and use them as index to assign to one.
+        hold[arr->Get(i) - 1] = 1;
+        
+    // Loop from lowst to highest value found in original array.
+    for (int j = l; j <= h; j++) {
+        if (hold[j - 1] == 0)
+            std::cout << j << std::endl;
+    } 
+
+    delete[]hold;
 }
