@@ -492,6 +492,9 @@ void duplicateSol2(Array<T>* arr);
 template<class T>
 void duplicateSol3(Array<T>* arr);
 
+template<class T>
+void duplicateSol4(Array<T>* arr);
+
 int main()
 {
     /*
@@ -673,6 +676,9 @@ int main()
 
     std::cout << "\tSol3" << std::endl;
     duplicateSol3(&arr4);
+
+    std::cout << "\tSol4" << std::endl;
+    duplicateSol4(&arr4);
 }
 
 // Note about the use of "hashmaps/hashtables":
@@ -795,7 +801,7 @@ void duplicateSol2(Array<T>* arr) {
 template <class T>
 void duplicateSol3(Array<T>* arr) {
 
-    // Make a deep copy.
+    // Make a deep copy manually as I haven't looked into how to make a deep copy constructor yet.
     int* copy= new int[arr->Length()];
     for (int x = 0; x < arr->Length(); x++)
         copy[x] = arr->Get(x);
@@ -815,4 +821,31 @@ void duplicateSol3(Array<T>* arr) {
     }
 
     delete[]copy;
+}
+
+// This solution uses a "hashtable" to count each element.
+template <class T>
+void duplicateSol4(Array<T>* arr) {
+    int l, h;
+    l = h = arr->Get(0);
+
+    // Find lowest and highest values.
+    for (int i = 0; i < arr->Length(); i++) {
+        if (arr->Get(i) < l) l = arr->Get(i);
+        if (arr->Get(i) > h) h = arr->Get(i);
+    }
+
+    int* map = new int[h];
+    // Initialize each index to 0
+    for (int i = 0; i < h; i++)
+        map[i] = 0;
+
+    // Using our array values as indices, start counting each one of them.
+    for (int i = 0; i < arr->Length(); i++)
+        map[arr->Get(i) - 1]++;
+
+    // Look for indices with higher than 1 count.
+    for (int j = l; j <= h; j++)
+        if (map[j - 1] > 1) std::cout << "\t\tValue: " << j << " duplicated " << map[j - 1] << " times." << std::endl;
+    delete[]map;
 }
