@@ -495,6 +495,9 @@ void duplicateSol3(Array<T>* arr);
 template<class T>
 void duplicateSol4(Array<T>* arr);
 
+template<class T>
+void pairSol1(Array<T>* arr, int target);
+
 int main()
 {
     /*
@@ -674,11 +677,35 @@ int main()
     arr4.Append(2);
     arr4.Append(7);
 
-    std::cout << "\tSol3" << std::endl;
+    std::cout << "\tSol 3:" << std::endl;
     duplicateSol3(&arr4);
 
-    std::cout << "\tSol4" << std::endl;
+    std::cout << "\tSol 4:" << std::endl;
     duplicateSol4(&arr4);
+
+    // Pair for a sum in sorted array.
+    // Skipping unsorted cause it's basically either just bruteforce or use a hashtable.
+    std::cout << std::endl;
+    std::cout << "Sum Pairs" << std::endl;
+    std::cout << "----------------" << std::endl;
+    std::cout << std::endl;
+
+    Array<int> arr5 = Array<int>(10);
+    arr5.Append(1);
+    arr5.Append(3);
+    arr5.Append(4);
+    arr5.Append(5);
+    arr5.Append(6);
+    arr5.Append(8);
+    arr5.Append(9);
+    arr5.Append(10);
+    arr5.Append(12);
+    arr5.Append(14);
+
+    std::cout << "\tSol 1:" << std::endl;
+    pairSol1(&arr5, 10);
+    std::cout << std::endl;
+    pairSol1(&arr5, 15);
 }
 
 // Note about the use of "hashmaps/hashtables":
@@ -848,4 +875,29 @@ void duplicateSol4(Array<T>* arr) {
     for (int j = l; j <= h; j++)
         if (map[j - 1] > 1) std::cout << "\t\tValue: " << j << " duplicated " << map[j - 1] << " times." << std::endl;
     delete[]map;
+}
+
+// This solution uses two indices: one starting at the beginning and one at the end.
+// It sums elements at each index and moves the indices based on how the result compares to our target pair sum.
+template <class T>
+void pairSol1(Array<T>* arr, int target) {
+    int i, j;
+    i = 0;
+    j = arr->Length()-1;
+
+    while (i < j) {
+        // If they hit our target, move both indices.
+        if (arr->Get(i) + arr->Get(j) == target) {
+            std::cout << "\t\tValues: " << arr->Get(i) << " + " << arr->Get(j) << " = " << target << std::endl;
+            i++;
+            j--;
+        }
+        // If the sum is too large, move rightmost index inwards.
+        else if (arr->Get(i) + arr->Get(j) > target)
+            j--;
+        // Only possible scenario left is that sum is too small, in which case move leftmost index inwards.
+        else
+            i++;
+    }
+
 }
