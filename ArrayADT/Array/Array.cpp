@@ -489,6 +489,9 @@ void duplicateSol1(Array<T>* arr);
 template<class T>
 void duplicateSol2(Array<T>* arr);
 
+template<class T>
+void duplicateSol3(Array<T>* arr);
+
 int main()
 {
     /*
@@ -631,6 +634,7 @@ int main()
     std::cout << "\tSol 4:" << std::endl;
     missingSol4(&arr2);
 
+    // Duplicate elements from sorted array.
     std::cout << std::endl;
     std::cout << "Duplicates" << std::endl;
     std::cout << "----------------" << std::endl;
@@ -654,8 +658,25 @@ int main()
     std::cout << "\tSol 2:" << std::endl;
     duplicateSol2(&arr3);
 
+    // Missing elements from unsorted array.
+    Array<int> arr4 = Array<int>(10);
+    arr4.Append(8);
+    arr4.Append(3);
+    arr4.Append(6);
+    arr4.Append(4);
+    arr4.Append(6);
+    arr4.Append(5);
+    arr4.Append(6);
+    arr4.Append(8);
+    arr4.Append(2);
+    arr4.Append(7);
+
+    std::cout << "\tSol3" << std::endl;
+    duplicateSol3(&arr4);
 }
 
+// Note about the use of "hashmaps/hashtables":
+//  I'm using arrays instead of hashing/dictionaries since that's the topic I'm on. Once I reach section 21: Hashing Technique I'll start introducing actual hashing into the solutions.
 // This solution uses the formula (n*(n+1))/2
 template<class T>
 int missingSol1(Array<T>* arr) {
@@ -698,7 +719,7 @@ void missingSol3(Array<T>* arr) {
             }
 }
 
-// This solution uses a hashmap to find single or multiple missing elements from an unsorted array.
+// This solution uses a "hashmap" to find single or multiple missing elements from an unsorted array.
 // If we can't sort the array, but space is not an issue, we just use a hashmap.
 template<class T>
 void missingSol4(Array<T>* arr) {
@@ -731,6 +752,7 @@ void missingSol4(Array<T>* arr) {
     delete[]hold;
 }
 
+// Finding duplicates.
 // This solution uses two indices to find and count duplicates in a sorted array
 template <class T>
 void duplicateSol1(Array<T>* arr) {
@@ -766,4 +788,31 @@ void duplicateSol2(Array<T>* arr) {
         if (map[j - 1] > 1) {
             std::cout << "\t\t" << "Value: " << j << " duplicated " << map[j-1] << " times." << std::endl;
         }
+    delete[]map;
+}
+
+// This goes through each value and compares all the following ones against it. It marks duplicates as -1 so they're not checked again.
+template <class T>
+void duplicateSol3(Array<T>* arr) {
+
+    // Make a deep copy.
+    int* copy= new int[arr->Length()];
+    for (int x = 0; x < arr->Length(); x++)
+        copy[x] = arr->Get(x);
+
+
+    for (int i = 0; i < arr->Length() - 1; i++) {
+
+        int count = 1;
+        if (copy[i] != -1)
+            for (int j = i + 1; j < arr->Length(); j++)
+                if (copy[i] == copy[j]) {
+                    count++;
+                    copy[j] = -1;
+                }
+        if (count > 1)
+            std::cout << "\t\tValue: " << copy[i] << " duplicated " << count << " times." << std::endl;
+    }
+
+    delete[]copy;
 }
