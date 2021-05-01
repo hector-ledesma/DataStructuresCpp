@@ -56,6 +56,27 @@ int StringsSection::compareStrings(const char* s1, const char* s2) {
     // If string 1 is greater = 1
     if (s1[i] > s2[i]) return 1;
     // If string 1 is smaller = -1
-    if (s1[i] < s2[i]) return -1;
+    else return -1;
+}
 
+// So this method assumes the string is all lower case. This makes it so we only need as many bits
+// as there are letters = 25. So using a long(2 bytes) is enough to handle all of our comparisons.
+// This is literally the same as finding dupe ints in an unsorted array, where we use a hashtable/set to
+// add as we find, and whenever we reach a dupe we know it's not our first time seeing it.
+// So I'm not too sure why use this instead of that? Since with this method we can't even count the amount of dupes but w/e
+void StringsSection::dupesByBits(const char* s) {
+    long h = 0, x;
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        x = 1;
+        // We move one bit as many times as the index of the letter.
+        x = x<<(s[i] - 97);
+        // We use and to see if it's already there by ANDing it.
+        if ((x & h) > 0)
+            // If it is, we print it out.
+            std::cout << s[i] << " is a duplicate." << std::endl;
+        else
+            // Otherwise, we add that bit to h/our hashtable by ORing it.
+            h = x | h;
+    }
 }
