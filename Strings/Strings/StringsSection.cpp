@@ -44,3 +44,18 @@ char* StringsSection::reverseString(const char* s) {
 
     return str;
 }
+
+int StringsSection::compareStrings(const char* s1, const char* s2) {
+    int i;
+    // Go through both strings until we either reach the end of one, or find a letter that doesn't match.
+    for (i = 0; s1[i] != '\0' && s2[i] != '\0'; i++)
+        if (s1[i] != s2[i]) break;
+
+    // If they're the same = 0
+    if (s1[i] == s2[i]) return 0;
+    // If string 1 is greater = 1
+    if (s1[i] > s2[i]) return 1;
+    // If string 1 is smaller = -1
+    if (s1[i] < s2[i]) return -1;
+
+}

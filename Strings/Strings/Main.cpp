@@ -10,4 +10,5 @@ int main()
     impls.toggleCase(str);
     impls.toggleCase(str2);
     std::cout << impls.reverseString(str) << std::endl;
+    std::cout << impls.compareStrings(str2, str) << std::endl;
 }

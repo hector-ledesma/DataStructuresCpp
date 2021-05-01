@@ -6,4 +6,5 @@ public:
 	char* copyString(const char* s);
 	void toggleCase(const char* s);
 	char* reverseString(const char* s);
+	int compareStrings(const char* s1, const char* s2);
 };
