@@ -9,4 +9,5 @@ int main()
     std::cout << impls.countString(str) << std::endl;
     impls.toggleCase(str);
     impls.toggleCase(str2);
+    std::cout << impls.reverseString(str) << std::endl;
 }

@@ -31,3 +31,16 @@ void StringsSection::toggleCase(const char* s) {
 
     delete[] writable;
 }
+
+char* StringsSection::reverseString(const char* s) {
+    int sz = countString(s);
+    char* str = new char[sz+1];
+    // We want to move index i from last letter to first of og str.
+    // And j from 0 to last of new str.
+    for (int j = 0, i = sz - 1; i >= 0; i--, j++) {
+        str[j] = s[i];
+    }
+    str[sz] = '\0';
+
+    return str;
+}
