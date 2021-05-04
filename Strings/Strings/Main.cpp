@@ -7,6 +7,7 @@ int main()
     const char* str2 = "w4lC oMe";
     const char* str3 = "yeeehaaw";
     const char* str4 = "clemowe";
+    const char* str5 = "emil";
 
     std::cout << impls.countString(str) << std::endl;
     impls.toggleCase(str);
@@ -16,4 +17,7 @@ int main()
     impls.dupesByBits(str3);
     impls.isAnagram(str2, str);
     impls.isAnagram(str, str4);
+    std::cout << "----- Permutations -----" << std::endl;
+    impls.permutations1(str5, 0);
+    std::cout << "------------------------" << std::endl;
 }

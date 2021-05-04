@@ -91,9 +91,7 @@ void StringsSection::dupesByBits(const char* s) {
 
 void StringsSection::isAnagram(const char* s1, const char* s2) {
     // First make our hashmap/table
-    int map[25];
-    for (int i = 0; i < 25; i++)
-        map[i] = 0;
+    int map[25] = { 0 };
 
     // Same method of accessing each index by subtracting 97.
     // Add one to that index, and we have the count for each letter by their alphabetical index.
@@ -109,5 +107,41 @@ void StringsSection::isAnagram(const char* s1, const char* s2) {
         }
     }
     std::cout << s1 << " and " << s2 << " are anagrams." << std::endl;
+
+}
+
+// This method is nuts. The recursion is cool and all, but the trick is in checking
+//      what letters do we have available for us to use at any given moment.
+// At every layer of the recursion we're basically looping through the whole string from beginning to end.
+// But for each layer that we go down, we let the program know that the previous letters aren't available
+//      by having a look up table where we set 0 on available indices, letting us loop past those letters at the respective layer.
+void StringsSection::permutations1(const char* s, int k) {
+    // We're gonna need static arrays that will serve as our look up table and permutation build.
+    // We're hardcoding 4 letter long strings for the sake of simplicity.
+    static int A[4] = { 0 };
+    static char res[4];
+    
+    // If we reached the end of our recursion, print our permutation build.
+    if (s[k] == '\0') {
+        std::cout << res << std::endl;
+        return;
+    }
+    else {
+        // We'll loop through the whole string at each layer.
+        for (int i = 0; s[i] != '\0'; i++) {
+            // But we only care about the ones available to us by checking our lookup table.
+            if (A[i] == 0) {
+                // Let the wolrd knows this letter is no longer available.
+                A[i] = 1;
+                // Add it to our permutation build.
+                res[k] = s[i];
+                // Go a layer deeper.
+                permutations1(s, k + 1);
+                // On our way back up, free up our current letter.
+                A[i] = 0;
+            }
+        }
+    }
+
 
 }
