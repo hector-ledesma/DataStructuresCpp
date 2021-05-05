@@ -17,7 +17,12 @@ int main()
     impls.dupesByBits(str3);
     impls.isAnagram(str2, str);
     impls.isAnagram(str, str4);
-    std::cout << "----- Permutations -----" << std::endl;
+    std::cout << "----- Permutations Map -----" << std::endl;
     impls.permutationsMap(str5, 0);
+    std::cout << "------------------------" << std::endl;
+
+    std::cout << "----- Permutations Swap -----" << std::endl;
+    char* editable = impls.copyString(str5);
+    impls.permutationsSwap(editable, 0);
     std::cout << "------------------------" << std::endl;
 }
