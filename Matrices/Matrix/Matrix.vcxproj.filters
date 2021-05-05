@@ -21,10 +21,16 @@
     <ClCompile Include="DiagonalMatrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LowTriMatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LowTriMatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="DiagonalMatrix.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,11 +1,11 @@
 #include <iostream>
-#include "./DiagonalMatrix.h"
+#include "DiagonalMatrix.h"
 
 DiagonalMatrix::DiagonalMatrix(int i) {
 	n = i;
 }
 
-void DiagonalMatrix::Set(int i, int j, int x) {
+void DiagonalMatrix::Set  (int i, int j, int x) {
 	if (i == j)
 		A[i - 1] = x;
 }
