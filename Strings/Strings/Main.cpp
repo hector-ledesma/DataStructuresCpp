@@ -18,6 +18,6 @@ int main()
     impls.isAnagram(str2, str);
     impls.isAnagram(str, str4);
     std::cout << "----- Permutations -----" << std::endl;
-    impls.permutations1(str5, 0);
+    impls.permutationsMap(str5, 0);
     std::cout << "------------------------" << std::endl;
 }

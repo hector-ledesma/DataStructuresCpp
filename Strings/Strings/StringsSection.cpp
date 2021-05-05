@@ -115,7 +115,7 @@ void StringsSection::isAnagram(const char* s1, const char* s2) {
 // At every layer of the recursion we're basically looping through the whole string from beginning to end.
 // But for each layer that we go down, we let the program know that the previous letters aren't available
 //      by having a look up table where we set 0 on available indices, letting us loop past those letters at the respective layer.
-void StringsSection::permutations1(const char* s, int k) {
+void StringsSection::permutationsMap(const char* s, int k) {
     // We're gonna need static arrays that will serve as our look up table and permutation build.
     // We're hardcoding 4 letter long strings for the sake of simplicity.
     static int A[4] = { 0 };
@@ -136,12 +136,38 @@ void StringsSection::permutations1(const char* s, int k) {
                 // Add it to our permutation build.
                 res[k] = s[i];
                 // Go a layer deeper.
-                permutations1(s, k + 1);
+                permutationsMap(s, k + 1);
                 // On our way back up, free up our current letter.
                 A[i] = 0;
             }
         }
     }
+}
 
 
+// This method is a mind bender.
+// We use two indices. l and i
+// l will determine which level we're in. 
+// i will move through the characters at every level, startin from l.
+// as l moves forward, it prevents the letters that come before it from being altered.
+void StringsSection::permutationsSwap(char* s, int l) {
+
+    if (s[l] == '\0') {
+        // Once l is at the end of the string, we've hit the bottom.
+        std::cout << s << std::endl;
+        return;
+    }
+
+    // We start from l, until we hit end of string.
+    for (int i = l; s[i] != '\0'; i++) {
+        // First we swap l with i.
+        swap(&s[l], &s[i]);
+        // We go deeper by l+1
+    }
+}
+
+void StringsSection::swap(char* c1, char* c2) {
+    char hold = *c1;
+    *c2 = *c1;
+    *c1 = hold;
 }
