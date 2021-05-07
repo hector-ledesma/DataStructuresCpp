@@ -5,18 +5,22 @@ Sparse::Sparse() {
 	// We need dimensions row and columns
 	//		as well as number of non-zero elements.
 
-	std::cout << "Enter Dimensions m: ";
+	/*std::cout << "Enter Dimensions m: ";
 	std::cin >> m;
 	std::cout << "n: ";
 	std::cin >> n;
 
 	std::cout << "How many non-zero elements: ";
-	std::cin >> num;
+	std::cin >> num;*/
+
+	m = 5;
+	n = 6;
+	num = 4;
 
 	ele = new Element[num];
 
 	// Get elements from user input.
-	for (int i = 0; i < num; i++) {
+	/*for (int i = 0; i < num; i++) {
 		Element e = Element();
 		std::cout << "i: ";
 		std::cin >> e.i;
@@ -27,7 +31,9 @@ Sparse::Sparse() {
 		std::cout << "value: ";
 		std::cin >> e.x;
 		ele[i] = e;
-	}
+	}*/
+
+	// I'll just hardcode these cause sheesh
 }
 
 Sparse::~Sparse() {

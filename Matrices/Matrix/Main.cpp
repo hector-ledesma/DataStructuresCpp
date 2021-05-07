@@ -26,6 +26,17 @@ int main()
     lt.Display();
 
     std::cout << "\n---- Sparse Matrix ----\n";
-    Sparse s = Sparse();
-    s.Display();
+
+    // Sparse Matrix #1
+    Sparse s1 = Sparse();
+    Element ele10 = Element{ 1,2,12 };
+    s1.ele[0] = ele10;
+    Element ele11 = Element{ 2,0,1 };
+    s1.ele[1] = ele11;
+    Element ele12 = Element{ 2,4,7 };
+    s1.ele[2] = ele12;
+    Element ele13 = Element{ 4,2,4 };
+    s1.ele[3] = ele13;
+
+    s1.Display();
 }
