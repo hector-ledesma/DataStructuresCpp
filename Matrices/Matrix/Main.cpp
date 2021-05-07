@@ -2,6 +2,7 @@
 #include "DiagonalMatrix.h"
 #include "LowTriMatrix.h"
 #include "SparseMatrix.h"
+#include "Polynomial.h"
 int main()
 {
     std::cout << "---- Diagonal Matrix ----\n";
@@ -58,4 +59,32 @@ int main()
     Sparse* sum = Sparse::add(&s1, &s2);
 
     sum->Display();
+
+    std::cout << "\n---- Polynomials ----\n";
+
+    //Polynomial #1
+    std::cout << "\nPolynomial #1" << std::endl;
+    Polynomial p1 = Polynomial(3);
+    Term term10 = Term{2, 5};
+    p1.terms[0] = term10;
+    Term term11 = Term{5, 2};
+    p1.terms[1] = term11;
+    Term term12 = Term{2, 1};
+    p1.terms[2] = term12;
+    p1.Display();
+
+    //Polynomial #2
+    std::cout << "\nPolynomial #2" << std::endl;
+    Polynomial p2 = Polynomial(3);
+    Term term20 = Term{ 1, 5 };
+    p2.terms[0] = term20;
+    Term term21 = Term{ 2, 1 };
+    p2.terms[1] = term21;
+    Term term22 = Term{ 1, 0 };
+    p2.terms[2] = term22;
+    p2.Display();
+
+    std::cout << "\nPolynomial #3" << std::endl;
+    Polynomial* psum = Polynomial::add(&p1, &p2);
+    psum->Display();
 }

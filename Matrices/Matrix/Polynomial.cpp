@@ -3,6 +3,7 @@
 
 Polynomial::Polynomial(int nums) {
 	n = nums;
+	terms = new Term[n];
 }
 
 Polynomial::~Polynomial() {
@@ -11,7 +12,7 @@ Polynomial::~Polynomial() {
 
 void Polynomial::Display() {
 	for (int i = 0; i < n; i++)
-		std::cout << terms[i].coeff << "x^" << terms[i].exp << " + ";
+		std::cout << terms[i].coeff << "*x^" << terms[i].exp << " + ";
 	std::cout << std::endl;
 }
 
@@ -42,4 +43,7 @@ Polynomial* Polynomial::add(Polynomial* p1, Polynomial* p2) {
 	// And as usual, check which one has some juice left in it, and squeeze it out.
 	for (; i < p1->n; i++) sum->terms[k++] = p1->terms[i];
 	for (; j < p2->n; j++) sum->terms[k++] = p2->terms[j];
+
+	sum->n = k;
+	return sum;
 }

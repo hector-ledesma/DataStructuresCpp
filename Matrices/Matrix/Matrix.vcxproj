@@ -150,11 +150,13 @@
     <ClCompile Include="LowTriMatrix.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="DiagonalMatrix.cpp" />
+    <ClCompile Include="Polynomial.cpp" />
     <ClCompile Include="SparseMatrix.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DiagonalMatrix.h" />
     <ClInclude Include="LowTriMatrix.h" />
+    <ClInclude Include="Polynomial.h" />
     <ClInclude Include="SparseMatrix.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

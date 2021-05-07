@@ -96,9 +96,9 @@ Sparse* Sparse::add(Sparse* m1, Sparse* m2) {
 			// Else if they're the same
 			else {
 				// Move m1 or m2 into sum[k].
-				sum->ele[k] = m1->ele[i++];
+				sum->ele[k] = m1->ele[i];
 				// Add the other element's value onto sum[k].x
-				sum->ele[k++].x += m2->ele[j++].x;
+				sum->ele[k++].x = m1->ele[i++].x + m2->ele[j++].x;
 			}
 		}
 	}
