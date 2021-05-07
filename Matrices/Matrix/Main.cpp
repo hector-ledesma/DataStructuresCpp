@@ -1,6 +1,7 @@
 #include <iostream>
 #include "DiagonalMatrix.h"
 #include "LowTriMatrix.h"
+#include "SparseMatrix.h"
 int main()
 {
     std::cout << "---- Diagonal Matrix ----\n";
@@ -23,4 +24,8 @@ int main()
     }
 
     lt.Display();
+
+    std::cout << "\n---- Sparse Matrix ----\n";
+    Sparse s = Sparse();
+    s.Display();
 }
