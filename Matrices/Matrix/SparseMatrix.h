@@ -12,4 +12,5 @@ public:
 	~Sparse();
 
 	void Display();
+	static Sparse* add(Sparse* m1, Sparse* m2);
 };
