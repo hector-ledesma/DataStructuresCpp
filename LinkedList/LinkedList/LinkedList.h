@@ -15,4 +15,5 @@ public:
 
 	void Display();
 	void RDisplay(Node* p);
+	int count();
 };

@@ -12,4 +12,6 @@ int main()
 	LinkedList list = LinkedList(A, 5);
 	list.Display();
 	list.RDisplay(list.head);
+
+	std::cout << "There are " << list.count() << " elements on this Linked List." << std::endl;
 }

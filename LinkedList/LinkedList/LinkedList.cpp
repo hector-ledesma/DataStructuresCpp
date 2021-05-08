@@ -50,3 +50,13 @@ void LinkedList::RDisplay(Node* p) {
 		std::cout << p->data << " <- ";
 	}
 }
+
+int LinkedList::count() {
+	int count = 0;
+	Node* current = head;
+	while (current) {
+		count++;
+		current = current->next;
+	}
+	return count;
+}
