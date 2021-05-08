@@ -14,4 +14,6 @@ int main()
 	list.RDisplay(list.head);
 
 	std::cout << "There are " << list.count() << " elements on this Linked List." << std::endl;
+	std::cout << "Sum of all elements on list is: " << list.sum() << std::endl;
+	std::cout << "Max element: " << list.max() << std::endl;
 }

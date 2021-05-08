@@ -60,3 +60,26 @@ int LinkedList::count() {
 	}
 	return count;
 }
+
+int LinkedList::sum() {
+	int s = 0;
+	Node* current = head;
+	while (current) {
+		s += current->data;
+		current = current->next;
+	}
+	return s;
+}
+
+int LinkedList::max() {
+	int m = INT16_MIN;
+	Node* current = head;
+
+	while (current) {
+		if (current->data > m)
+			m = current->data;
+		current = current->next;
+	}
+
+	return m;
+}
