@@ -26,3 +26,17 @@ LinkedList::LinkedList(int A[], int n) {
 		previous = next;
 	}
 }
+
+LinkedList::~LinkedList() {
+	delete head;
+}
+
+void LinkedList::Display() {
+	Node *hold = head;
+
+	while (hold != NULL) {
+		std::cout << hold->data << " -> ";
+		hold = hold->next;
+	}
+	std::cout<<std::endl;
+}

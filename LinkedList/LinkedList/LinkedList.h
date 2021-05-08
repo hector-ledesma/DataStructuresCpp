@@ -12,4 +12,6 @@ public:
 	Node* head;
 	LinkedList(int A[], int n);
 	~LinkedList();
+
+	void Display();
 };
