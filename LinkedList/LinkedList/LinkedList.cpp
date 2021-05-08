@@ -40,3 +40,13 @@ void LinkedList::Display() {
 	}
 	std::cout<<std::endl;
 }
+
+// This method displays the list in reverse by traversing the list recursively and printing on return.
+
+void LinkedList::RDisplay(Node* p) {
+	
+	if (p != NULL) {
+		RDisplay(p->next);
+		std::cout << p->data << " <- ";
+	}
+}

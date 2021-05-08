@@ -14,4 +14,5 @@ public:
 	~LinkedList();
 
 	void Display();
+	void RDisplay(Node* p);
 };
