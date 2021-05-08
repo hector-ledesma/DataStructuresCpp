@@ -35,8 +35,8 @@ Polynomial* Polynomial::add(Polynomial* p1, Polynomial* p2) {
 			sum->terms[k++] = p2->terms[j++];
 		// If exponents are equal, we can add the coefficients
 		else {
-			sum->terms[k] = p1->terms[i++];
-			sum->terms[k++].coeff += p2->terms[j++].coeff;
+			sum->terms[k] = p1->terms[i];
+			sum->terms[k++].coeff = p1->terms[i++].coeff + p2->terms[j++].coeff;
 		}
 	}
 
