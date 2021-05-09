@@ -1,5 +1,11 @@
 #include "LinkedList.h"
 
+Node::Node(int n) {
+	data = n;
+}
+
+Node::Node() {}
+
 // THe array will be the data, n is size of array.
 LinkedList::LinkedList(int A[], int n) {
 
@@ -112,4 +118,27 @@ Node* LinkedList::Search(int key) {
 	}
 	// If we make it out of the loop, we didn't find anything.
 	return NULL;
+}
+
+void LinkedList::Insert(int data, int pos) {
+	Node* n = new Node(data);
+	Node* current = head;
+	// We want to loop until we either
+	//	1- Hit our index or
+	//	2- We hit the end of the list
+	// If index is 0 return the head:
+	if (pos == 0) {
+		n->next = head->next;
+		head = n;
+		return;
+	}
+
+	for (int i = 0; i < pos - 1 && current->next != NULL; i++)
+		current = current->next;
+
+	// Once we have found the node where we'll insert our new node:
+	// Make our new node point to the node that's already there.
+	n->next = current->next;
+	// Make our current node, point at our new one now.
+	current->next = n;
 }
