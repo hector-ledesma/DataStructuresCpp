@@ -142,3 +142,29 @@ void LinkedList::Insert(int data, int pos) {
 	// Make our current node, point at our new one now.
 	current->next = n;
 }
+
+// This method assumes we're using a sorted Linked List
+void LinkedList::InsertSorted(int data) {
+	Node* n = new Node(data);
+	Node* current = head;
+	Node* prev = current;
+
+	// We want to loop until our current is NULL, or it's greater thanour target.
+	while (current && current->data < data) {
+		prev = current;
+		current = current->next;
+	}
+
+	// Check if we're targetting the head.
+	if (current == head) {
+		n->next = head;
+		head = n;
+		return;
+	}
+
+	// Once we've found our position:
+	// The node occupying this position becomes our new node's next.
+	n->next = prev->next;
+	// Assign our node to this position through prev's next
+	prev->next = n;
+}
