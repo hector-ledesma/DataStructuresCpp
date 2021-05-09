@@ -83,3 +83,33 @@ int LinkedList::max() {
 
 	return m;
 }
+
+// This linear seach method assumes that order doesn't matter, and it will move to head
+//		any searched node, so next time it takes less time to find.
+Node* LinkedList::Search(int key) {
+	// For as long as our node is not null, keep looking.
+	Node* current = head;
+	Node* prev = NULL;
+	while (current != NULL) {
+		if (key == current->data) {
+			// If our find is the head, simply return it
+			// doing any other steps would error out, since our previous node would be NULL
+			if (current == head)
+				return current;
+			// Else, we want to move current node to the head.
+			// 1.) Move the next node to be previous' next
+			prev->next = current->next;
+			// 2.) Make current point to current head
+			current->next = head;
+			// 3.) Make current the head
+			head = current;
+			// And just return our node.
+			return current;
+		}
+		// We want to keep track of both the next node, and the one we just visited.
+		prev = current;
+		current = current->next;
+	}
+	// If we make it out of the loop, we didn't find anything.
+	return NULL;
+}

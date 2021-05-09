@@ -18,4 +18,6 @@ public:
 	int count();
 	int sum();
 	int max();
+
+	Node* Search(int key);
 };
