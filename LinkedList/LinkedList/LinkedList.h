@@ -38,4 +38,5 @@ public:
 	void Merge(LinkedList &secondList);
 
 	bool isLoop();
+	void makeCircular();
 };

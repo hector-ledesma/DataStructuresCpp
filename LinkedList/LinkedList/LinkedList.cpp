@@ -431,3 +431,15 @@ bool LinkedList::isLoop() {
 	// If j isn't null and the loop exited, then there is a loop.
 	return true;
 }
+
+// I'm making this method so I can covert a normal list into a circular list without having to code a new class
+void LinkedList::makeCircular() {
+	Node* hold = head;
+	// Loop til we get to the last node
+	while (hold->next) {
+		hold = hold->next;
+	}
+
+	// At the last node, make it point to the head.
+	hold->next = head;
+}
