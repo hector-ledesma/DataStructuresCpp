@@ -36,6 +36,16 @@ LinkedList::LinkedList(int A[], int n, int num) {
 		previous = next;
 	}
 }
+// I'm making this method so I can deallocate memory for circular lists.
+int LinkedList::circularSize() {
+	int count = 0;
+	Node* hold = head;
+	do {
+		count++;
+		hold = hold->next;
+	} while (hold != head);
+	return count;
+}
 
 LinkedList::~LinkedList() {
 	// We have to dig deep to delete all nodes.
@@ -444,7 +454,8 @@ void LinkedList::makeCircular() {
 	hold->next = head;
 }
 
-// we simply wanna loop through til we hit the head agian
+// This method assumes the list is circular.
+// we simply wanna loop through til we hit the head again.
 void LinkedList::DisplayCircular() {
 	Node* hold = head;
 	do {

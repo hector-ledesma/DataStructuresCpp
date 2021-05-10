@@ -39,5 +39,6 @@ public:
 
 	bool isLoop();
 	void makeCircular();
+	int circularSize();
 	void DisplayCircular();
 };
