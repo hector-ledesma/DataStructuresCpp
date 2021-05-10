@@ -13,7 +13,8 @@ public:
 class LinkedList {
 public:
 	Node* head;
-	LinkedList(int A[], int n);
+	int id;
+	LinkedList(int A[], int n, int num);
 	~LinkedList();
 
 	void Display();
@@ -33,6 +34,8 @@ public:
 	void ReverseSP(); // SP for Sliding Pointers.
 	void ReverseRec(Node* q, Node* p);
 
-	void Append(LinkedList secondList);
-	void Merge(LinkedList secondList);
+	void Append(LinkedList &secondList);
+	void Merge(LinkedList &secondList);
+
+	bool isLoop();
 };

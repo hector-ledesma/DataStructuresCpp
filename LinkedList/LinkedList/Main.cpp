@@ -9,7 +9,7 @@
 int main()
 {
 	int A[] = { 1, 54, 12, 13, 7 };
-	LinkedList list = LinkedList(A, 5);
+	LinkedList list = LinkedList(A, 5, 1);
 	list.Display();
 	list.RDisplay(list.head);
 
@@ -58,7 +58,7 @@ int main()
 
 	// Unsorted list to be appended
 	int C[] = {3,2,12,97};
-	LinkedList toAppend = LinkedList(C, 4);
+	LinkedList toAppend = LinkedList(C, 4, 2);
 	list.Append(toAppend);
 	list.Display();
 
@@ -67,7 +67,7 @@ int main()
 	// Sorted Linked List
 	std::cout << "\nUnsorted List ----" << std::endl;
 	int B[] = {2,3,5,7,11};
-	LinkedList sortedList(B, 5);
+	LinkedList sortedList(B, 5, 3);
 
 
 	// Insert somewhere
@@ -84,9 +84,10 @@ int main()
 
 	// Sorted list to be append
 	int D[] = {1,4,6,8,12};
-	LinkedList toMerge(D, 5);
+	LinkedList toMerge(D, 5, 4);
 	
 	sortedList.Merge(toMerge);
 	sortedList.Display();
 	std::cout << "List is " << (sortedList.isSorted() ? "sorted" : "unsorted") << std::endl;
+	std::cout << "List is " << (sortedList.isLoop() ? "a loop" : "not a loop") << std::endl;
 }

@@ -5,10 +5,13 @@ Node::Node(int n) {
 	data = n;
 }
 
-Node::Node() {}
+Node::Node() {
+	data = 0;
+}
 
 // THe array will be the data, n is size of array.
-LinkedList::LinkedList(int A[], int n) {
+LinkedList::LinkedList(int A[], int n, int num) {
+	id = num;
 
 	// We'll use these two to create all Nodes back to back.
 	Node* next, * previous;
@@ -35,10 +38,17 @@ LinkedList::LinkedList(int A[], int n) {
 }
 
 LinkedList::~LinkedList() {
-	/*if (head) {
-		delete head;
-		head = NULL;
-	}*/
+	// We have to dig deep to delete all nodes.
+	Node* hold = head;
+	while (hold) {
+		// Move the head down to the next.
+		head = head->next;
+		// Delete what was previously the head.
+		delete hold;
+		// Point our bucket to new head.
+		hold = head;
+	}
+	head = NULL;
 }
 
 void LinkedList::Display() {
@@ -333,7 +343,7 @@ void LinkedList::ReverseRec(Node* prev, Node* current) {
 	}
 }
 
-void LinkedList::Append(LinkedList secondList) {
+void LinkedList::Append(LinkedList& secondList) {
 	// First we need to get to the last node
 	Node* current = head;
 	while (current->next != NULL)
@@ -346,7 +356,7 @@ void LinkedList::Append(LinkedList secondList) {
 }
 
 // For this method we don't need to create a new LinkedList class, but we'll need to manage several pointers.
-void LinkedList::Merge(LinkedList secondList) {
+void LinkedList::Merge(LinkedList& secondList) {
 	Node* first, * second, * newHead, * current;
 	// First we need to decide where we'll start.
 	// Compare heads (giggity) and start at whichever is smaller.
@@ -400,5 +410,24 @@ void LinkedList::Merge(LinkedList secondList) {
 
 	head = newHead;
 	secondList.head = NULL;
+}
 
+// This method is super cool. With just two pointers we can figure out if there's a loop.
+bool LinkedList::isLoop() {
+	Node* i, * j;
+	i = j = head;
+	// We'll move i once, and j twice.
+	// until j yeets off of the list or meets with i again
+	do {
+		i = i->next;
+		// Check that the next node isn't null. if so assign next's next.
+		j = j->next;
+		j = j ? j->next : j;
+	} while (i && j && i != j);
+	
+	// If j is NULL, it means there's no loop
+	if (!j)
+		return false;
+	// If j isn't null and the loop exited, then there is a loop.
+	return true;
 }
