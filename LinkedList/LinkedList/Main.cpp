@@ -90,4 +90,10 @@ int main()
 	sortedList.Display();
 	std::cout << "List is " << (sortedList.isSorted() ? "sorted" : "unsorted") << std::endl;
 	std::cout << "List is " << (sortedList.isLoop() ? "a loop" : "not a loop") << std::endl;
+
+	// Circular linked list
+	int E[] = {3,8,9,12,24};
+	LinkedList circularList(E, 5, 5);
+	circularList.makeCircular();
+	circularList.DisplayCircular();
 }

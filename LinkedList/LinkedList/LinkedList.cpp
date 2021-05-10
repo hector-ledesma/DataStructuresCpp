@@ -443,3 +443,13 @@ void LinkedList::makeCircular() {
 	// At the last node, make it point to the head.
 	hold->next = head;
 }
+
+// we simply wanna loop through til we hit the head agian
+void LinkedList::DisplayCircular() {
+	Node* hold = head;
+	do {
+		std::cout << hold->data << " -> ";
+		hold = hold->next;
+	} while (hold != head);
+	std::cout << std::endl;
+}
