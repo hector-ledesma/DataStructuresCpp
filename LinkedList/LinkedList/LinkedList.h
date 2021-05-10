@@ -25,4 +25,5 @@ public:
 	Node* Search(int key);
 	void Insert(int data, int pos);
 	void InsertSorted(int data);
+	int Delete(int pos);
 };

@@ -41,6 +41,13 @@ int main()
 	list.Insert(67, 12);
 	list.Display();
 
+	// Delete First
+	list.Delete(1);
+	// Delete in the middle 
+	list.Delete(4);
+	// Delete last
+	list.Delete(7);
+	list.Display();
 	// Sorted Linked List
 	std::cout << "\nUnsorted List ----" << std::endl;
 	int B[] = {2,3,5,7,11};

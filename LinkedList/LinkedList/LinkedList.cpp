@@ -146,6 +146,12 @@ void LinkedList::Insert(int data, int pos) {
 // This method assumes we're using a sorted Linked List
 void LinkedList::InsertSorted(int data) {
 	Node* n = new Node(data);
+	// If there's no head (brand new list), then simply insert this in the head.
+	if (!head) {
+		head = n;
+		return;
+	}
+
 	Node* current = head;
 	Node* prev = current;
 
@@ -167,4 +173,44 @@ void LinkedList::InsertSorted(int data) {
 	n->next = prev->next;
 	// Assign our node to this position through prev's next
 	prev->next = n;
+}
+
+int LinkedList::Delete(int pos) {
+	Node* current, *prev;
+	// If we don't find anything, we return -1
+	int found = -1;
+
+	// Check if it's the head
+	if (pos == 1) {
+		// Data to be returned
+		found = head->data;
+		// Store the pointer so we can delete it
+		prev = head;
+		// Make the second Node the head
+		head = head->next;
+		// Delete our stored node
+		delete prev;
+		return found;
+	}
+
+	// If it's not the head, business as usual.
+	current = head;
+	prev = NULL;
+	// Same as searching/inserting at an index.
+	// Traverse til we either hit the end, or we find our target.
+	for (int i = 0; i < pos - 1 && current; i++) {
+		prev = current;
+		current = current->next;
+	}
+
+	// If we found nothing, it will be NULL.
+	if (!current)
+		return found;
+
+	// If it isn't null, then continue
+	prev->next = current->next;
+	found = current->data;
+	delete current;
+
+	return found;
 }
