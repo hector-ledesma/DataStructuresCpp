@@ -50,13 +50,27 @@ int LinkedList::circularSize() {
 LinkedList::~LinkedList() {
 	// We have to dig deep to delete all nodes.
 	Node* hold = head;
-	while (hold) {
-		// Move the head down to the next.
-		head = head->next;
-		// Delete what was previously the head.
-		delete hold;
-		// Point our bucket to new head.
-		hold = head;
+	// We're assuming that the only loop lists we'll use are the circular ones.
+	if (isLoop()) {
+		// We'll use the size of the list to delete all nodes
+		int sz = circularSize();
+		int i = 0;
+		while (i < sz) {
+			i++;
+			head = head->next;
+			delete hold;
+			hold = head;
+		}
+	}
+	else {
+		while (hold) {
+			// Move the head down to the next.
+			head = head->next;
+			// Delete what was previously the head.
+			delete hold;
+			// Point our bucket to new head.
+			hold = head;
+		}
 	}
 	head = NULL;
 }
@@ -424,6 +438,7 @@ void LinkedList::Merge(LinkedList& secondList) {
 
 // This method is super cool. With just two pointers we can figure out if there's a loop.
 bool LinkedList::isLoop() {
+	if (!head) return false;
 	Node* i, * j;
 	i = j = head;
 	// We'll move i once, and j twice.
