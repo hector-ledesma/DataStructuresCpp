@@ -1,4 +1,5 @@
 #include "LinkedList.h"
+#include <iostream>
 
 Node::Node(int n) {
 	data = n;
@@ -258,4 +259,56 @@ void LinkedList::DeleteDupes() {
 			current = current->next;
 		}
 	}
+}
+
+// Not a huge fan of this one.
+// This reverses values, not links.
+void LinkedList::ReverseArr() {
+	int sz = count();
+	int* A = new int[sz];
+	int i = 0;
+	Node* current = head;
+	// We want to move through the whole list while storing each node data in our array.
+	/*for (int i = 0; i < sz; i++) {
+		A[i] = current->data;
+		current = current->next;
+	}*/
+	while (current) {
+		A[i] = current->data;
+		current = current->next;
+		i++;
+	}
+
+
+	// We now want to traverse the array in reverse, whilst we edit the list in order
+	current = head;
+	i--;
+	while (current) {
+		current->data = A[i--];
+		current = current->next;
+	}
+
+	delete[]A;
+}
+
+// This method uses sliding pointers to reverse node links. Pretty poggers
+void LinkedList::ReverseSP() {
+	// We'll use 3 pointers to keep track of the nodes we want to reverse without losing track of the nodes that come after
+	// This node will take care of traversing the List
+	Node* lead = head;
+	// This node will be the node whose connection gets altered.
+	Node* current = NULL;
+	// This is the node that will now be pointed at.
+	Node* prev = NULL;
+
+	while (lead) {
+		// Slide our pointers.
+		prev = current;
+		current = lead;
+		lead = lead->next;
+		// Adjust links.
+		current->next = prev;
+	}
+	// at the end, our new head is going to be our current, as lead falls off of the list, current remains one step behind, aka at the end aka our new head.
+	head = current;
 }

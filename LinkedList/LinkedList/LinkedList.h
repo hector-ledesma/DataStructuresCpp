@@ -28,4 +28,7 @@ public:
 	int Delete(int pos);
 	bool isSorted();
 	void DeleteDupes();
+
+	void ReverseArr();
+	void ReverseSP(); // SP for Sliding Pointers.
 };

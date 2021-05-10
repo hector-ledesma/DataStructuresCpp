@@ -49,6 +49,11 @@ int main()
 	list.Delete(7);
 	list.Display();
 
+	list.ReverseArr();
+	list.Display();
+	list.ReverseSP();
+	list.Display();
+
 	std::cout << "List is " << (list.isSorted() ? "sorted" : "unsorted") << std::endl;
 
 	// Sorted Linked List
