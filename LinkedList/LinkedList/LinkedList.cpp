@@ -214,3 +214,23 @@ int LinkedList::Delete(int pos) {
 
 	return found;
 }
+
+bool LinkedList::isSorted() {
+	// We check all nodes and compare them to the previous one,
+	//	we find a value smaller than the previous, we exit early
+	int smallest = INT_MIN;
+	Node* current = head;
+
+	while (current) {
+		// Check if data is smaller, if so exit early
+		if (current->data < smallest)
+			return false;
+		// Otherwise, store this value
+		smallest = current->data;
+		// And move up
+		current = current->next;
+	}
+
+
+	return true;
+}

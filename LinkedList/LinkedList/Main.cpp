@@ -48,6 +48,9 @@ int main()
 	// Delete last
 	list.Delete(7);
 	list.Display();
+
+	std::cout << "List is " << (list.isSorted() ? "sorted" : "unsorted") << std::endl;
+
 	// Sorted Linked List
 	std::cout << "\nUnsorted List ----" << std::endl;
 	int B[] = {2,3,5,7,11};
@@ -61,4 +64,6 @@ int main()
 	// Insert at end
 	sortedList.InsertSorted(12);
 	sortedList.Display();
+
+	std::cout << "List is " << (sortedList.isSorted() ? "sorted" : "unsorted") << std::endl;
 }
