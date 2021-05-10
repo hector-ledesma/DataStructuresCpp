@@ -67,7 +67,7 @@ int main()
 	// Sorted Linked List
 	std::cout << "\nUnsorted List ----" << std::endl;
 	int B[] = {2,3,5,7,11};
-	LinkedList sortedList = LinkedList(B, 5);
+	LinkedList sortedList(B, 5);
 
 
 	// Insert somewhere
@@ -82,5 +82,11 @@ int main()
 	sortedList.DeleteDupes();
 	sortedList.Display();
 
+	// Sorted list to be append
+	int D[] = {1,4,6,8,12};
+	LinkedList toMerge(D, 5);
+	
+	sortedList.Merge(toMerge);
+	sortedList.Display();
 	std::cout << "List is " << (sortedList.isSorted() ? "sorted" : "unsorted") << std::endl;
 }

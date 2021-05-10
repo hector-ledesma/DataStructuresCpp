@@ -35,7 +35,10 @@ LinkedList::LinkedList(int A[], int n) {
 }
 
 LinkedList::~LinkedList() {
-	delete head;
+	/*if (head) {
+		delete head;
+		head = NULL;
+	}*/
 }
 
 void LinkedList::Display() {
@@ -342,3 +345,60 @@ void LinkedList::Append(LinkedList secondList) {
 	secondList.head = NULL;
 }
 
+// For this method we don't need to create a new LinkedList class, but we'll need to manage several pointers.
+void LinkedList::Merge(LinkedList secondList) {
+	Node* first, * second, * newHead, * current;
+	// First we need to decide where we'll start.
+	// Compare heads (giggity) and start at whichever is smaller.
+	if (head->data < secondList.head->data) {
+		// Move new head to our existing head as well as our current.
+		newHead = current = head;
+		// Point first to where we'll now begin traversing our main list.
+		first = head->next;
+		// Now that we have the first list secured, null out current's next
+		current->next = NULL;
+		// That takes care of the first list.
+		// Make second aim at our second list.
+		second = secondList.head;
+	}
+	// If our second list's head holds the smaller value, do the same but with its head
+	else {
+		newHead = current = secondList.head;
+		second = secondList.head->next;
+		current->next = NULL;
+		first = head;
+	}
+
+	// Now that the initial setup is done, we want to loop until one of our lists lead pointers hits NULL
+	while (first && second) {
+		// Compare, and whichever is smaller gets the movin movin
+		if (first->data < second->data) {
+			// Make our current point at this node
+			current->next = first;
+			// Move current forward, to make it point at the new tail.
+			current = first;
+			// Move first forward
+			first = first->next;
+			// Null out our new tail.
+			current->next = NULL;
+			// And with that we've moved the smaller value at the current head of either
+			//		list to be the new tail of our sorted merged list.
+			// Do the same for the other list if it turns out to be the smaller or equal one
+		}
+		else {
+			current->next = second;
+			current = second;
+			second = second->next;
+			current->next = NULL;
+		}
+	}
+
+	// Once we're out of the while loop, we want to check which list has the leftovers
+	// We only need to make our tail point at the corresponding head.
+	if (first) current->next = first;
+	else current->next = second;
+
+	head = newHead;
+	secondList.head = NULL;
+
+}

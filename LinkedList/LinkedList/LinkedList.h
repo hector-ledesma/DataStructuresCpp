@@ -34,4 +34,5 @@ public:
 	void ReverseRec(Node* q, Node* p);
 
 	void Append(LinkedList secondList);
+	void Merge(LinkedList secondList);
 };
