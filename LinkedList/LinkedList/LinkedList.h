@@ -27,4 +27,5 @@ public:
 	void InsertSorted(int data);
 	int Delete(int pos);
 	bool isSorted();
+	void DeleteDupes();
 };

@@ -234,3 +234,28 @@ bool LinkedList::isSorted() {
 
 	return true;
 }
+
+// This method assumes link is sorted.
+void LinkedList::DeleteDupes() {
+	Node* current = head->next;
+	Node* prev = head;
+	// We can start a step ahead, since the whole program consists of comparing prev and current
+	// We want to loop until we exit the list
+	while (current) {
+		// If we find a dupe
+		if (prev->data == current->data) {
+			// Do the swaparoo
+			// Point prev in the right direction
+			prev->next = current->next;
+			// Delete current/duplicate
+			delete current;
+			// Make current point to what comes after prev
+			current = prev->next;
+		}
+		else {
+			// If we don't find a dupe, move forward
+			prev = current;
+			current = current->next;
+		}
+	}
+}

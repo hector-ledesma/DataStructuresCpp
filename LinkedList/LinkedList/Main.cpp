@@ -59,10 +59,14 @@ int main()
 
 	// Insert somewhere
 	sortedList.InsertSorted(6);
+	sortedList.InsertSorted(6);
 	// Insert at head
 	sortedList.InsertSorted(1);
 	// Insert at end
 	sortedList.InsertSorted(12);
+	sortedList.InsertSorted(12);
+	sortedList.InsertSorted(12);
+	sortedList.DeleteDupes();
 	sortedList.Display();
 
 	std::cout << "List is " << (sortedList.isSorted() ? "sorted" : "unsorted") << std::endl;
