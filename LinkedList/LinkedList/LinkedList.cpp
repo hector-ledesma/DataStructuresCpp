@@ -312,3 +312,21 @@ void LinkedList::ReverseSP() {
 	// at the end, our new head is going to be our current, as lead falls off of the list, current remains one step behind, aka at the end aka our new head.
 	head = current;
 }
+
+// Let's try to make this take only one argument
+// Nope, gonna need two args
+void LinkedList::ReverseRec(Node* prev, Node* current) {
+	// Check that we haven't reached the bottom
+	if (current) {
+		// Go deep by one
+		ReverseRec(current, current->next);
+		// As we come back up, assign ounext node's next to be our current
+		// effectively reversing the link
+		current->next = prev;
+	}
+	// If we have reached the bottom, make our q the head
+	else {
+		head = prev;
+	}
+}
+

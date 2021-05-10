@@ -31,4 +31,5 @@ public:
 
 	void ReverseArr();
 	void ReverseSP(); // SP for Sliding Pointers.
+	void ReverseRec(Node* q, Node* p);
 };

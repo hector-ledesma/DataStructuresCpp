@@ -53,6 +53,8 @@ int main()
 	list.Display();
 	list.ReverseSP();
 	list.Display();
+	list.ReverseRec(NULL, list.head);
+	list.Display();
 
 	std::cout << "List is " << (list.isSorted() ? "sorted" : "unsorted") << std::endl;
 
