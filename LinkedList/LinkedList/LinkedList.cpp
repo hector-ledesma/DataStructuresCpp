@@ -330,3 +330,15 @@ void LinkedList::ReverseRec(Node* prev, Node* current) {
 	}
 }
 
+void LinkedList::Append(LinkedList secondList) {
+	// First we need to get to the last node
+	Node* current = head;
+	while (current->next != NULL)
+		current = current->next;
+
+	// Once we're at the end, we make it point to the head of the second list
+	current->next = secondList.head;
+	// Then we null out the head of the second one.
+	secondList.head = NULL;
+}
+

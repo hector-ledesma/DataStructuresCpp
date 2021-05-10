@@ -56,6 +56,12 @@ int main()
 	list.ReverseRec(NULL, list.head);
 	list.Display();
 
+	// Unsorted list to be appended
+	int C[] = {3,2,12,97};
+	LinkedList toAppend = LinkedList(C, 4);
+	list.Append(toAppend);
+	list.Display();
+
 	std::cout << "List is " << (list.isSorted() ? "sorted" : "unsorted") << std::endl;
 
 	// Sorted Linked List
