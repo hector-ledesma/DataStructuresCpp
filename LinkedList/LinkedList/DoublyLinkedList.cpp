@@ -50,3 +50,41 @@ int DoublyLinkedList::Length() {
 	}
 	return len;
 }
+
+void DoublyLinkedList::Insert(int data, int index) {
+	DoubleNode* current = head;
+	DoubleNode* newNode = new DoubleNode(data);
+	// First we must check if we're trying to insert at head
+	if (index == 0) {
+		// If head is null, we simply make thi snew head
+		if (!head) {
+			head = newNode;
+		}
+		// Else modify the links and make it our new head
+		else {
+			// Node's next will be current head
+			newNode->next = head;
+			// make head point back to new node
+			head->previous = newNode;
+			// Make head new node
+			head = newNode;
+		}
+	}
+	// If we don't wanna insert at head, we move til we get to index.
+	else {
+		// We want to stop until we're one index before our target, or we hit the end of the list.
+		for (int i = 0; i < index - 1 && current->next; i++) current = current->next;
+
+		// Once we've reached our target, we make sure there's an element at the targer index
+		// if there is, make its previous point to our new node
+		if (current->next) current->next->previous = current;
+		// If there's no next node, we simply don't worry about making a backfacing connection.
+		// Make our current point towards the node after our current/potentially NULL
+		newNode->next = current->next;
+		// new node should also connect back to our current index
+		newNode->previous = current;
+		// Our new node now faces towards the node after current, and back to our current.
+		// All that's left, is to move our current to face to our new node instead of th eone after the new node
+		current->next = newNode;
+	}
+}
