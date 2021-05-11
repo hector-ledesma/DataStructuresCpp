@@ -96,6 +96,8 @@ int main()
 	LinkedList circularList(E, 5, 5);
 	circularList.makeCircular();
 	circularList.AppendCircular(25);
+	circularList.InsertCircular(4, 1);
+	circularList.InsertCircular(14, 5);
 	circularList.DisplayCircular();
 	std::cout << "List is " << (circularList.isLoop() ? "a loop" : "not a loop") << std::endl;
 }

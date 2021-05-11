@@ -487,10 +487,47 @@ void LinkedList::AppendCircular(int data) {
 	// Make it point to the head
 	newNode->next = head;
 	// Traverse til we get to last node
-	Node* hold = head;
-	while (hold->next != head) {
-		hold = hold->next;
+	Node* current = head;
+	while (current->next != head) {
+		current = current->next;
 	}
 	// Make last node point at new node instead of head
-	hold->next = newNode;
+	current->next = newNode;
+}
+
+void LinkedList::InsertCircular(int data, int index) {
+	Node* newNode, * current;
+	// Create our new node
+	newNode = new Node(data);
+	// If we want to insert at the beginning of the list:
+	if (index == 0) {
+		// Check that we have a head
+		if (!head) {
+			head = newNode;
+			head->next = head;
+		}
+		// If we do have a head:
+		else {
+			current = head;
+			// Traverse til we get to the tail
+			while (current->next != head) current = current->next;
+			// Make our tail point to our new head
+			current->next = newNode;
+			// Make our new node point at head.
+			newNode->next = head;
+			// Make our new node the head
+			head = newNode;
+		}
+	}
+	// If we're not looking to make our new node the new head then proceed
+	// We're simply assuming that head will never be null. Otherwise we'd null check.
+	else {
+		current = head;
+		// Move forward as many indices as we want
+		for (int i = 0; i < index - 1; i++) current = current->next;
+		// Make our new node point to what comes after where we stopped
+		newNode->next = current->next;
+		// And then make current point at new node. Effectively inserting our node at the index.
+		current->next = newNode;
+	}
 }

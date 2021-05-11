@@ -42,4 +42,5 @@ public:
 	int circularSize();
 	void DisplayCircular();
 	void AppendCircular(int data);
+	void InsertCircular(int data, int index);
 };
