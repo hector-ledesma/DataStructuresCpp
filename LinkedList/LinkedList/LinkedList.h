@@ -41,4 +41,5 @@ public:
 	void makeCircular();
 	int circularSize();
 	void DisplayCircular();
+	void AppendCircular(int data);
 };

@@ -469,7 +469,7 @@ void LinkedList::makeCircular() {
 	hold->next = head;
 }
 
-// This method assumes the list is circular.
+// These method assumes the list is circular.
 // we simply wanna loop through til we hit the head again.
 void LinkedList::DisplayCircular() {
 	Node* hold = head;
@@ -478,4 +478,19 @@ void LinkedList::DisplayCircular() {
 		hold = hold->next;
 	} while (hold != head);
 	std::cout << std::endl;
+}
+
+// This method will insert an element before head/after last element of circular list
+void LinkedList::AppendCircular(int data) {
+	// Create our new node
+	Node* newNode = new Node(data);
+	// Make it point to the head
+	newNode->next = head;
+	// Traverse til we get to last node
+	Node* hold = head;
+	while (hold->next != head) {
+		hold = hold->next;
+	}
+	// Make last node point at new node instead of head
+	hold->next = newNode;
 }
