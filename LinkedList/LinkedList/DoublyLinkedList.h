@@ -15,6 +15,7 @@ public:
 	DoublyLinkedList();
 	DoublyLinkedList(int A[], int sz);
 
+	void Display();
 	int Length();
 };
 

@@ -31,6 +31,16 @@ DoublyLinkedList::DoublyLinkedList(int A[], int sz) {
 	}
 }
 
+// This is basically the exact same as a normal list.
+void DoublyLinkedList::Display() {
+	DoubleNode* current = head;
+	while (current) {
+		std::cout << current->data << " <->";
+		current = current->next;
+	}
+	std::cout << std::endl;
+}
+
 int DoublyLinkedList::Length() {
 	int len = 0;
 	DoubleNode* current = head;
