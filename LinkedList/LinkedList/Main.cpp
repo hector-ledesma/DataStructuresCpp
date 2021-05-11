@@ -3,8 +3,7 @@
 
 #include <iostream>
 #include "LinkedList.h"
-
-
+#include "DoublyLinkedList.h"
 
 int main()
 {
@@ -102,4 +101,9 @@ int main()
 	circularList.DeleteCircular(4);
 	circularList.DisplayCircular();
 	std::cout << "List is " << (circularList.isLoop() ? "a loop" : "not a loop") << std::endl;
+
+	int F[] = { 2,12,32,54,77 };
+	DoublyLinkedList dubs(F, 5);
+	std::cout << std::endl;
+	
 }

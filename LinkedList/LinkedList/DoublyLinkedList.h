@@ -12,5 +12,7 @@ public:
 class DoublyLinkedList {
 public:
 	DoubleNode* head;
+	DoublyLinkedList();
+	DoublyLinkedList(int A[], int sz);
 };
 
