@@ -531,3 +531,45 @@ void LinkedList::InsertCircular(int data, int index) {
 		current->next = newNode;
 	}
 }
+
+// Much like with inserting we have to account for trying to target the Head.
+void LinkedList::DeleteCircular(int index) {
+	Node* current;
+	// First, we check if we tryna blast the head
+	if (index == 0) {
+		// Find the tail
+		current = head;
+		while (current->next != head) current = current->next;
+		// First we check if the tail IS the head
+		if (current == head) {
+			// If so we simply delete it
+			delete head;
+			head = NULL;
+		}
+		else {
+			// Otherwise, we want to sever the connection between tail and current head
+			current->next = head->next;
+			// delete current head;
+			delete head;
+			// make head point to new head
+			head = current->next;
+		}
+
+	}
+	// If we're not trying to delete the head, proceed
+	else {
+		current = head;
+		// Traverse as many times needed -2 positions 
+		for (int i = 0; i < index - 2; i++) current = current->next;
+		// We'll want to delete the node that comes right after where we stopped.
+		// So we make it point to the node that comes after the one after it.
+		// But first we store it so we can delete it
+		Node* hold = current->next;
+		// Break the link
+		current->next = hold->next;
+		// Delete stored node
+		std::cout << "Deleting " << hold->data << std::endl;
+		delete hold;
+
+	}
+}

@@ -43,4 +43,5 @@ public:
 	void DisplayCircular();
 	void AppendCircular(int data);
 	void InsertCircular(int data, int index);
+	void DeleteCircular(int index);
 };
