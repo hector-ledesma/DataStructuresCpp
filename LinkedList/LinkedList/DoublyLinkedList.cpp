@@ -30,3 +30,13 @@ DoublyLinkedList::DoublyLinkedList(int A[], int sz) {
 		current = newNode;
 	}
 }
+
+int DoublyLinkedList::Length() {
+	int len = 0;
+	DoubleNode* current = head;
+	while (current) {
+		len++;
+		current = current->next;
+	}
+	return len;
+}

@@ -104,6 +104,6 @@ int main()
 
 	int F[] = { 2,12,32,54,77 };
 	DoublyLinkedList dubs(F, 5);
-	std::cout << std::endl;
+	std::cout << "Size: " << dubs.Length() << std::endl;
 	
 }

@@ -14,5 +14,7 @@ public:
 	DoubleNode* head;
 	DoublyLinkedList();
 	DoublyLinkedList(int A[], int sz);
+
+	int Length();
 };
 
