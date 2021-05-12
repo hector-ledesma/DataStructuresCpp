@@ -106,5 +106,6 @@ int main()
 	DoublyLinkedList dubs(F, 5);
 	std::cout << "Size: " << dubs.Length() << std::endl;
 	dubs.Insert(13, 2);
+	std::cout << "Deleting " << dubs.Delete(3) << std::endl;
 	dubs.Display();	
 }

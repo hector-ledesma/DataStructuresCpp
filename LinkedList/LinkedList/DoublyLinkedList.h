@@ -18,5 +18,8 @@ public:
 	void Display();
 	int Length();
 	void Insert(int data, int index);
+
+	int Delete(int index);
+	void Reverse();
 };
 

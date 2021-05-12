@@ -88,3 +88,34 @@ void DoublyLinkedList::Insert(int data, int index) {
 		current->next = newNode;
 	}
 }
+
+// Standard link delete
+// Standard assumptions:there's elements in the list
+int DoublyLinkedList::Delete(int index) {
+	DoubleNode* current = head;
+	int x = -1;
+	// First check it's the head
+	if (index == 1) {
+		head = head->next;
+		x = current->data;
+		delete current;
+		if (head)
+			head->previous = NULL;
+	}
+	else {
+		// Traverse til our target node
+		for (int i = 0; i < index - 1; i++) current = current->next;
+		
+		// Link the node behind our target to the node after
+		current->previous->next = current->next;
+		// If there's a node after, create the backfacing link
+		if (current->next)
+			current->next->previous = current->previous;
+
+		x = current->data;
+		delete current;
+
+	}
+
+	return x;
+}
