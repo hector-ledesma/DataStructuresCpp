@@ -119,3 +119,23 @@ int DoublyLinkedList::Delete(int index) {
 
 	return x;
 }
+
+void DoublyLinkedList::Reverse() {
+	std::cout << "Reversing list" << std::endl;
+	DoubleNode* current = head;
+	DoubleNode* temp;
+	// traverse
+	while (current) {
+		// Hold the next node
+		temp = current->next;
+		// Make next node point back
+		current->next = current->previous;
+		// Make it face back to the one that was previously in front
+		current->previous = temp;
+		// Move forward 
+		current = current->previous;
+		// If we reach the end, make sure to set the new head.
+		if ( current && current->next == NULL)
+			head = current;
+	}
+}

@@ -80,6 +80,7 @@ int main()
 	sortedList.InsertSorted(12);
 	sortedList.DeleteDupes();
 	sortedList.Display();
+	std::cout<< " Found " << sortedList.findMiddle() << std::endl;
 
 	// Sorted list to be append
 	int D[] = {1,4,6,8,12};
@@ -102,10 +103,13 @@ int main()
 	circularList.DisplayCircular();
 	std::cout << "List is " << (circularList.isLoop() ? "a loop" : "not a loop") << std::endl;
 
+	// Doubly linked list
 	int F[] = { 2,12,32,54,77 };
 	DoublyLinkedList dubs(F, 5);
 	std::cout << "Size: " << dubs.Length() << std::endl;
 	dubs.Insert(13, 2);
 	std::cout << "Deleting " << dubs.Delete(3) << std::endl;
 	dubs.Display();	
+	dubs.Reverse();
+	dubs.Display();
 }

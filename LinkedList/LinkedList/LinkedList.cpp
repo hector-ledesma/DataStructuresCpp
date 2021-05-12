@@ -573,3 +573,21 @@ void LinkedList::DeleteCircular(int index) {
 
 	}
 }
+
+// This method is dope.
+// Think about it this way,  any (even) number divvided by 2, gives you how many times you have to multiply by 2 to reach the end. AKA how many double steps to the end.
+// e.g: list of 10 nodes / 2 = 5 times you have to move a pointer twice before you reach the end. So if you move another pointer only one step until the second pointer reaches the end,
+//		the pointer that moves once at a time will always end up in the middle.
+int LinkedList::findMiddle() {
+	Node* single, * dubs;
+
+	single = dubs = head;
+	while (dubs) {
+		dubs = dubs->next;
+		// If we haven't hit the end, move forward twice
+		if (dubs) dubs = dubs->next;
+		// Only move forward AFTER we've moved twice (once if we hit null on first move)
+		if (dubs) single = single->next;
+	}
+	return single->data;
+}
