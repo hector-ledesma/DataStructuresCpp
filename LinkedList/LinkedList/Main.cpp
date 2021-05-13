@@ -4,6 +4,7 @@
 #include <iostream>
 #include "LinkedList.h"
 #include "DoublyLinkedList.h"
+#include "Stack1.h"
 
 int main()
 {
@@ -112,4 +113,25 @@ int main()
 	dubs.Display();	
 	dubs.Reverse();
 	dubs.Display();
+
+	// Stack operations
+	std::cout << "\Stack Operations----" << std::endl;
+	Stack1 s1(5);
+	std::cout << (s1.isEmpty() ? "It's empty" : "It's not empty") << std::endl;
+	std::cout << (s1.isFull() ? "It's full" : "It's not full") << std::endl;
+	s1.pop();
+	s1.push(2);
+	s1.push(21);
+	s1.push(56);
+	s1.push(7);
+	s1.push(9);
+	s1.Display();
+	std::cout << (s1.isEmpty() ? "It's empty" : "It's not empty") << std::endl;
+	std::cout << (s1.isFull() ? "It's full" : "It's not full") << std::endl;
+	s1.push(777);
+
+	std::cout << "Peeking at index 1: " << s1.peek(1) << std::endl;
+	std::cout << "Peeking at index 2: " << s1.peek(2) << std::endl;
+	std::cout << "Peeking at index 3: " << s1.peek(3) << std::endl;
+
 }

@@ -5,6 +5,15 @@ class Stack1 {
 	int top;
 	int* s;
 public:
-	Stack1();
+	Stack1(int sz);
+	void Display();
+	void push(int x);
+	int pop();
+
+	int peek(int index);
+	int stackTop();
+	bool isEmpty();
+	int isFull();
+
 };
 
