@@ -591,3 +591,4 @@ int LinkedList::findMiddle() {
 	}
 	return single->data;
 }
+
