@@ -151,7 +151,7 @@ int main()
 
 	// In to post testing
 	std::cout << "\Infix to Postfix----" << std::endl;
-	Stack1 intopost = Stack1(10);
-	const char *infix = "a+b*c-d/e";
+	Stack1 intopost = Stack1(16);
+	const char *infix = "((a+b)*c)-d^e^f";
 	std::cout << intopost.InToPost(infix) << std::endl;
 }

@@ -15,7 +15,8 @@ public:
 	bool isEmpty();
 	bool isFull();
 
-	int pre(char x);
+	int preOut(char x);
+	int preIn(char x);
 	bool isOperand(char x);
 	char* InToPost(const char* in);
 };
