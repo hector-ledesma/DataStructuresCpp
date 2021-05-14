@@ -6,6 +6,7 @@
 #include "DoublyLinkedList.h"
 #include "Stack1.h"
 #include "Stack2.h"
+#include "Queue1.h"
 
 int main()
 {
@@ -136,7 +137,7 @@ int main()
 	std::cout << "Peeking at index 3: " << s1.peek(3) << std::endl;
 	*/
 
-	std::cout << "\Stack Operations----" << std::endl;
+	std::cout << "\nStack Operations----" << std::endl;
 	Stack2 s2 = Stack2();
 	s2.push(3);
 	s2.push(31);
@@ -150,11 +151,24 @@ int main()
 	s2.Display();
 
 	// In to post testing
-	std::cout << "\Infix to Postfix----" << std::endl;
+	std::cout << "\nInfix to Postfix----" << std::endl;
 	Stack1 intopost = Stack1(16);
 	const char *infix = "((2+5)*6)-7+8-1";
 	char* post = intopost.InToPost(infix);
 	int eval = intopost.eval(post);
 	std::cout << post << std::endl;
 	std::cout << eval << std::endl;
+
+
+	// Queue operations
+	std::cout << "\nQueue Operations----" << std::endl;
+	Queue1 q1 = Queue1(5);
+	q1.queue(2);
+	q1.queue(4);
+	q1.queue(12);
+	q1.queue(89);
+	q1.queue(39);
+	q1.queue(39);
+	q1.Display();
+
 }

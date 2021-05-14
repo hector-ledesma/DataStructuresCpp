@@ -150,12 +150,14 @@
     <ClCompile Include="DoublyLinkedList.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Queue1.cpp" />
     <ClCompile Include="Stack1.cpp" />
     <ClCompile Include="Stack2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="Queue1.h" />
     <ClInclude Include="Stack1.h" />
     <ClInclude Include="Stack2.h" />
   </ItemGroup>
