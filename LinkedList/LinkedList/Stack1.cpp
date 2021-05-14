@@ -151,3 +151,32 @@ char* Stack1::InToPost(const char* in) {
 
 	return post;
 }
+
+int Stack1::eval(char* post) {
+	int i, x1, x2, r;
+	for (int i = 0; post[i] != '\0'; i++) {
+		if (isOperand(post[i]))
+			push(post[i]);
+		else {
+			x2 = pop() - '0';
+			x1 = pop() - '0';
+			r = -48;
+			switch (post[i]) {
+			case '+':
+				r = x1 + x2;
+				break;
+			case '-':
+				r = x1 - x2;
+				break;
+			case '*':
+				r = x1 * x2;
+				break;
+			case '/':
+				r = x1 / x2;
+				break;
+			}
+			push(r + 48);
+		}
+	}
+	return pop()-48;
+}

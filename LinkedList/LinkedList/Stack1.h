@@ -19,5 +19,6 @@ public:
 	int preIn(char x);
 	bool isOperand(char x);
 	char* InToPost(const char* in);
+	int eval(char* post);
 };
 
