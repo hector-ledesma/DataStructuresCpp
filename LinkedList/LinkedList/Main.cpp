@@ -169,6 +169,13 @@ int main()
 	q1.queue(89);
 	q1.queue(39);
 	q1.queue(39);
+	q1.dequeue();
+	q1.dequeue();
+	q1.dequeue();
+	q1.queue(9);
+	q1.queue(14);
+	q1.queue(3);
+	q1.queue(91);
 	q1.Display();
 
 }

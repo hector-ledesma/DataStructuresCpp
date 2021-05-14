@@ -4,18 +4,19 @@
 using q = Queue1;
 
 q::Queue1(int sz) {
-	front = rear = -1;
+	front = rear = 0;
 	size = sz;
 	Q = new int[sz];
 }
 
+// To make this circular, we'll use the power of modulo to move the rear pointer forward.
 void q::queue(int x) {
 	// We want to move only the front index
 	// first we check if it's full
-	if (rear == size - 1)
+	if ((rear+1)%size == front)
 		std::cout << "Queue full" << std::endl;
 	else {
-		rear++; // move forward first
+		rear = (rear+1)%size; // move forward first
 		Q[rear] = x; // store at new index
 	}
 }
@@ -26,15 +27,18 @@ int q::dequeue() {
 	if (front == rear)//check if our head hit our tail
 		std::cout << "Queue is Empty" << std::endl;
 	else {
-		x = Q[front + 1];// We'll always point behind our actual target.
-		front++;
+		front = (front +1)%size;
+		x = Q[front + 1];
 	}
 
 	return x;
 }
 
 void q::Display() {
-	for (int i = front + 1; i <= rear; i++)
+	int i = front;
+	do {
 		std::cout << Q[i] << " ";
+		i = (i + 1) % size;
+	} while (i != (rear + 1)%size);
 	std::cout << std::endl;
 }
