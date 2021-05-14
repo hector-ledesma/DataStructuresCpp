@@ -5,6 +5,7 @@
 #include "LinkedList.h"
 #include "DoublyLinkedList.h"
 #include "Stack1.h"
+#include "Stack2.h"
 
 int main()
 {
@@ -134,4 +135,16 @@ int main()
 	std::cout << "Peeking at index 2: " << s1.peek(2) << std::endl;
 	std::cout << "Peeking at index 3: " << s1.peek(3) << std::endl;
 
+	Stack2 s2 = Stack2();
+	s2.push(3);
+	s2.push(31);
+	s2.push(12);
+	s2.push(93);
+	s2.push(148);
+	s2.push(74);
+	s2.push(58);
+	s2.push(64);
+	s2.push(16);
+	s2.Display();
+	
 }
