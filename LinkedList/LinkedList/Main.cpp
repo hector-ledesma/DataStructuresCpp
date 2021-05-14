@@ -116,7 +116,7 @@ int main()
 	dubs.Display();
 
 	// Stack operations
-	std::cout << "\Stack Operations----" << std::endl;
+	/*	Updated this stack to char instead of int for the sake of building the infix to postfix conversion methods.
 	Stack1 s1(5);
 	std::cout << (s1.isEmpty() ? "It's empty" : "It's not empty") << std::endl;
 	std::cout << (s1.isFull() ? "It's full" : "It's not full") << std::endl;
@@ -134,7 +134,9 @@ int main()
 	std::cout << "Peeking at index 1: " << s1.peek(1) << std::endl;
 	std::cout << "Peeking at index 2: " << s1.peek(2) << std::endl;
 	std::cout << "Peeking at index 3: " << s1.peek(3) << std::endl;
+	*/
 
+	std::cout << "\Stack Operations----" << std::endl;
 	Stack2 s2 = Stack2();
 	s2.push(3);
 	s2.push(31);
@@ -146,5 +148,10 @@ int main()
 	s2.push(64);
 	s2.push(16);
 	s2.Display();
-	
+
+	// In to post testing
+	std::cout << "\Infix to Postfix----" << std::endl;
+	Stack1 intopost = Stack1(10);
+	const char *infix = "a+b*c-d/e";
+	std::cout << intopost.InToPost(infix) << std::endl;
 }

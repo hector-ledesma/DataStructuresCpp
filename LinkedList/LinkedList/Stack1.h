@@ -3,17 +3,20 @@
 class Stack1 {
 	int size;
 	int top;
-	int* s;
+	char* s;
 public:
 	Stack1(int sz);
 	void Display();
-	void push(int x);
-	int pop();
+	void push(char x);
+	char pop();
 
-	int peek(int index);
-	int stackTop();
+	char peek(int index);
+	char stackTop();
 	bool isEmpty();
-	int isFull();
+	bool isFull();
 
+	int pre(char x);
+	bool isOperand(char x);
+	char* InToPost(const char* in);
 };
 
