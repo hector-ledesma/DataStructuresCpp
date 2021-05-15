@@ -7,6 +7,7 @@
 #include "Stack1.h"
 #include "Stack2.h"
 #include "Queue1.h"
+#include "Queue2.h"
 
 int main()
 {
@@ -178,4 +179,23 @@ int main()
 	q1.queue(91);
 	q1.Display();
 
+
+	Queue2 q2 = Queue2();
+	q2.queue(9);
+	q2.queue(34);
+	q2.queue(95);
+	q2.queue(912);
+	q2.queue(51);
+	q2.queue(18);
+	q2.queue(76);
+	q2.queue(81);
+	q2.queue(8);
+	q2.queue(34);
+	q2.queue(46);
+
+	q2.Display();
+	for (int i = 0; i < 11; i++)
+		std::cout << "Dequeued " << q2.dequeue() << std::endl;
+	q2.dequeue();
+	std::cout << std::endl;
 }
