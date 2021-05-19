@@ -70,15 +70,26 @@ BinaryTree::BinaryTree(int* arr, int len) {
 		if (i < len) { // Only enter this if there's any elements left.
 			BTNode* l = new BTNode(); // Create a new node
 			l->data = arr[i++]; // Assign it current data and index go up 1
+			current->lchild = l; // assign it as child
 			q.push(l); // push it to our queue.
 			if (i < len) {
 				BTNode* r = new BTNode();
 				r->data = arr[i++];
+				current->rchild = r; // assign it as child
 				q.push(r); // push it to our queue.
 			}
 		}
 		else {// if we're beyond the array, just assign null to children.
 			current->lchild = current->rchild = NULL;
 		}
+	}
+}
+
+// Preorder is root -> left -> right
+void BinaryTree::Preorder(BTNode *current) {
+	if (current) {
+		std::cout << current->data << ", ";
+		Preorder(current->lchild);
+		Preorder(current->rchild);
 	}
 }

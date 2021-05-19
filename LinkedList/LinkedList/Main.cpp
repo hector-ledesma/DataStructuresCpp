@@ -8,6 +8,7 @@
 #include "Stack2.h"
 #include "Queue1.h"
 #include "Queue2.h"
+#include "BinaryTree.h"
 
 int main()
 {
@@ -198,4 +199,11 @@ int main()
 		std::cout << "Dequeued " << q2.dequeue() << std::endl;
 	q2.dequeue();
 	std::cout << std::endl;
+
+	// BinaryTree stuff
+	int ar[] = {1,2,3,4,5,6,7};
+	BinaryTree tree = BinaryTree(ar, 7);
+
+	tree.Preorder(tree.root);
+
 }
