@@ -26,9 +26,13 @@ public:
 	BinaryTree();
 	BinaryTree(int* arr, int len);
 	void Preorder(BTNode* current);
-	void Postorder(BTNode* current);
 	void Inorder(BTNode* current);
-	void Levelorder(BTNode* current);
+	void Postorder(BTNode* current);
+	void Levelorder();
 	void Height(BTNode* current);
+
+	void PreorderIT();
+	void InorderIT();
+	void PostorderIT();
 };
 

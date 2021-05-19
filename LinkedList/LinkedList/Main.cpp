@@ -204,13 +204,32 @@ int main()
 	int ar[] = {1,2,3,4,5,6,7};
 	BinaryTree tree = BinaryTree(ar, 7);
 
+	// Iteratively
+	std::cout << "Preorder Iteratively:" << std::endl;
+	tree.PreorderIT();
+
+	std::cout << "Inorder Iteratively:" << std::endl;
+	tree.InorderIT();
+
+	std::cout << "Postorder Iteratively:" << std::endl;
+	tree.PostorderIT();
+
+	std::cout << "Level Order:" << std::endl;
+	tree.Levelorder();
+	std::cout << std::endl;
+	std::cout << std::endl;
+	// Recursively
+	std::cout << "Preorder Recursive:" << std::endl;
 	tree.Preorder(tree.root);
 	std::cout << std::endl;
+
+	std::cout << "Inorder Recursive:" << std::endl;
 	tree.Inorder(tree.root);
 	std::cout << std::endl;
+
+	std::cout << "Postorder Recursive:" << std::endl;
 	tree.Postorder(tree.root);
 	std::cout << std::endl;
-	tree.Levelorder(tree.root);
-	std::cout << std::endl;
+	
 
 }
