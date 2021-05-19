@@ -93,3 +93,43 @@ void BinaryTree::Preorder(BTNode *current) {
 		Preorder(current->rchild);
 	}
 }
+
+// Inorder is left -> root -> right
+void BinaryTree::Inorder(BTNode* current) {
+	if (current) {
+		Inorder(current->lchild);
+		std::cout << current->data << ", ";
+		Inorder(current->rchild);
+	}
+}
+
+// Postorder is left -> right -> root
+void BinaryTree::Postorder(BTNode* current) {
+	if (current) {
+		Postorder(current->lchild);
+		Postorder(current->rchild);
+		std::cout << current->data << ", ";
+	}
+}
+
+// Level order uses a queue in the exact same way I used it in my constructor
+// Except now it goes from tree -> array instead of the other way around.
+//
+void BinaryTree::Levelorder(BTNode* current) {
+	std::queue<BTNode*> q;
+	q.push(root);
+
+	std::cout << root->data << ", ";
+	while (!q.empty()) {
+		// check if there are children. As we find the children, put them in the q and print em
+		BTNode* current = q.front(); q.pop();
+		if (current->lchild) {
+			std::cout << current->lchild->data << ", ";
+			q.push(current->lchild);
+		}
+		if (current->rchild) {
+			std::cout << current->rchild->data << ", ";
+			q.push(current->rchild);
+		}
+	}
+}

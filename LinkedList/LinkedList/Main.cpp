@@ -205,5 +205,12 @@ int main()
 	BinaryTree tree = BinaryTree(ar, 7);
 
 	tree.Preorder(tree.root);
+	std::cout << std::endl;
+	tree.Inorder(tree.root);
+	std::cout << std::endl;
+	tree.Postorder(tree.root);
+	std::cout << std::endl;
+	tree.Levelorder(tree.root);
+	std::cout << std::endl;
 
 }
