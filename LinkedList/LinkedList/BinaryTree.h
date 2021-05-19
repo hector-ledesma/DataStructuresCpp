@@ -4,6 +4,8 @@ public:
 	BTNode* lchild;
 	int data;
 	BTNode* rchild;
+
+
 };
 class BTQueue
 {
@@ -18,5 +20,15 @@ public:
 };
 class BinaryTree
 {
+public:
+	BTNode* root;
+
+	BinaryTree();
+	BinaryTree(int* arr, int len);
+	void Preorder();
+	void Postorder();
+	void Inorder();
+	void Levelorder();
+	void Height();
 };
 
