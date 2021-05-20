@@ -41,6 +41,45 @@ BinaryTree::BinaryTree(int* arr, int len) {
 	}
 }
 
+// This is a support function for constructing from a traversal
+// It will search the passed in array (which will be a portion of the original in order array)
+//		and return the index of the item we're searching for, or -1 if it's not in there.
+int BinaryTree::searchInorder(int inArray[], int inStart, int inEnd, int data) {
+	for (int i = inStart; i <= inEnd; i++) {
+		if (inArray[i] == data) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+// This constructor will use the resulting inorder and preorder traversals from another tree
+//		and will create a brand new binary tree.
+BTNode* BinaryTree::constructFromPost(int* inorder, int* preorder, int inStart, int inEnd) {
+	static int prei = 0;
+	// Much like with binary search, if our start is greater than our end
+	//		it means we either went too far left (our end went too low)
+	//		or we went too far right (our start went too high).
+	// Which signifies there's no further children, so return nothing.
+	if (inStart > inEnd)
+		return nullptr;
+
+	// Create our current parent
+	BTNode* current = new BTNode();
+	current->data = preorder[prei++];
+
+	// This basically means we only have one node left in here, so return it.
+	if (inStart == inEnd) {
+		return current;
+	}
+
+	int splitIndex = searchInorder(inorder, inStart, inEnd, current->data); // We'll use this index to handle left and right children for any given nodes.
+	current->lchild = constructFromPost(inorder, preorder, inStart, splitIndex - 1); // We want the next stack to only check from left up until the node right before this parent.
+	current->rchild = constructFromPost(inorder, preorder, splitIndex + 1, inEnd); // We want the next stack to go from the node right after this parent to the end.
+
+	return current;
+}
+
 // Preorder is root -> left -> right
 void BinaryTree::Preorder(BTNode *current) {
 	if (current) {
