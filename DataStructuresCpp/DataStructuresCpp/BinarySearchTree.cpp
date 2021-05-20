@@ -40,3 +40,18 @@ void BST::Insert(int key) {
     else    // We don't check for == case, as we handled that in our initial search.
         r->rchild = p;
 }
+
+// Simple iterative BST Search
+Node* BST::Search(int key) {
+    Node* t = root;
+    // If we exit it's cause we hit null.
+    while (t) {
+        if (key == t->data)
+            return t; // Found
+        else if (key < t->data)
+            t=t->lchild; // Key is smaller so we go left
+        else
+            t=t->rchild; // Key is larger so we go right
+    }
+    return nullptr;
+}
