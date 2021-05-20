@@ -20,7 +20,7 @@ public:
 	void Inorder(BTNode* current);
 	void Postorder(BTNode* current);
 	void Levelorder();
-	void Height(BTNode* current);
+	int height(BTNode* current);
 	int count(BTNode* current);
 
 	void PreorderIT();

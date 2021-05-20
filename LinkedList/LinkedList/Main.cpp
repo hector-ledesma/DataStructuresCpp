@@ -231,5 +231,9 @@ int main()
 	tree.Postorder(tree.root);
 	std::cout << std::endl;
 	
+	std::cout << "Node Count:" << std::endl;
+	std::cout << tree.count(tree.root) << std::endl;
 
+	std::cout << "Tree Height:" << std::endl;
+	std::cout << tree.height(tree.root) << std::endl;
 }

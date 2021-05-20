@@ -198,13 +198,21 @@ void BinaryTree::PostorderIT() {
 	std::cout << std::endl;
 }
 
-// 
+int BinaryTree::height(BTNode* current) {
+	int x = 0, y = 0;
+	if (!current)
+		return 0;
+	x = height(current->lchild);
+	y = height(current->rchild);
+	if (x > y)
+		return x + 1;
+	else
+		return y + 1;
+}
+
+
 int BinaryTree::count(BTNode* current) {
-	int x, y;
-	if (current) {
-		x = count(current->lchild);
-		y = count(current->rchild);
-		return y + x + 1;
-	}
+	if (current) 
+		return count(current->lchild) + count(current->rchild) + 1;
 	return 0;
 }
