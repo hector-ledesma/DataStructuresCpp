@@ -55,3 +55,68 @@ Node* BST::Search(int key) {
     }
     return nullptr;
 }
+
+// Recursive methods
+
+Node* BST::RInsert(Node *p, int key) {
+
+    if (!p) {
+        Node* child = new Node(key);
+        return child;
+    }
+    else if (key < p->data)
+        p->lchild = RInsert(p->lchild, key);
+    else if (key > p->data)
+        p->rchild = RInsert(p->rchild, key);
+
+    return p;
+}
+
+// Support methods for Delete
+int BST::Height(BSTNode* p) {
+    if (!p) return 0;
+    int x = Height(p->lchild);
+    int y = Height(p->rchild);
+    return x > y ? x + 1 : y + 1;
+}
+
+BSTNode* BST::InPre(BSTNode *p) {
+    while (p && p->rchild)
+        p=p->rchild;
+    return p;
+}
+
+BSTNode* BST::InSucc(BSTNode *p) {
+    while (p && p->lchild)
+        p=p->lchild;
+    return p;
+}
+
+Node* BST::Delete(BSTNode *p, int key) {
+    if (!p)
+        return NULL;
+    if (!p->lchild && !p->rchild) {
+        if (p == root)
+            root = NULL;
+            delete p;
+        return NULL;
+    }
+
+    if (key < p->data)
+        p->lchild = Delete(p->lchild, key);
+    else if (key > p->data)
+        p->rchild = Delete(p->rchild, key);
+    else {
+        BSTNode *q;
+        if (Height(p->lchild) > Height(p->rchild)) {
+            q=InPre(p->lchild);
+            p->data = q->data;
+            p->lchild = Delete(p->lchild, q->data);
+        } else {
+            q=InSucc(p->rchild);
+            p->data = q->data;
+            p->rchild = Delete(p->rchild, q->data);
+        }
+    }
+    return p;
+}

@@ -20,14 +20,20 @@ public:
 };
 
 class BST {
-private:
-    BSTNode* root;
 public:
+    BSTNode* root;
+    
     BST(){root = nullptr;}
-    BSTNode* getRoot(){return root;}
+
     void Insert(int key);
     void Inorder(BSTNode* current);
     BSTNode* Search(int key);
+
+    BSTNode* RInsert(BSTNode *p, int key);
+    int Height(BSTNode* p);
+    BSTNode* InPre(BSTNode* p);
+    BSTNode* InSucc(BSTNode* p);
+    BSTNode* Delete(BSTNode *p, int key);
 };
 
 #endif /* BinarySearchTree_hpp */
