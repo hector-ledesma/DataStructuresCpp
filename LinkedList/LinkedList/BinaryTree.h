@@ -7,17 +7,7 @@ public:
 
 
 };
-class BTQueue
-{
-private:
-	BTNode* head;
-	BTNode* tail;
-public:
-	BTQueue();
-	void queue(BTNode x);
-	BTNode* dequeue();
-	void Display();
-};
+
 class BinaryTree
 {
 public:
@@ -25,6 +15,7 @@ public:
 
 	BinaryTree();
 	BinaryTree(int* arr, int len);
+	BinaryTree(int* inorder, int *preorder, int inStart, int inEnd);
 	void Preorder(BTNode* current);
 	void Inorder(BTNode* current);
 	void Postorder(BTNode* current);
