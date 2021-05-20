@@ -11,6 +11,7 @@
 		9C1C47312656AC6B0096FDC2 /* BinaryTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C1C472D2656AC6B0096FDC2 /* BinaryTree.cpp */; };
 		9C1C47322656AC6B0096FDC2 /* DoublyLinkedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C1C472F2656AC6B0096FDC2 /* DoublyLinkedList.cpp */; };
 		9C1C47332656AC6B0096FDC2 /* LinkedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C1C47302656AC6B0096FDC2 /* LinkedList.cpp */; };
+		9C1C47372656DBA00096FDC2 /* BinarySearchTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C1C47352656DBA00096FDC2 /* BinarySearchTree.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,8 @@
 		9C1C472E2656AC6B0096FDC2 /* BinaryTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinaryTree.h; path = ../../LinkedList/LinkedList/BinaryTree.h; sourceTree = "<group>"; };
 		9C1C472F2656AC6B0096FDC2 /* DoublyLinkedList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DoublyLinkedList.cpp; path = ../../LinkedList/LinkedList/DoublyLinkedList.cpp; sourceTree = "<group>"; };
 		9C1C47302656AC6B0096FDC2 /* LinkedList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LinkedList.cpp; path = ../../LinkedList/LinkedList/LinkedList.cpp; sourceTree = "<group>"; };
+		9C1C47352656DBA00096FDC2 /* BinarySearchTree.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BinarySearchTree.cpp; sourceTree = "<group>"; };
+		9C1C47362656DBA00096FDC2 /* BinarySearchTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BinarySearchTree.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,8 @@
 				9C1C47302656AC6B0096FDC2 /* LinkedList.cpp */,
 				9C1C472C2656AC6B0096FDC2 /* LinkedList.h */,
 				9C1C47232656ABD30096FDC2 /* main.cpp */,
+				9C1C47352656DBA00096FDC2 /* BinarySearchTree.cpp */,
+				9C1C47362656DBA00096FDC2 /* BinarySearchTree.h */,
 			);
 			path = DataStructuresCpp;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 				9C1C47322656AC6B0096FDC2 /* DoublyLinkedList.cpp in Sources */,
 				9C1C47332656AC6B0096FDC2 /* LinkedList.cpp in Sources */,
 				9C1C47242656ABD30096FDC2 /* main.cpp in Sources */,
+				9C1C47372656DBA00096FDC2 /* BinarySearchTree.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
