@@ -168,7 +168,7 @@ void BinaryTree::InorderIT() {
 }
 
 // Postorder is iffy
-// The magic relieson backtracking:
+// The magic relies on backtracking:
 //		We don't want to print root until we're done with both left and right side which means we have to go through the root onto the right side
 //			and then know that we just finished with the right side.
 //		We could check that the node we just backtracked from is the right child of this node. If it is then we can print and go back.
@@ -196,4 +196,15 @@ void BinaryTree::PostorderIT() {
 		}
 	}
 	std::cout << std::endl;
+}
+
+// 
+int BinaryTree::count(BTNode* current) {
+	int x, y;
+	if (current) {
+		x = count(current->lchild);
+		y = count(current->rchild);
+		return y + x + 1;
+	}
+	return 0;
 }
