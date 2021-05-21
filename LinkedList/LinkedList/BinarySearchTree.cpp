@@ -53,7 +53,7 @@ BST::BST(int pre[], int n) {
 void BST::Insert(int key) {
     Node* r;
     Node* t = r = root;
-    Node *p;
+    Node*p;
 
     // This triggers if we don't have a root in our BST
     // simply creates a new node and assigns it to root
@@ -101,7 +101,7 @@ Node* BST::Search(int key) {
 
 // Recursive methods
 
-Node* BST::RInsert(Node *p, int key) {
+Node* BST::RInsert(Node*p, int key) {
 
     if (!p) {
         Node* child = new Node(key);
