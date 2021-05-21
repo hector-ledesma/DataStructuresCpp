@@ -6,7 +6,50 @@
 //
 
 #include "BinarySearchTree.h"
+#include <stack>
 using Node = BSTNode;
+
+// So the idea is that we'll use a stack for backtracking.
+// Since the order is root -> left -> right
+//      we know that every node that comes after our current root should belong to the left side.
+// Once we determine that it doesn't belong to its left side, we back track and check it belongs to the right side.
+// After moving onto the right side we won't need to go back again so we don't need to push the parent back onto the stack.
+// As next time we backtrack it will be back to the previous parent node.
+BST::BST(int pre[], int n) {
+    std::stack<Node*> stk;
+    Node* child, *current;
+    int i = 0;
+
+    root = new Node(pre[i++]);
+
+    current = root;
+
+    while (i < n) { // We want to loop from beginning to end of preorder array. We want control of when the index goes up, so we use while loop.
+        if (pre[i] < current->data) { // If data at this index belongs to the lef ot our current node:
+            child = new Node(pre[i++]); // Create new child node
+
+            current->lchild = child; // Give it to our current node
+            stk.push(current); // And this is now a parent node we'll have to backtrack to once we gotta check its right side, so push it onto the stack
+            current = child; // Move our current to this new node, and loop
+        }
+        else {  // If the data belongs to the right of our current node:
+            if (pre[i] > current->data && pre[i] < stk.top()->data) { // First make sure it belongs to the left side of the previous node as well.
+                child = new Node(pre[i++]);
+                current->rchild = child;
+                current = child;
+                // We don't put anything onto the stack here, because next time we find a right child, we have to check for either the parent previous to current.
+                // Or w/e new parent we pushed onto the stack until we have to backtrack.
+            }
+            else {
+                current = stk.top(); stk.pop(); // If the data doesn't belong to the left side of the previous parent, we want to backtrack to that previous parent and move to its right.
+                // No changes to our index because we want to compare the same data to our new current node.
+            }
+        }
+    }
+
+}
+
+
 void BST::Insert(int key) {
     Node* r;
     Node* t = r = root;

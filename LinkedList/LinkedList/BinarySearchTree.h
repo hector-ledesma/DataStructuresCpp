@@ -24,6 +24,7 @@ public:
     BSTNode* root;
     
     BST(){root = nullptr;}
+    BST(int pre[], int n);
 
     void Insert(int key);
     void Inorder(BSTNode* current);
