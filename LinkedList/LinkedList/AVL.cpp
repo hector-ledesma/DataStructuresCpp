@@ -1,7 +1,7 @@
 #include "AVL.h"
 #include <iostream>
 
-int NodeHeight(AVNode* p) {
+int AVL::NodeHeight(AVNode* p) {
     int hl, hr;
     // Check that each child is present and assign its height.
     // if either the children or the passed in node are NULL, assign 0.
@@ -12,7 +12,7 @@ int NodeHeight(AVNode* p) {
     return hl > hr ? hl + 1 : hr + 1;
 }
 
-int BalanceFactor(AVNode* p) {
+int AVL::BalanceFactor(AVNode* p) {
     int hl, hr;
     // Check that each child is present and assign its height.
     // if either the children or the passed in node are NULL, assign 0.
@@ -20,6 +20,25 @@ int BalanceFactor(AVNode* p) {
     hr = p && p->rchild ? p->rchild->height : 0;
 
     return hl - hr; // Return the difference
+}
+
+AVNode* AVL::LLRotation(AVNode* p) {
+    AVNode* pl = p->lchild;
+    AVNode* plr = pl->rchild;
+
+    pl->rchild = p;
+    p->lchild = plr; // This confused me at first.
+    // PLL is the culprit of our imbalance, but PLR is the victim.
+    // P must be rotated right, which now misplaces PLR as P will be taking its place as PL's right child.
+    // So where do we put plr? p's left child. Therefore we need to extract it so we can move it.
+    p->height = NodeHeight(p);
+    pl->height = NodeHeight(pl); // New Heights
+    
+    // Check if we just messed with our root, if so we need to change our root to PL
+    if (root == p)
+        root = pl;
+
+    return pl;
 }
 
 AVNode* AVL::RInsert(AVNode* current, int key) {
@@ -40,7 +59,7 @@ AVNode* AVL::RInsert(AVNode* current, int key) {
     if (BalanceFactor(current) == 2) {
         // Left child 1 means imbalance comes from LL.
         if (BalanceFactor(current->lchild) == 1) {
-            //return LLRotation(current);
+            return LLRotation(current);
         }
         // Left child -1 means imbalance comes from LR.
         else if (BalanceFactor(current->lchild) == -1) {
