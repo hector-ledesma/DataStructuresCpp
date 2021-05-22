@@ -59,6 +59,25 @@ AVNode* AVL::LRRotation(AVNode* p) {
     return plr;
 }
 
+AVNode* AVL::RRRotation(AVNode* p) {
+    AVNode* pr = p->rchild;
+    AVNode* prl = pr->lchild;
+
+    pr->lchild = p;
+    p->rchild = prl; // This confused me at first.
+    // PLL is the culprit of our imbalance, but PLR is the victim.
+    // P must be rotated right, which now misplaces PLR as P will be taking its place as PL's right child.
+    // So where do we put plr? p's left child. Therefore we need to extract it so we can move it.
+    p->height = NodeHeight(p);
+    pr->height = NodeHeight(pr); // New Heights
+
+    // Check if we just messed with our root, if so we need to change our root to PL
+    if (root == p)
+        root = pr;
+
+    return pr;
+}
+
 AVNode* AVL::RInsert(AVNode* current, int key) {
 
     if (!current) {
