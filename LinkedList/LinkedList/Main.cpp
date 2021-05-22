@@ -9,6 +9,7 @@
 #include "Queue1.h"
 #include "Queue2.h"
 #include "BinaryTree.h"
+#include "AVL.h"
 
 int main()
 {
@@ -236,4 +237,14 @@ int main()
 
 	std::cout << "Tree Height:" << std::endl;
 	std::cout << tree.height(tree.root) << std::endl;
+
+	std::cout << "AVL Tree: -------" << std::endl;
+	AVL avl = AVL();
+	avl.root = avl.RInsert(avl.root, 20);
+	avl.RInsert(avl.root, 10);
+	avl.RInsert(avl.root, 30);
+	avl.RInsert(avl.root, 31);
+	avl.RInsert(avl.root, 25);
+	avl.RInsert(avl.root, 26);
+	std::cout << "---------" << std::endl;
 }
