@@ -18,5 +18,6 @@ public:
 	int NodeHeight(AVNode* p);
 	int BalanceFactor(AVNode* p);
 	AVNode* LLRotation(AVNode* p);
+	AVNode* LRRotation(AVNode* p);
 };
 

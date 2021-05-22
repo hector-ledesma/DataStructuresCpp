@@ -41,6 +41,24 @@ AVNode* AVL::LLRotation(AVNode* p) {
     return pl;
 }
 
+AVNode* AVL::LRRotation(AVNode* p) {
+    AVNode* pl = p->lchild;
+    AVNode* plr = pl->rchild;
+
+    pl->rchild = plr->lchild;
+    p->lchild = plr->rchild;
+
+    plr->lchild = pl;
+    plr->rchild = p;
+
+    pl->height = NodeHeight(pl);
+    p->height = NodeHeight(p);
+    plr->height = NodeHeight(plr);
+
+    if (p == root) root = plr;
+    return plr;
+}
+
 AVNode* AVL::RInsert(AVNode* current, int key) {
 
     if (!current) {
@@ -63,7 +81,7 @@ AVNode* AVL::RInsert(AVNode* current, int key) {
         }
         // Left child -1 means imbalance comes from LR.
         else if (BalanceFactor(current->lchild) == -1) {
-            //return LRRotation(current);
+            return LRRotation(current);
         }
     }
     // -2 means imbalance to the right.
