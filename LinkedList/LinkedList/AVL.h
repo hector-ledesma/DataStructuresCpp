@@ -15,6 +15,11 @@ public:
 
 	AVL() { root = nullptr; };
 	AVNode* RInsert(AVNode* current, int key);
+	int Height(AVNode* p);
+	AVNode* InPre(AVNode* p);
+	AVNode* InSucc(AVNode* p);
+	AVNode* Delete(AVNode* p, int key);
+
 	int NodeHeight(AVNode* p);
 	int BalanceFactor(AVNode* p);
 	AVNode* LLRotation(AVNode* p);

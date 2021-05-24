@@ -134,3 +134,87 @@ AVNode* AVL::RInsert(AVNode* current, int key) {
     }
     return current;
 }
+
+int AVL::Height(AVNode* p) {
+    if (!p) return 0;
+    int x = Height(p->lchild);
+    int y = Height(p->rchild);
+    return x > y ? x + 1 : y + 1;
+}
+
+AVNode* AVL::InPre(AVNode* p) {
+    while (p && p->rchild)
+        p = p->rchild;
+    return p;
+}
+
+AVNode* AVL::InSucc(AVNode* p) {
+    while (p && p->lchild)
+        p = p->lchild;
+    return p;
+}
+
+// Delete method should remain exactly the same.
+// All that should change is knowing when and how to rotate.
+AVNode* AVL::Delete(AVNode* p, int key) {
+    if (!p)
+        return NULL;
+    if (!p->lchild && !p->rchild) {
+        if (p == root)
+            root = NULL;
+        delete p;
+        return NULL;
+    }
+
+    if (key < p->data)
+        p->lchild = Delete(p->lchild, key);
+    else if (key > p->data)
+        p->rchild = Delete(p->rchild, key);
+    else {
+        AVNode* q;
+        if (Height(p->lchild) > Height(p->rchild)) {
+            q = InPre(p->lchild);
+            p->data = q->data;
+            p->lchild = Delete(p->lchild, q->data);
+        }
+        else {
+            q = InSucc(p->rchild);
+            p->data = q->data;
+            p->rchild = Delete(p->rchild, q->data);
+        }
+    }
+
+    // I think right here, once we're about to start returning our nodes after deletion, we should 
+    //      check if we should rebalance.
+    p->height = NodeHeight(p);
+    // Check our height to know if we must perform rotations.
+    // 2 means inbalance to the left.
+    if (BalanceFactor(p) == 2) {
+        // Left child 1 means imbalance comes from LL.
+        if (BalanceFactor(p->lchild) == 1) {
+            return LLRotation(p);
+        }
+        // Left child -1 means imbalance comes from LR.
+        else if (BalanceFactor(p->lchild) == -1) {
+            return LRRotation(p);
+        }
+        else {
+            return LLRotation(p);
+        }
+    }
+    // -2 means imbalance to the right.
+    else if (BalanceFactor(p) == -2) {
+        // Right child -1 means imbalance comes from RR.
+        if (BalanceFactor(p->rchild) == -1) {
+            return RRRotation(p);
+        }
+        // Right child 1 means imbalance comes from RL.
+        else if (BalanceFactor(p->rchild) == 1) {
+            return RLRotation(p);
+        }
+        else {
+            return RRRotation(p);
+        }
+    }
+    return p;
+}

@@ -246,5 +246,7 @@ int main()
 	avl.RInsert(avl.root, 31);
 	avl.RInsert(avl.root, 25);
 	avl.RInsert(avl.root, 26);
+	avl.Delete(avl.root, 10);
+	avl.Delete(avl.root, 20);
 	std::cout << "---------" << std::endl;
 }
