@@ -8,10 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		9C1C47242656ABD30096FDC2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C1C47232656ABD30096FDC2 /* main.cpp */; };
-		9C1C47312656AC6B0096FDC2 /* BinaryTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C1C472D2656AC6B0096FDC2 /* BinaryTree.cpp */; };
-		9C1C47322656AC6B0096FDC2 /* DoublyLinkedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C1C472F2656AC6B0096FDC2 /* DoublyLinkedList.cpp */; };
-		9C1C47332656AC6B0096FDC2 /* LinkedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C1C47302656AC6B0096FDC2 /* LinkedList.cpp */; };
-		9C1C47372656DBA00096FDC2 /* BinarySearchTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C1C47352656DBA00096FDC2 /* BinarySearchTree.cpp */; };
+		9CE5EE84265AE5F200D62B98 /* LinkedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE5EE6F265AE5F100D62B98 /* LinkedList.cpp */; };
+		9CE5EE85265AE5F200D62B98 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE5EE73265AE5F100D62B98 /* Main.cpp */; };
+		9CE5EE86265AE5F200D62B98 /* Queue1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE5EE74265AE5F100D62B98 /* Queue1.cpp */; };
+		9CE5EE87265AE5F200D62B98 /* Queue2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE5EE75265AE5F100D62B98 /* Queue2.cpp */; };
+		9CE5EE88265AE5F200D62B98 /* Stack1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE5EE78265AE5F100D62B98 /* Stack1.cpp */; };
+		9CE5EE89265AE5F200D62B98 /* BinaryTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE5EE7C265AE5F200D62B98 /* BinaryTree.cpp */; };
+		9CE5EE8A265AE5F200D62B98 /* Stack2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE5EE7D265AE5F200D62B98 /* Stack2.cpp */; };
+		9CE5EE8B265AE5F200D62B98 /* DoublyLinkedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE5EE7E265AE5F200D62B98 /* DoublyLinkedList.cpp */; };
+		9CE5EE8C265AE5F200D62B98 /* BinarySearchTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE5EE7F265AE5F200D62B98 /* BinarySearchTree.cpp */; };
+		9CE5EE8D265AE5F200D62B98 /* AVL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE5EE81265AE5F200D62B98 /* AVL.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,14 +35,28 @@
 /* Begin PBXFileReference section */
 		9C1C47202656ABD30096FDC2 /* DataStructuresCpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DataStructuresCpp; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C1C47232656ABD30096FDC2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		9C1C472B2656AC6B0096FDC2 /* DoublyLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DoublyLinkedList.h; path = ../../LinkedList/LinkedList/DoublyLinkedList.h; sourceTree = "<group>"; };
-		9C1C472C2656AC6B0096FDC2 /* LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LinkedList.h; path = ../../LinkedList/LinkedList/LinkedList.h; sourceTree = "<group>"; };
-		9C1C472D2656AC6B0096FDC2 /* BinaryTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryTree.cpp; path = ../../LinkedList/LinkedList/BinaryTree.cpp; sourceTree = "<group>"; };
-		9C1C472E2656AC6B0096FDC2 /* BinaryTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinaryTree.h; path = ../../LinkedList/LinkedList/BinaryTree.h; sourceTree = "<group>"; };
-		9C1C472F2656AC6B0096FDC2 /* DoublyLinkedList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DoublyLinkedList.cpp; path = ../../LinkedList/LinkedList/DoublyLinkedList.cpp; sourceTree = "<group>"; };
-		9C1C47302656AC6B0096FDC2 /* LinkedList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LinkedList.cpp; path = ../../LinkedList/LinkedList/LinkedList.cpp; sourceTree = "<group>"; };
-		9C1C47352656DBA00096FDC2 /* BinarySearchTree.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BinarySearchTree.cpp; sourceTree = "<group>"; };
-		9C1C47362656DBA00096FDC2 /* BinarySearchTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BinarySearchTree.h; sourceTree = "<group>"; };
+		9CE5EE6E265AE5F100D62B98 /* BinaryTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinaryTree.h; path = ../../LinkedList/LinkedList/BinaryTree.h; sourceTree = "<group>"; };
+		9CE5EE6F265AE5F100D62B98 /* LinkedList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LinkedList.cpp; path = ../../LinkedList/LinkedList/LinkedList.cpp; sourceTree = "<group>"; };
+		9CE5EE70265AE5F100D62B98 /* LinkedList.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = LinkedList.vcxproj; path = ../../LinkedList/LinkedList/LinkedList.vcxproj; sourceTree = "<group>"; };
+		9CE5EE71265AE5F100D62B98 /* AVL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVL.h; path = ../../LinkedList/LinkedList/AVL.h; sourceTree = "<group>"; };
+		9CE5EE72265AE5F100D62B98 /* LinkedList.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = LinkedList.vcxproj.filters; path = ../../LinkedList/LinkedList/LinkedList.vcxproj.filters; sourceTree = "<group>"; };
+		9CE5EE73265AE5F100D62B98 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../../LinkedList/LinkedList/Main.cpp; sourceTree = "<group>"; };
+		9CE5EE74265AE5F100D62B98 /* Queue1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Queue1.cpp; path = ../../LinkedList/LinkedList/Queue1.cpp; sourceTree = "<group>"; };
+		9CE5EE75265AE5F100D62B98 /* Queue2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Queue2.cpp; path = ../../LinkedList/LinkedList/Queue2.cpp; sourceTree = "<group>"; };
+		9CE5EE76265AE5F100D62B98 /* LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LinkedList.h; path = ../../LinkedList/LinkedList/LinkedList.h; sourceTree = "<group>"; };
+		9CE5EE77265AE5F100D62B98 /* LinkedList.sln */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LinkedList.sln; path = ../../LinkedList/LinkedList/LinkedList.sln; sourceTree = "<group>"; };
+		9CE5EE78265AE5F100D62B98 /* Stack1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Stack1.cpp; path = ../../LinkedList/LinkedList/Stack1.cpp; sourceTree = "<group>"; };
+		9CE5EE79265AE5F100D62B98 /* Stack1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stack1.h; path = ../../LinkedList/LinkedList/Stack1.h; sourceTree = "<group>"; };
+		9CE5EE7A265AE5F200D62B98 /* Queue1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Queue1.h; path = ../../LinkedList/LinkedList/Queue1.h; sourceTree = "<group>"; };
+		9CE5EE7B265AE5F200D62B98 /* DoublyLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DoublyLinkedList.h; path = ../../LinkedList/LinkedList/DoublyLinkedList.h; sourceTree = "<group>"; };
+		9CE5EE7C265AE5F200D62B98 /* BinaryTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryTree.cpp; path = ../../LinkedList/LinkedList/BinaryTree.cpp; sourceTree = "<group>"; };
+		9CE5EE7D265AE5F200D62B98 /* Stack2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Stack2.cpp; path = ../../LinkedList/LinkedList/Stack2.cpp; sourceTree = "<group>"; };
+		9CE5EE7E265AE5F200D62B98 /* DoublyLinkedList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DoublyLinkedList.cpp; path = ../../LinkedList/LinkedList/DoublyLinkedList.cpp; sourceTree = "<group>"; };
+		9CE5EE7F265AE5F200D62B98 /* BinarySearchTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinarySearchTree.cpp; path = ../../LinkedList/LinkedList/BinarySearchTree.cpp; sourceTree = "<group>"; };
+		9CE5EE80265AE5F200D62B98 /* BinarySearchTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinarySearchTree.h; path = ../../LinkedList/LinkedList/BinarySearchTree.h; sourceTree = "<group>"; };
+		9CE5EE81265AE5F200D62B98 /* AVL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AVL.cpp; path = ../../LinkedList/LinkedList/AVL.cpp; sourceTree = "<group>"; };
+		9CE5EE82265AE5F200D62B98 /* Stack2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stack2.h; path = ../../LinkedList/LinkedList/Stack2.h; sourceTree = "<group>"; };
+		9CE5EE83265AE5F200D62B98 /* Queue2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Queue2.h; path = ../../LinkedList/LinkedList/Queue2.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,15 +89,29 @@
 		9C1C47222656ABD30096FDC2 /* DataStructuresCpp */ = {
 			isa = PBXGroup;
 			children = (
-				9C1C472D2656AC6B0096FDC2 /* BinaryTree.cpp */,
-				9C1C472E2656AC6B0096FDC2 /* BinaryTree.h */,
-				9C1C472F2656AC6B0096FDC2 /* DoublyLinkedList.cpp */,
-				9C1C472B2656AC6B0096FDC2 /* DoublyLinkedList.h */,
-				9C1C47302656AC6B0096FDC2 /* LinkedList.cpp */,
-				9C1C472C2656AC6B0096FDC2 /* LinkedList.h */,
+				9CE5EE81265AE5F200D62B98 /* AVL.cpp */,
+				9CE5EE71265AE5F100D62B98 /* AVL.h */,
+				9CE5EE7F265AE5F200D62B98 /* BinarySearchTree.cpp */,
+				9CE5EE80265AE5F200D62B98 /* BinarySearchTree.h */,
+				9CE5EE7C265AE5F200D62B98 /* BinaryTree.cpp */,
+				9CE5EE6E265AE5F100D62B98 /* BinaryTree.h */,
+				9CE5EE7E265AE5F200D62B98 /* DoublyLinkedList.cpp */,
+				9CE5EE7B265AE5F200D62B98 /* DoublyLinkedList.h */,
+				9CE5EE6F265AE5F100D62B98 /* LinkedList.cpp */,
+				9CE5EE76265AE5F100D62B98 /* LinkedList.h */,
+				9CE5EE77265AE5F100D62B98 /* LinkedList.sln */,
+				9CE5EE70265AE5F100D62B98 /* LinkedList.vcxproj */,
+				9CE5EE72265AE5F100D62B98 /* LinkedList.vcxproj.filters */,
+				9CE5EE73265AE5F100D62B98 /* Main.cpp */,
+				9CE5EE74265AE5F100D62B98 /* Queue1.cpp */,
+				9CE5EE7A265AE5F200D62B98 /* Queue1.h */,
+				9CE5EE75265AE5F100D62B98 /* Queue2.cpp */,
+				9CE5EE83265AE5F200D62B98 /* Queue2.h */,
+				9CE5EE78265AE5F100D62B98 /* Stack1.cpp */,
+				9CE5EE79265AE5F100D62B98 /* Stack1.h */,
+				9CE5EE7D265AE5F200D62B98 /* Stack2.cpp */,
+				9CE5EE82265AE5F200D62B98 /* Stack2.h */,
 				9C1C47232656ABD30096FDC2 /* main.cpp */,
-				9C1C47352656DBA00096FDC2 /* BinarySearchTree.cpp */,
-				9C1C47362656DBA00096FDC2 /* BinarySearchTree.h */,
 			);
 			path = DataStructuresCpp;
 			sourceTree = "<group>";
@@ -138,11 +172,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C1C47312656AC6B0096FDC2 /* BinaryTree.cpp in Sources */,
-				9C1C47322656AC6B0096FDC2 /* DoublyLinkedList.cpp in Sources */,
-				9C1C47332656AC6B0096FDC2 /* LinkedList.cpp in Sources */,
+				9CE5EE8D265AE5F200D62B98 /* AVL.cpp in Sources */,
+				9CE5EE85265AE5F200D62B98 /* Main.cpp in Sources */,
+				9CE5EE8B265AE5F200D62B98 /* DoublyLinkedList.cpp in Sources */,
+				9CE5EE86265AE5F200D62B98 /* Queue1.cpp in Sources */,
+				9CE5EE88265AE5F200D62B98 /* Stack1.cpp in Sources */,
+				9CE5EE8C265AE5F200D62B98 /* BinarySearchTree.cpp in Sources */,
+				9CE5EE8A265AE5F200D62B98 /* Stack2.cpp in Sources */,
+				9CE5EE89265AE5F200D62B98 /* BinaryTree.cpp in Sources */,
+				9CE5EE87265AE5F200D62B98 /* Queue2.cpp in Sources */,
+				9CE5EE84265AE5F200D62B98 /* LinkedList.cpp in Sources */,
 				9C1C47242656ABD30096FDC2 /* main.cpp in Sources */,
-				9C1C47372656DBA00096FDC2 /* BinarySearchTree.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

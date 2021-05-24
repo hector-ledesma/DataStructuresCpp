@@ -138,10 +138,10 @@ BSTNode* BST::InSucc(BSTNode *p) {
 Node* BST::Delete(BSTNode *p, int key) {
     if (!p)
         return NULL;
-    if (!p->lchild && !p->rchild) {
-        if (p == root)
-            root = NULL;
-            delete p;
+    if (!p->lchild && !p->rchild && p->data == key) {
+        if (p == root) root = NULL;
+
+        delete p;
         return NULL;
     }
 
