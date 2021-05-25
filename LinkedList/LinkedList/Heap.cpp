@@ -36,7 +36,7 @@ void Heap::InsertInPlace(std::vector<int>& a, int n) {
 	a[i] = temp;
 	}
 int Heap::Delete(std::vector<int>& a, int n) {
-	int x = a[0]; // Max element
+	int x = a[0]; // Max element to be deleted.
 	a[0] = a[n - 1]; // Replace max element to be deleted with last element, and start bubbling it down.
 
 	int i = 0; // This points to our current node we wanna buble down.
@@ -56,5 +56,6 @@ int Heap::Delete(std::vector<int>& a, int n) {
 			break;
 		}
 	}
-	return x;
+	a.pop_back();
+	return x; // Return our max node we've just deleted..
 	}

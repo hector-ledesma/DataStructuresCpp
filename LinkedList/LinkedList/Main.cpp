@@ -11,6 +11,8 @@
 #include "BinaryTree.h"
 #include "AVL.h"
 
+void sortingCode();
+
 int main()
 {
 	int A[] = { 1, 54, 12, 13, 7 };
@@ -249,4 +251,90 @@ int main()
 	avl.Delete(avl.root, 10);
 	avl.Delete(avl.root, 20);
 	std::cout << "---------" << std::endl;
+
+	sortingCode();
+}
+
+void swap(int *a, int *b) {
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+/*
+	- Min time (no swaps/already sorted) = O(n)
+	- Max time = O(n^2)
+
+	No. of passes = (n-1)passes
+	No. of comparisons = O(n^2)
+	Max No. of Swaps = O(n^2)
+	It is adaptive because it can take advantage of existing order in input by using a FLAG.
+	It is stable because it retains original order when values are equal, because swaps only happen when a value is greater.
+
+	Due to the nature of BubbleSort, each nth pass will be indicative of the nth largest element.
+	So you can use this to "Sort" an array n times, and the nth element from the end will be the nth largest element.
+*/
+void BubbleSort(int A[], int n) {
+	// Gotta exit early if array already sorted. To do so, we'll use a flag
+	bool flag = false;
+	// We want to do this for each element in the array.
+	for (int i = 0; i < n - 1; i++) {
+		flag = false;
+		// And for each element, compare it to every other element
+		//	that hasn't been compared.
+		for (int j = 0; j < n - 1 - i; j++) {
+			if (A[j] > A[j + 1]) {
+				swap(&A[j], &A[j + 1]);
+				flag = true; // Flip flag to true if we make a swap
+			}
+		}
+		if (!flag) break; // If we didn't perform any swaps in this pass, array is already sorted.
+	}
+}
+
+/*
+	Min time = O(n)
+	Max time = O(n^2)
+
+	No. of passes = (n-1)passes
+	No. of comparisons = O(n^2)
+	Max No. of Swaps = O(n^2)
+
+	With a linked list, Insertion sort doesn't require any element shifting, just rearranging of pointers.
+	Therefore Insertion sort is more compatible/useful with linked lists than arrays. It is designed for Lists.
+
+	It is Adaptive, as we don't cascade comparisons unless our elements fit the condition. So if it's sorted, we don't do extra work.
+*/
+void insertionSort(int A[], int n) {
+	// n-1 passes, but instead of 0 to n-1 it's 1 to n
+	for (int i = 0; i < n; i++) {
+		int j = i - 1; // Index J will start at one prior to index i.
+		// Index i = item we want to insert
+		// Index j = last/largest element in "sorted" portion of our array.
+		// i will move right
+		// j will move left
+		int x = A[i]; // Extract our value.
+		while (j > -1 && A[j] > x) { // Loop for as long as j is within bounds, and our elements from sorted portion of the array are larger than our item to be inserted.
+			A[j + 1] = A[j]; // If our item is larger, shift the largest element right by one.
+			j--; // Move our index to a smaller element in sorted portion.
+		}
+		// Once we're out of the loop, it means we're directly behind the index where our item to be inserted belongs.
+		A[j + 1] = x; // so insert it directly in front.
+	}
+}
+
+void sortingCode() {
+	std::cout << "Sorting business: ------" << std::endl;
+	std::cout << std::endl;
+	int a[] = { 3,7,9,10,6,5,12,4,11,2 }, n = 10;
+	std::cout << "Unsorted array" << std::endl;
+	for (int i = 0; i < 10; i++) std::cout << a[i] << " | ";
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Bubble Sort:" << std::endl;
+	BubbleSort(a, n);
+	for (int i = 0; i < 10; i++) std::cout << a[i] << " | ";
+	std::cout << std::endl;
+	std::cout << std::endl;
 }
