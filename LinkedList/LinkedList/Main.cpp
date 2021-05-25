@@ -304,8 +304,9 @@ void BubbleSort(int A[], int n) {
 	Therefore Insertion sort is more compatible/useful with linked lists than arrays. It is designed for Lists.
 
 	It is Adaptive, as we don't cascade comparisons unless our elements fit the condition. So if it's sorted, we don't do extra work.
+	It is Stable, the duplicate will not be shifted as it is not greater. So original order is retained.
 */
-void insertionSort(int A[], int n) {
+void InsertionSort(int A[], int n) {
 	// n-1 passes, but instead of 0 to n-1 it's 1 to n
 	for (int i = 0; i < n; i++) {
 		int j = i - 1; // Index J will start at one prior to index i.
@@ -323,18 +324,50 @@ void insertionSort(int A[], int n) {
 	}
 }
 
+/*
+
+	No. of comparisons = O(n^2)
+	No. of Swaps = O(n) Only algorithm with minimal number of swaps.
+
+	Just like bubble sort gives us kth largest element for k passes;
+	Selection sort is great to find kth smallest element after k passes.
+
+	Not adaptive. Can't judge whether or not the rest of the array is sorted simply because our current index is in the right spot.
+	Not stable. Whichever duplicate comes first, will be placed at the right index first.
+*/
+void SelectionSort(int A[], int n) {
+	for (int i = 0; i < n - 1; i++) { // Each value of i will mark what's the current smallest element we're trying to find.
+		int j,k; // This index will point to the final smallest index we find.
+		// Starting at i for both j and k means we don't need to compare the already sorted portions.
+		for (k = j = i ; j < n; j++) {// j will go through each element in the unsorted portion of the array.
+			if (A[j] < A[k]) k = j; // If item at index j is smaller (what we want), then move k to j.
+		}
+		swap(&A[i], &A[k]); // Once we're done checking all of the unsorted elements, move the item we found at index k, to our index i where it belongs.
+	}
+}
+
 void sortingCode() {
 	std::cout << "Sorting business: ------" << std::endl;
 	std::cout << std::endl;
+	// Bubble
 	int a[] = { 3,7,9,10,6,5,12,4,11,2 }, n = 10;
-	std::cout << "Unsorted array" << std::endl;
-	for (int i = 0; i < 10; i++) std::cout << a[i] << " | ";
-	std::cout << std::endl;
-	std::cout << std::endl;
-
 	std::cout << "Bubble Sort:" << std::endl;
 	BubbleSort(a, n);
 	for (int i = 0; i < 10; i++) std::cout << a[i] << " | ";
+	std::cout << std::endl;
+	std::cout << std::endl;
+	// Insertion
+	int b[] = { 4,8,10,11,7,6,13,5,12,3 };
+	std::cout << "Insertion Sort:" << std::endl;
+	InsertionSort(b, n);
+	for (int i = 0; i < 10; i++) std::cout << b[i] << " | ";
+	std::cout << std::endl;
+	std::cout << std::endl;
+	// Selection
+	int c[] = { 3,7,9,10,6,5,12,4,11,2 };
+	std::cout << "Selection Sort:" << std::endl;
+	InsertionSort(c, n);
+	for (int i = 0; i < 10; i++) std::cout << c[i] << " | ";
 	std::cout << std::endl;
 	std::cout << std::endl;
 }
