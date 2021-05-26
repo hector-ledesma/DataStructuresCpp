@@ -483,6 +483,116 @@ void CountSort(int A[], int n) {
 	}
 }
 
+/*
+	The idea behind radix sort is that we sort based on decimal value at nth position, where n represent the pass
+		so pass 1 = 1s or (a[i]/1)%10
+		pass 2 = 10s or (a[i]/10)%10
+		pass 3 = 100s or (a[i]/100)%10
+	And so on.
+	We do as many passes as our largest value has digits.
+
+	This sorting method will combine linked lists with arrays.
+*/
+
+class RNode { public: int value = 0; RNode* next = nullptr; }; // Node class we'll use for Radix Sort.
+int Max(int A[], int n);
+int countDigits(int x);
+void initializeBins(RNode** p, int n);
+int getBinIndex(int x, int idx);
+void Insert(RNode** ptrBins, int value, int idx);
+int Delete(RNode** ptrBins, int idx);
+void RadixSort(int A[], int n) {
+	int max = Max(A, n); // gotta find our largest value to know how many passes we need to perform
+	int nPass = countDigits(max); // How many passes we'll have to perform before it's fully sorted.
+	
+	// Array of linked lists. "Bins"
+	RNode** bins = new RNode * [10]{ nullptr }; // The size of the array is equals to the radix. So decimal = 10
+
+	// We loop for as many passes as we need til we're done.
+	for (int pass = 0; pass < nPass; pass++) {
+
+		// For each pass, we need to handle all elements in the array.
+		for (int i = 0; i < n; i++) {
+			int binIdx = getBinIndex(A[i], pass); // We pass in our value, and which pass we're in, to get A[i]'s digit at plass'/nth place.
+			Insert(bins, A[i], binIdx); // Now that we know where it belongs, insert it at this index's linked list.
+		}
+		
+		// We now have to reposition our items based on how they're sorted at this pass.
+		int i = 0; // Index i will let us access our bin. Since our bins is based on decimals, we only need to go from 0 to 9.
+		int j = 0; // Index j will let us access our initial array in order.
+		while (i < 10) {
+			// Since any given index may contain multiple nodes, we loop until we've extracted all of them at this index i and placed them in our array.
+			while (bins[i]) A[j++] = Delete(bins, i); // We extract as FIFO, we don't search.
+			i++;
+		}
+		// I feel like, this shouldn't be needed if all our nodes are initialized with a nullptr for next as opposed to an uninitialized ptr.
+		//initializeBins(bins, 10);
+	}
+	delete[]bins;
+}
+
+// This simply finds our largest value and returns it.
+int Max(int A[], int n) {
+	int max = INT16_MIN;
+	for (int i = 0; i < n; i++)
+		if (A[i] > max) max = A[i];
+	return max;
+}
+// This method divides by 10 until we reach 0
+int countDigits(int x) {
+	int count = 0;
+	while (x != 0) {
+		x = x / 10;
+		count++;
+	}
+	return count; // We return how many times we divided by 10. That lets us know how many digits we have in this number.
+}
+
+/*
+	This is unneeded:
+		1. When we first initialize the array, we can use of c++'s notation to set everything as nullptrs
+		2. Since we're giving every node a default value of nullptr as opposed to an uninitialized pointer, when we're done deleting a list it'll always have nullptr as head.
+*/
+void initializeBins(RNode** p, int n) {
+	for (int i = 0; i < n; i++) p[i] = nullptr;
+}
+
+int getBinIndex(int x, int idx) {
+	// x is the value from the array so say 1923.
+	// We increase 10 to the power of which pass we're in. So in pass 0, we get 1. But in pass 2, we get 100.
+	// This basically reduces the number to the nth place. So 1923 is now 19, because we want to sort based on the hundredth place.
+	// Mod it by 10, and it will give us the first digit so in this case, 9.
+	return (int)(x / pow(10, idx)) % 10;
+}
+
+// Our "bins", or rather the array we're manipulating, will be an array of linked lists. Which are nothing but a root node pointing to other nodes.
+// So RNode*[] is our array of pointers, RNode** is our pointer to our array of pointers.
+void Insert(RNode** ptrBins, int value, int idx) {
+	// Initialize our new node to be inserted
+	RNode* temp = new RNode;
+	temp->value = value;
+	
+	// If there's nothing at this index, then our new node will be the head of this list.
+	if (ptrBins[idx] == nullptr) {
+		ptrBins[idx] = temp;
+	}
+	else {
+		RNode* p = ptrBins[idx]; // Extract the head.
+		while (p->next) p = p->next; // Move until we find the last node.
+		p->next = temp; // And link our new node at the end.
+	}
+
+}
+
+// We extract values as FIFO. We don't search for any specific value.
+int Delete(RNode** ptrBins, int idx) {
+	RNode* p = ptrBins[idx]; // Extract head at index.
+	ptrBins[idx] = ptrBins[idx]->next; // Move head to immediate child
+	int x = p->value;
+	delete p; // Delete extracted node.
+	return x;
+}
+
 void sortingCode() {
 	std::cout << "Sorting business: ------" << std::endl;
 	std::cout << std::endl;
@@ -533,6 +643,13 @@ void sortingCode() {
 	std::cout << "Merge Sort:" << std::endl;
 	CountSort(g, n);
 	for (int i = 0; i < 10; i++) std::cout << g[i] << " | ";
+	std::cout << std::endl;
+	std::cout << std::endl;
+	// Radix
+	int h[] = { 4,8,10,11,7,6,13,5,12,3 };
+	std::cout << "Radix Sort:" << std::endl;
+	RadixSort(h, n);
+	for (int i = 0; i < 10; i++) std::cout << h[i] << " | ";
 	std::cout << std::endl;
 	std::cout << std::endl;
 }
