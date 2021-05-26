@@ -440,6 +440,49 @@ void IMergeSort(int A[], int n) {
 
 }
 
+void MergeSort(int A[], int l, int h) {
+	if (l < h) {
+		int mid = (l + h) / 2;
+		MergeSort(A, l, mid);
+		MergeSort(A, mid + 1, h);
+		Merge(A, l, mid, h);
+	}
+}
+
+/*
+	Count Sort consumes an obscene amount of memory lol. Stupid fast tho.
+
+	O(n) time complexity always.
+	Not adaptive as it doesn't matter whether it's sorted or not. There's no comparisons done other than for moving back the elements into the array.
+	Since this version is creating brand new elements, it's hard to consider it stable. I'd say no.
+	But the version presented by geekforgeeks that uses arithmetic seems to be stable as it preserves original order.
+*/
+int findMax(int A[], int n) {
+	int largest = 0;
+	for (int i = 0; i < n; i++)
+		if (A[i] > largest) largest = A[i];
+
+	return largest;
+}
+
+void CountSort(int A[], int n) {
+	int max = findMax(A, n);	// Find the largest element in the array.
+	int* c = new int[max + 1]{0}; // make a new array as large as the largest element we found and initialize it to 0.
+
+	for (int i = 0; i < n; i++) c[A[i]]++; // Increase count at the value as index.
+
+	int j = 0, k = 0;
+	while (j < max + 1) {
+		if (c[j] > 0) {
+			A[k++] = j;
+			c[j]--;
+		}
+		else {
+			j++;
+		}
+	}
+}
+
 void sortingCode() {
 	std::cout << "Sorting business: ------" << std::endl;
 	std::cout << std::endl;
@@ -478,5 +521,18 @@ void sortingCode() {
 	for (int i = 0; i < 10; i++) std::cout << e[i] << " | ";
 	std::cout << std::endl;
 	std::cout << std::endl;
-
+	// Merge Recursive
+	int f[] = { 4,8,10,11,7,6,13,5,12,3 };
+	std::cout << "Merge Sort Recursively:" << std::endl;
+	MergeSort(f, 0, n-1);
+	for (int i = 0; i < 10; i++) std::cout << f[i] << " | ";
+	std::cout << std::endl;
+	std::cout << std::endl;
+	// Count
+	int g[] = { 3,7,9,10,6,5,12,4,11,2 };
+	std::cout << "Merge Sort:" << std::endl;
+	CountSort(g, n);
+	for (int i = 0; i < 10; i++) std::cout << g[i] << " | ";
+	std::cout << std::endl;
+	std::cout << std::endl;
 }
