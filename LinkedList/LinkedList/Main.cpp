@@ -293,6 +293,18 @@ void BubbleSort(int A[], int n) {
 }
 
 /*
+	Bubble and Insertion sort have very similar statistics.
+	Same min time, same max time.
+	Where they differ, is in their unique usefulness.
+
+	Bubble sort lets you quickly find the kth largest element in an array.
+	Whilst Insertion sort lets you easily handle Linked lists.
+
+	These are the only two algorithms that are adaptive, which take advantage of already sorted arrays.
+	These are also 2 out of the only 3 algorithms that are stable, respecting original order for duplicates.
+*/
+
+/*
 	Min time = O(n)
 	Max time = O(n^2)
 
@@ -346,6 +358,50 @@ void SelectionSort(int A[], int n) {
 	}
 }
 
+//QuickSort methods
+
+/*
+	Best Case -> If partitioning is always in the middle = O(nlogn)
+	Worst case -> If partitioning is at the end of the list (if it's already sorted) = O(n^2)
+	Average Runtime = O(nlogn)
+
+	Also called Partition Exchange Sort and Selection Exchange Sort.
+
+	A clear distinction between Quick sort and Selection Sort:
+		With selection sort, you select a POSITION and find the element that belongs there.
+		With quick sort, you select an ELEMENT and find the position where it belongs.
+*/
+int Partition(int A[], int l, int h) {
+	int pivot = A[l]; // The passed in l index will represent our pivot.
+	int i = l+1, j = h; // The passed in h index will represent the size of our array initially, but then it will become the last index we want to check as we recursively dig.
+
+	// We want to do this at least once, so that i moves up and j moves down at least once.
+	do {
+		while (i <= j && A[i] <= pivot) // Index i will move forward and look for the first element that's larger or equals to our pivot
+		{
+			i++;
+		 }
+		while (j >= i && A[j] > pivot) // Index j will move back and look for the first element smaller than our pivot
+		{
+			j--;
+		}
+		if (i < j) swap(&A[i], &A[j]); // If j is still in front of i, then we've found two items we want to swap, so swap em.
+		// Effectively moving elements smaller than our pivot to the left of the array, and larger elements to the right.
+	} while (i < j); // Once j ends up behind i, we've finished swapping based on our pivot.
+
+	swap(&A[l], &A[j]); // If we've exited the loop, that means j is less than i, therefore all elements are reposition based on pivot.
+	// So move our pivot to the index j has found for us, and move the item and index j to where our pivot is placed.
+	return j; // Return the position we moved our pivot to. This will serve as our "h" index/last element to check for lower recursive levels.
+}
+
+void QuickSort(int A[], int l, int h) {
+	if (l < h) {
+		int p = Partition(A, l, h);
+		QuickSort(A, l, p-1);
+		QuickSort(A, p+1, h);
+	}
+}
+
 void sortingCode() {
 	std::cout << "Sorting business: ------" << std::endl;
 	std::cout << std::endl;
@@ -368,6 +424,13 @@ void sortingCode() {
 	std::cout << "Selection Sort:" << std::endl;
 	InsertionSort(c, n);
 	for (int i = 0; i < 10; i++) std::cout << c[i] << " | ";
+	std::cout << std::endl;
+	std::cout << std::endl;
+	// Quick
+	int d[] = { 4,8,10,11,7,6,13,5,12,3 };
+	std::cout << "Quick Sort:" << std::endl;
+	QuickSort(d, 0, n-1);
+	for (int i = 0; i < 10; i++) std::cout << d[i] << " | ";
 	std::cout << std::endl;
 	std::cout << std::endl;
 }
