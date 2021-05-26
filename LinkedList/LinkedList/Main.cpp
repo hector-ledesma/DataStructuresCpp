@@ -492,6 +492,8 @@ void CountSort(int A[], int n) {
 	We do as many passes as our largest value has digits.
 
 	This sorting method will combine linked lists with arrays.
+
+	It's technically O(n), but we can make a ton of n passes, but consumes way less space.
 */
 
 class RNode { public: int value = 0; RNode* next = nullptr; }; // Node class we'll use for Radix Sort.
@@ -593,6 +595,48 @@ int Delete(RNode** ptrBins, int idx) {
 	return x;
 }
 
+/*
+	Bucket/Bin Sort is kind of a combo between count and Radix sort.
+	
+	It uses the idea of creating an array as large as our largest element so we got unique bins for each value.
+	It uses linked lists to maintain the original order of the values.
+*/
+void Binsert(RNode** ptrBins, int idx);
+void BinSort(int A[], int n) {
+	int i, j;
+
+	int max = findMax(A, n); // In this case, our max value itself will be the size of our auxiliary array.
+	RNode** bins = new RNode*[max + 1]{ nullptr }; // Like with Radix sort, we need an array that holds linked lists. 
+
+	for (i = 0; i < n; i++) Binsert(bins, A[i]); // Here we also simply extract the values of our initial array, and insert them into the list as nodes.
+	// Main difference being that the value themselves will serve as the index of where to insert in the auxiliary array.
+
+	// i for traversing auxiliary array.
+	i = j = 0;
+	// j for inserting back into our initial array.
+	while (i < max + 1) {
+		while (bins[i]) A[j++] = Delete(bins, i); // Once we find a linked list, extract it all one by one in a FIFO approach.
+		i++;
+	}
+}
+
+// This is the same as the Insert method for radix sort. Only difference is that we don't need a value parameter
+// because our value doubles as our index
+void Binsert(RNode** ptrBins, int value) {
+	RNode* temp = new RNode;
+	temp->value = value;
+
+	if (!ptrBins[value]) {
+		ptrBins[value] = temp;
+	}
+	else {
+		RNode* p = ptrBins[value];
+		while (p->next) p = p->next;
+		p->next = temp;
+	}
+}
+
+
 void sortingCode() {
 	std::cout << "Sorting business: ------" << std::endl;
 	std::cout << std::endl;
@@ -650,6 +694,13 @@ void sortingCode() {
 	std::cout << "Radix Sort:" << std::endl;
 	RadixSort(h, n);
 	for (int i = 0; i < 10; i++) std::cout << h[i] << " | ";
+	std::cout << std::endl;
+	std::cout << std::endl;
+	// Bin/Bucket
+	int k[] = { 3,7,9,10,6,5,12,4,11,2 };
+	std::cout << "Bin/Bucket Sort:" << std::endl;
+	BinSort(k, n);
+	for (int i = 0; i < 10; i++) std::cout << k[i] << " | ";
 	std::cout << std::endl;
 	std::cout << std::endl;
 }
