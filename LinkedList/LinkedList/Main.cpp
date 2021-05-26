@@ -358,9 +358,9 @@ void SelectionSort(int A[], int n) {
 	}
 }
 
-//QuickSort methods
-
 /*
+	QuickSort methods-------
+
 	Best Case -> If partitioning is always in the middle = O(nlogn)
 	Worst case -> If partitioning is at the end of the list (if it's already sorted) = O(n^2)
 	Average Runtime = O(nlogn)
@@ -393,13 +393,51 @@ int Partition(int A[], int l, int h) {
 	// So move our pivot to the index j has found for us, and move the item and index j to where our pivot is placed.
 	return j; // Return the position we moved our pivot to. This will serve as our "h" index/last element to check for lower recursive levels.
 }
-
 void QuickSort(int A[], int l, int h) {
 	if (l < h) {
 		int p = Partition(A, l, h);
 		QuickSort(A, l, p-1);
 		QuickSort(A, p+1, h);
 	}
+}
+//0 0 1
+void Merge(int A[], int l, int mid, int h) {
+	int i, j, k;
+	i = l; j = mid + 1; k = l;
+	int* B =new int[h + 1];
+
+	while (i <= mid && j <= h) {
+		if (A[i] < A[j]) B[k++] = A[i++];
+		else B[k++] = A[j++];
+	}
+	while (i <= mid) B[k++] = A[i++];
+	while (j <= h) B[k++] = A[j++];
+
+	for (int i = l; i <= h; i++) A[i] = B[i];
+	delete[]B;
+}
+
+void IMergeSort(int A[], int n) {
+	// Index p will be the equivalent of recursive stack frames.
+	//	the value of p basically represents how many elements are in the "arrays" we're comparing.
+	//	So when p is 2, each one of our arrays will have two elements so -> index 0 and 1 are one array and index 2 and 3 are another array etc.
+	int p, i, l, mid, h;
+	for (p = 2; p <= n; p = p * 2) {// p will double til we go beyond the size of our passed in array.
+		// Wow ok so, as I mentioned p will determine how many items per array.
+		// So we'll use p to determine mid point and high point.
+		// Index i moves by p + 1. So when p=2 it starts as i=0, then i=2, then i=4. This will determine starting point of this subarray.
+		// Index l is = i
+		// Index h is based on current i and current p. So say p=2 and i=4, h = 4 + 2 - 1 = 5. So our subarray will be 4->5 because p says we only have 2 items.
+		//	If p were p=5. Then our subarray would be p=5, i=10 then h = 10+5-1 = 14 so -> 10->14. Five elements as per p.
+		for (i = 0; i + p - 1 < n; i = i + p) {
+			l = i;
+			h = i + p - 1;
+			mid = (l + h) / 2;
+			Merge(A, l, mid, h); // Merge our subarray.
+		}
+	}
+	if (p / 2 < n) Merge(A, 0, p / 2-1, n - 1); // If size of array is odd, we'll have one final lingering element that we'll want to merge into our array.
+
 }
 
 void sortingCode() {
@@ -433,4 +471,12 @@ void sortingCode() {
 	for (int i = 0; i < 10; i++) std::cout << d[i] << " | ";
 	std::cout << std::endl;
 	std::cout << std::endl;
+	// Merge
+	int e[] = { 3,7,9,10,6,5,12,4,11,2 };
+	std::cout << "Merge Sort:" << std::endl;
+	IMergeSort(e, n);
+	for (int i = 0; i < 10; i++) std::cout << e[i] << " | ";
+	std::cout << std::endl;
+	std::cout << std::endl;
+
 }
