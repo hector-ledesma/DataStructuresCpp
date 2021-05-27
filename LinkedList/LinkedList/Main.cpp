@@ -636,6 +636,33 @@ void Binsert(RNode** ptrBins, int value) {
 	}
 }
 
+/*
+	Shell Sort is just Insertion sort on steroids.
+	It does passes for portions of the array based on a gap, until it gets down to a gap of 1 at which point it just does a normal insertion sort pass.
+*/
+void ShellSort(int A[], int n) {
+	for (int gap = n / 2; gap >= 1; gap /= 2) { // We start with a gap of half the size of our array, and keep dividing by 2 until we get to 1.
+		for (int j = gap; j < n; j+=gap) { // Inner loop will let us traverse the array by the gap.
+			// We'll handle two items at a time.
+			// temp will be the item at the current step of the gap.
+			// i will be the tail we're initially comparing against
+			// At first it will only be those two, but as we go deeper with j,
+			//		our staring gap will cascade back to the first item in the following while loop.
+
+			int temp = A[j]; // leading item to be moved back if necessary
+			int i = j - gap; // Our base index which we'll use to traverse backwards if needed
+
+			while (i >= 0 && A[i] > temp) { // We move back until all previous items are no longer larger than our temp value
+				A[i + gap] = A[i]; // when we find a larger value, we move it forward.
+				// So we found it at index i, we move it forward with i+gap. At first it will override our temp value but that's why we extracted it.
+				i = i - gap; // We move our index back by reducing it by the gap amount until we either find the first value smaller or equals to our temp value or we exit the bounds.
+			}
+
+			A[i + gap] = temp; // Once we're out of the while loop, our index i will point directly behind the position we want to insert at
+			//	so we move forward by adding back the gap and then inserting our temp value
+		}
+	}
+}
 
 void sortingCode() {
 	std::cout << "Sorting business: ------" << std::endl;
@@ -701,6 +728,13 @@ void sortingCode() {
 	std::cout << "Bin/Bucket Sort:" << std::endl;
 	BinSort(k, n);
 	for (int i = 0; i < 10; i++) std::cout << k[i] << " | ";
+	std::cout << std::endl;
+	std::cout << std::endl;
+	// Shell
+	int l[] = { 4,8,10,11,7,6,13,5,12,3 };
+	std::cout << "Shell Sort:" << std::endl;
+	ShellSort(l, n);
+	for (int i = 0; i < 10; i++) std::cout << l[i] << " | ";
 	std::cout << std::endl;
 	std::cout << std::endl;
 }
