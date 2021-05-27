@@ -125,3 +125,30 @@ int HashTable::LinearProbe(int H[], int key) {
 	while (H[(idx + i) % size] != 0) i++; // We basically just keep rehashing til we find an empty spot by adding 1 to i
 	return (idx + i) % size; // return index for first empty spot.
 }
+
+/*
+	Quadratic Probing is p much the same as linear, it's just that for shifting to the next empty space,
+	we square the offset for our hashing.
+*/
+int HashTable::hashquad(int key) { return key % size; }
+
+int HashTable::QuadraticProbe(int H[], int key) {
+	int idx = hashquad(key);
+	int i = 0;
+	while (H[(idx + i * i) % size] != 0) i++;
+	return (idx + i * i) % size;
+}
+void HashTable::InsertQuadratic(int H[], int key){
+	int idx = hashquad(key); // hash our key
+	if (H[idx] != 0)  // If spot is taken, do a quadratic hash 
+		idx = QuadraticProbe(H, key);
+	H[idx] = key;
+}
+int HashTable::SearchQuadratic(int H[], int key){
+	int idx = hashquad(key);
+	int i = 0;
+	while (H[(idx + i * i) % size] != key) {
+		i++;
+		if (H[(idx + i * i) % size] == 0) return -1;
+	}
+}

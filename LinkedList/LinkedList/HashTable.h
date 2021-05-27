@@ -26,6 +26,12 @@ private:
 	void InsertProbe(int H[], int key);
 	int SearchProbe(int H[], int key);
 
+	// Quadratic probing collision
+	int hashquad(int key);
+	int QuadraticProbe(int H[], int key);
+	void InsertQuadratic(int H[], int key);
+	int SearchQuadratic(int H[], int key);
+
 
 public:
 	void runChaining();
