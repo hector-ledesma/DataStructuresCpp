@@ -138,17 +138,43 @@ int HashTable::QuadraticProbe(int H[], int key) {
 	while (H[(idx + i * i) % size] != 0) i++;
 	return (idx + i * i) % size;
 }
-void HashTable::InsertQuadratic(int H[], int key){
+void HashTable::InsertQuadratic(int H[], int key) {
 	int idx = hashquad(key); // hash our key
 	if (H[idx] != 0)  // If spot is taken, do a quadratic hash 
 		idx = QuadraticProbe(H, key);
 	H[idx] = key;
 }
-int HashTable::SearchQuadratic(int H[], int key){
+int HashTable::SearchQuadratic(int H[], int key) {
 	int idx = hashquad(key);
 	int i = 0;
 	while (H[(idx + i * i) % size] != key) {
 		i++;
 		if (H[(idx + i * i) % size] == 0) return -1;
 	}
+}
+
+// Double Hashing collision handling methods
+int HashTable::hashdub(int key) { return key % size; }
+int HashTable::PrimeHash(int key) { return key % 7; }
+int HashTable::DoubleHash(int H[], int key) {
+	int idx = hashdub(key);
+	int i = 0;
+	while (H[(hashdub(idx) + i * PrimeHash(idx)) % size] != 0)
+		i++;
+	return (idx + i * PrimeHash(idx)) % size;
+}
+void HashTable::InsertDub(int H[], int key) {
+	int idx = hashdub(key);
+	if (H[idx] != 0) idx = DoubleHash(H, key);
+	H[idx] = key;
+}
+int HashTable::SearchDub(int H[], int key) {
+	int idx = hashdub(key);
+	int i = 0;
+	while (H[(hashdub(idx) + i * PrimeHash(idx)) % size] != key) {
+		i++;
+		if (H[(hashdub(idx) + i * PrimeHash(idx)) % size] == 0) return -1;
+	}
+
+	return (hashdub(idx) + i * PrimeHash(idx)) % size;
 }
