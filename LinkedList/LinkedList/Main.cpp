@@ -10,6 +10,7 @@
 #include "Queue2.h"
 #include "BinaryTree.h"
 #include "AVL.h"
+#include "HashTable.h"
 
 void sortingCode();
 
@@ -253,6 +254,8 @@ int main()
 	std::cout << "---------" << std::endl;
 
 	sortingCode();
+	HashTable htable;
+	htable.runChaining();
 }
 
 void swap(int *a, int *b) {
