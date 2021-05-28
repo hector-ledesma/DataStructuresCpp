@@ -11,6 +11,7 @@
 #include "BinaryTree.h"
 #include "AVL.h"
 #include "HashTable.h"
+#include "Graph.h"
 
 void sortingCode();
 
@@ -256,6 +257,9 @@ int main()
 	sortingCode();
 	HashTable htable;
 	htable.runChaining();
+
+	Graph graph;
+	graph.runGraphs();
 }
 
 void swap(int *a, int *b) {
