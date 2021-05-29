@@ -102,8 +102,8 @@ int main()
 	std::cout << "List is " << (sortedList.isLoop() ? "a loop" : "not a loop") << std::endl;
 
 	// Circular linked list
-	int E[] = {3,8,9,12,24};
-	LinkedList circularList(E, 5, 5);
+	int Ee[] = {3,8,9,12,24};
+	LinkedList circularList(Ee, 5, 5);
 	circularList.makeCircular();
 	circularList.AppendCircular(25);
 	circularList.InsertCircular(4, 1);

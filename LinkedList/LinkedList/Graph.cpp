@@ -119,9 +119,8 @@ void Graph::PrimMST() {
 			}
 
 		}
-
-		printST(T);
 	}
+		printST(T);
 }
 void Graph::printST(int st[][8 - 2]) {
 	std::cout << "\nMinimum Spanning Tree Edges (w/ cost)" << std::endl;
@@ -137,6 +136,79 @@ void Graph::printST(int st[][8 - 2]) {
 	std::cout << "Total cost of Minimum Cost Spanning Tree: " << sum << std::endl;
 }
 
+void Graph::Union(int u, int v, int s[]) {
+	if (s[u] < s[v]) {
+		s[u] += s[v];
+		s[v] = u;
+	}
+	else {
+		s[v] += s[u];
+		s[u] = v;
+	}
+}
+
+int Graph::Find(int u, int s[]) {
+	int x = u;
+	int v = 0;
+
+	while (s[x] > 0) {
+		x = s[x];
+	}
+
+	while (u != x) {
+		v = s[u];
+		s[u] = x;
+		u = v;
+	}
+
+	return x;
+}
+
+void Graph::KruskalsMCST() {
+	int T[2][V - 1]; // Solution array
+	int track[E]{ 0 }; // Track edges that are included in solution
+	int set[V + 1] = {-1,-1,-1,-1,-1,-1,-1}; // Array for finding cycle
+
+	int i{ 0 };
+	while (i < V - 1) {
+		int min = I;
+		int u{ 0 };
+		int v{ 0 };
+		int k{ 0 };
+
+		// Find minimum cost edge
+		for (int j{ 0 }; j < E; j++) {
+			if (track[j] == 0 && edg[2][j] < min) {
+				min = edg[2][j];
+				u = edg[0][j];
+				v = edg[1][j];
+				k = j;
+			}
+		}
+
+		// Check if the selected min cost edge (u, v) forms a cycle
+		if (Find(u, set) != Find(v, set)) {
+			T[0][i] = u;
+			T[1][i] = v;
+
+			// Perform union
+			Union(Find(u, set), Find(v, set), set);
+			i++;
+		}
+		track[k] = 1;
+	}
+
+	printKruskal(edg);
+}
+
+void Graph::printKruskal(int A[][E]) {
+	std::cout << "\nMinimum Cost Spanning Tree Edges\n" << std::endl;
+	for (int i{ 0 }; i < V - 1; i++) {
+		std::cout << "[" << edg[0][i] << "]-----[" << edg[1][i] << "]" << std::endl;
+	}
+	std::cout << std::endl;
+}
+
 void Graph::runGraphs() {
 	std::cout << "\nBFS starting at 4" << std::endl;
 	BFS(4);
@@ -145,5 +217,6 @@ void Graph::runGraphs() {
 	DFS(4);
 
 	PrimMST();
+	KruskalsMCST();
 }
 
